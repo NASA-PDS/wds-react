@@ -7,3 +7,4 @@ export * from "./components/HelloWorld";
 export * from "./components/Pagination";
 export * from "./components/Tag";
 export * from "./components/TextField";
+export * from "./components/Header";

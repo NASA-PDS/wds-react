@@ -116,6 +116,7 @@
   },
   "scripts": {
     "build-lib": "rollup -c",
+    "build-lib-watch": "rollup -c -w",
     "build-storybook": "storybook build",
     "compile": "tsc -p .",
     "lint": "eslint ./src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
