@@ -16,7 +16,9 @@ on:
     - cron: '41 7 * * 1'
   push:
     branches:
-      - '**'
+      - develop
+      - main
+  workflow_dispatch:
 
 jobs:
   analyze:
