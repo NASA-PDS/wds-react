@@ -12,7 +12,7 @@ import MenuItem from "@mui/material/MenuItem";
 import Menu from "@mui/material/Menu";
 import { Divider } from "@mui/material";
 import { HeaderProps } from "../Header/Header";
-import { styled } from "@mui/material/styles";
+import { StyledEngineProvider } from "@mui/material/styles";
 
 const Navbar = ({ navItems }: HeaderProps) => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
@@ -40,72 +40,23 @@ const Navbar = ({ navItems }: HeaderProps) => {
     setAnchorElSubNav(null);
   };
 
-  const StyledMenu = styled(Menu)(({ theme }) => ({
-    "& .MuiPaper-root": {
-      backgroundColor: "#17171B",
-      borderRadius: "0 0 3px 3px",
-      paddingTop: "15px",
-      "& .MuiList-padding": {
-        padding: "11px 5px 11px 5px",
-      },
-      color: "white",
-    },
-  }));
-
-  const StyledMenuItem = styled(MenuItem)(({ theme }) => ({
-    "&:hover": {
-      backgroundColor: "#17171B",
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: "#64B6F7",
-        textDecoration: "none",
-      },
-      "& .MuiLink-underlineHover": {
-        textDecoration: "none",
-      },
-    },
-    "&:focus": {
-      backgroundColor: "#17171B",
-      "& .MuiListItemIcon-root, & .MuiListItemText-primary": {
-        color: "#64B6F7",
-        textDecoration: "none",
-      },
-      "& .MuiLink-underlineFocus": {
-        textDecoration: "none",
-      },
-    },
-  }));
-
   return (
-    <>
+    <StyledEngineProvider injectFirst>
       <Divider
         variant="fullWidth"
         orientation="horizontal"
-        sx={{ bgcolor: "#58585B" }}
+        className="pds-wds-navbar-top-divider"
       />
-      <AppBar
-        component="nav"
-        position="static"
-        sx={{
-          backgroundColor: "#17171B",
-        }}
-      >
+      <AppBar component="nav" position="static" className="pds-wds-navbar">
         <Container maxWidth="xl">
-          <Toolbar disableGutters sx={{ justifyContent: "space-between" }}>
+          <Toolbar disableGutters className="pds-wds-navbar-toolbar">
             <div />
             <Box sx={{ display: { xs: "none", md: "block" } }}>
               {navItems.map((item, index) => {
                 return item.items ? (
                   <>
                     <Button
-                      sx={{
-                        fontSize: "0.875rem",
-                        fontWeight: 400,
-                        lineHeight: "1.1875rem",
-                        letterSpacing: "-0.25px",
-                        color: "#fff",
-                        mr: "32px",
-                        textTransform: "none",
-                      }}
+                      className="pds-wds-navbar-link-button"
                       endIcon={<ExpandCircleDownOutlinedIcon />}
                       key={item.id}
                       id={item.label + "MenuButton"}
@@ -113,8 +64,8 @@ const Navbar = ({ navItems }: HeaderProps) => {
                     >
                       {item.label}
                     </Button>
-
-                    <StyledMenu
+                    <Menu
+                      className="pds-wds-navbar-menu"
                       id={item.label + "Menu"}
                       key={index}
                       anchorEl={anchorElSubNav && anchorElSubNav[index]}
@@ -140,48 +91,31 @@ const Navbar = ({ navItems }: HeaderProps) => {
                       {item.items.map((subItem) => {
                         return (
                           <Link
+                            className="pds-wds-navbar-link"
                             key={subItem.id}
                             href={subItem.href}
-                            sx={{
-                              textDecoration: "none",
-                              "&:hover": {
-                                textDecoration: "underline",
-                                textDecorationColor: "white",
-                                textDecorationStyle: "dashed",
-                              },
-                            }}
                           >
-                            <StyledMenuItem onClick={handleCloseSubNavMenu}>
+                            <MenuItem
+                              onClick={handleCloseSubNavMenu}
+                              className="pds-wds-navbar-menu-item"
+                            >
                               <Typography
+                                className="pds-wds-navbar-link-label"
                                 textAlign="center"
-                                sx={{
-                                  color: "white",
-                                  "&:hover": {
-                                    color: "white",
-                                  },
-                                }}
                               >
                                 {subItem.label}
                               </Typography>
-                            </StyledMenuItem>
+                            </MenuItem>
                           </Link>
                         );
                       })}
-                    </StyledMenu>
+                    </Menu>
                   </>
                 ) : (
                   <Link href={item.href}>
                     <Button
+                      className="pds-wds-navbar-link-button-single"
                       key={item.id}
-                      sx={{
-                        fontSize: "0.875rem",
-                        fontWeight: 400,
-                        lineHeight: "1.1875rem",
-                        letterSpacing: "-0.25px",
-                        color: "#fff",
-                        mr: "32px",
-                        textTransform: "none",
-                      }}
                     >
                       {item.label}
                     </Button>
@@ -231,7 +165,7 @@ const Navbar = ({ navItems }: HeaderProps) => {
           </Toolbar>
         </Container>
       </AppBar>
-    </>
+    </StyledEngineProvider>
   );
 };
 
