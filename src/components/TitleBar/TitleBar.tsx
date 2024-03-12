@@ -16,6 +16,11 @@ import IconButton from "@mui/material/IconButton";
 import SearchIcon from "@mui/icons-material/Search";
 import Link from "@mui/material/Link";
 import { StyledEngineProvider } from "@mui/material/styles";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import MenuList from "@mui/material/MenuList";
 
 const pages = [
   {
@@ -73,15 +78,92 @@ const TitleBar = () => {
     HTMLElement
   >>(null);
 
+  const [elList, setElList] = useState(
+    Array<{
+      id: number;
+      anchorEl: HTMLElement | null;
+      isOpen: boolean;
+    }>,
+  );
+
+  const handleClick = (index: number, event: MouseEvent<HTMLElement>) => {
+    setElList((prevArray) => {
+      const idx = prevArray.findIndex((x) => x.id === index);
+      const a = [...prevArray];
+
+      if (idx < 0) {
+        a.push({
+          id: index,
+          isOpen: true,
+          anchorEl: event.currentTarget,
+        });
+      }
+
+      if (idx > -1) {
+        const copyAnchor = a[idx].anchorEl;
+        const copyid = a[idx].id;
+        const newIsOpen = !a[idx].isOpen;
+
+        a.splice(idx, 1);
+
+        a.push({
+          id: copyid,
+          isOpen: newIsOpen,
+          anchorEl: copyAnchor,
+        });
+      }
+
+      return a;
+    });
+  };
+
+  const handleClickAway = (index: number) => {
+    setElList((prevArray) => {
+      const idx = prevArray.findIndex((x) => x.id === index);
+      const a = [...prevArray];
+
+      if (idx > -1) {
+        const copyAnchor = a[idx].anchorEl;
+        const copyid = a[idx].id;
+
+        a.splice(idx, 1);
+
+        a.push({
+          id: copyid,
+          isOpen: false,
+          anchorEl: copyAnchor,
+        });
+      }
+
+      return a;
+    });
+  };
+
+  const getIsOpen = (index: number) => {
+    const idx = elList.findIndex((x) => x.id === index);
+
+    if (idx > -1) {
+      return elList[idx].isOpen;
+    }
+
+    return false;
+  };
+
+  const getAnchor = (index: number) => {
+    const idx = elList.findIndex((x) => x.id === index);
+
+    if (idx > -1) {
+      return elList[idx].anchorEl;
+    }
+
+    return null;
+  };
+
   const handleOpenSubNavMenu = (
     index: number,
     event: MouseEvent<HTMLElement>,
   ) => {
     setAnchorElSubNav({ [index]: event.currentTarget });
-  };
-
-  const handleCloseSubNavMenu = () => {
-    setAnchorElSubNav(null);
   };
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
@@ -166,61 +248,65 @@ const TitleBar = () => {
                   <>
                     <Button
                       className="pds-wds-titlebar-link-button"
+                      id="composition-button"
+                      aria-haspopup="true"
+                      onClick={(e) => handleClick(index, e)}
                       endIcon={<ExpandCircleDownOutlinedIcon />}
-                      key={item.id}
-                      id={item.label + "MenuButton"}
-                      onClick={(e) => handleOpenSubNavMenu(index, e)}
                     >
                       {item.label}
                     </Button>
-                    <Menu
-                      className="pds-wds-titlebar-menu"
-                      id={item.label + "Menu"}
-                      key={index}
-                      anchorEl={anchorElSubNav && anchorElSubNav[index]}
-                      open={Boolean(anchorElSubNav && anchorElSubNav[index])}
-                      onClose={handleCloseSubNavMenu}
-                      MenuListProps={{
-                        "aria-labelledby": "basic-button",
-                      }}
-                      elevation={0}
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "right",
-                      }}
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
+                    <Popper
+                      className="pds-wds-titlebar-popper"
+                      open={getIsOpen(index)}
+                      anchorEl={getAnchor(index)}
+                      role={undefined}
+                      placement="bottom-start"
+                      transition
+                      disablePortal
                     >
-                      {item.items.map((subItem) => {
-                        return (
-                          <Link
-                            className="pds-wds-titlebar-link"
-                            key={subItem.id}
-                            href={subItem.href}
-                          >
-                            <MenuItem
-                              className="pds-wds-titlebar-menu-item"
-                              onClick={handleCloseSubNavMenu}
+                      {({ TransitionProps, placement }) => (
+                        <Grow
+                          {...TransitionProps}
+                          style={{
+                            transformOrigin:
+                              placement === "bottom-start"
+                                ? "left top"
+                                : "left bottom",
+                          }}
+                        >
+                          <Paper className="pds-wds-titlebar-paper">
+                            <ClickAwayListener
+                              onClickAway={() => handleClickAway(index)}
                             >
-                              <Typography
-                                className="pds-wds-titlebar-link-label"
-                                textAlign="center"
+                              <MenuList
+                                autoFocusItem={getIsOpen(index)}
+                                id="composition-menu"
+                                aria-labelledby="composition-button"
                               >
-                                {subItem.label}
-                              </Typography>
-                            </MenuItem>
-                          </Link>
-                        );
-                      })}
-                    </Menu>
-                    <Divider
-                      className="pds-wds-titlebar-link-divider"
-                      variant="middle"
-                      orientation="vertical"
-                      flexItem
-                    />
+                                {item.items.map((subItem) => {
+                                  return (
+                                    <Link
+                                      className="pds-wds-titlebar-link"
+                                      key={subItem.id}
+                                      href={subItem.href}
+                                    >
+                                      <MenuItem className="pds-wds-titlebar-menu-item">
+                                        <Typography
+                                          className="pds-wds-titlebar-link-label"
+                                          textAlign="center"
+                                        >
+                                          {subItem.label}
+                                        </Typography>
+                                      </MenuItem>
+                                    </Link>
+                                  );
+                                })}
+                              </MenuList>
+                            </ClickAwayListener>
+                          </Paper>
+                        </Grow>
+                      )}
+                    </Popper>
                   </>
                 ) : (
                   <>

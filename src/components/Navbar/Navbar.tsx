@@ -13,13 +13,22 @@ import Menu from "@mui/material/Menu";
 import { Divider } from "@mui/material";
 import { HeaderProps } from "../Header/Header";
 import { StyledEngineProvider } from "@mui/material/styles";
+import ClickAwayListener from "@mui/material/ClickAwayListener";
+import Grow from "@mui/material/Grow";
+import Paper from "@mui/material/Paper";
+import Popper from "@mui/material/Popper";
+import MenuList from "@mui/material/MenuList";
 
 const Navbar = ({ navItems }: HeaderProps) => {
   const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElSubNav, setAnchorElSubNav] = useState<null | Record<
-    string,
-    HTMLElement
-  >>(null);
+
+  const [elList, setElList] = useState(
+    Array<{
+      id: number;
+      anchorEl: HTMLElement | null;
+      isOpen: boolean;
+    }>,
+  );
 
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
@@ -29,15 +38,77 @@ const Navbar = ({ navItems }: HeaderProps) => {
     setAnchorElNav(null);
   };
 
-  const handleOpenSubNavMenu = (
-    index: number,
-    event: MouseEvent<HTMLElement>,
-  ) => {
-    setAnchorElSubNav({ [index]: event.currentTarget });
+  const handleClick = (index: number, event: React.MouseEvent<HTMLElement>) => {
+    setElList((prevArray) => {
+      const idx = prevArray.findIndex((x) => x.id === index);
+      const a = [...prevArray];
+
+      if (idx < 0) {
+        a.push({
+          id: index,
+          isOpen: true,
+          anchorEl: event.currentTarget,
+        });
+      }
+
+      if (idx > -1) {
+        const copyAnchor = a[idx].anchorEl;
+        const copyid = a[idx].id;
+        const newIsOpen = !a[idx].isOpen;
+
+        a.splice(idx, 1);
+
+        a.push({
+          id: copyid,
+          isOpen: newIsOpen,
+          anchorEl: copyAnchor,
+        });
+      }
+
+      return a;
+    });
   };
 
-  const handleCloseSubNavMenu = () => {
-    setAnchorElSubNav(null);
+  const handleClickAway = (index: number) => {
+    setElList((prevArray) => {
+      const idx = prevArray.findIndex((x) => x.id === index);
+      const a = [...prevArray];
+
+      if (idx > -1) {
+        const copyAnchor = a[idx].anchorEl;
+        const copyid = a[idx].id;
+
+        a.splice(idx, 1);
+
+        a.push({
+          id: copyid,
+          isOpen: false,
+          anchorEl: copyAnchor,
+        });
+      }
+
+      return a;
+    });
+  };
+
+  const getIsOpen = (index: number) => {
+    const idx = elList.findIndex((x) => x.id === index);
+
+    if (idx > -1) {
+      return elList[idx].isOpen;
+    }
+
+    return false;
+  };
+
+  const getAnchor = (index: number) => {
+    const idx = elList.findIndex((x) => x.id === index);
+
+    if (idx > -1) {
+      return elList[idx].anchorEl;
+    }
+
+    return null;
   };
 
   return (
@@ -57,59 +128,65 @@ const Navbar = ({ navItems }: HeaderProps) => {
                   <>
                     <Button
                       className="pds-wds-navbar-link-button"
+                      id="composition-button"
+                      aria-haspopup="true"
+                      onClick={(e) => handleClick(index, e)}
                       endIcon={<ExpandCircleDownOutlinedIcon />}
-                      key={item.id}
-                      id={item.label + "MenuButton"}
-                      onClick={(e) => handleOpenSubNavMenu(index, e)}
                     >
                       {item.label}
                     </Button>
-                    <Menu
-                      className="pds-wds-navbar-menu"
-                      id={item.label + "Menu"}
-                      key={index}
-                      anchorEl={anchorElSubNav && anchorElSubNav[index]}
-                      open={Boolean(anchorElSubNav && anchorElSubNav[index])}
-                      onClose={handleCloseSubNavMenu}
-                      MenuListProps={{
-                        "aria-labelledby": "basic-button",
-                      }}
-                      elevation={0}
-                      anchorOrigin={{
-                        vertical: "bottom",
-                        horizontal: "right",
-                      }}
-                      transformOrigin={{
-                        vertical: "top",
-                        horizontal: "right",
-                      }}
+                    <Popper
+                      className="pds-wds-navbar-popper"
+                      open={getIsOpen(index)}
+                      anchorEl={getAnchor(index)}
+                      role={undefined}
+                      placement="bottom-start"
+                      transition
                       disablePortal
-                      sx={{
-                        zIndex: 1350,
-                      }}
                     >
-                      {item.items.map((subItem) => {
-                        return (
-                          <Link
-                            className="pds-wds-navbar-link"
-                            key={subItem.id}
-                            href={subItem.href}
-                          >
-                            <MenuItem
-                              onClick={handleCloseSubNavMenu}
-                              className="pds-wds-navbar-menu-item"
+                      {({ TransitionProps, placement }) => (
+                        <Grow
+                          {...TransitionProps}
+                          style={{
+                            transformOrigin:
+                              placement === "bottom-start"
+                                ? "left top"
+                                : "left bottom",
+                          }}
+                        >
+                          <Paper className="pds-wds-navbar-paper">
+                            <ClickAwayListener
+                              onClickAway={() => handleClickAway(index)}
                             >
-                              <Typography
-                                className="pds-wds-navbar-link-label"
-                                textAlign="center"
+                              <MenuList
+                                autoFocusItem={getIsOpen(index)}
+                                id="composition-menu"
+                                aria-labelledby="composition-button"
                               >
-                                {subItem.label}
-                              </Typography>
-                            </MenuItem>
-                          </Link>
-                        );
-                      })}
-                    </Menu>
+                                {item.items.map((subItem) => {
+                                  return (
+                                    <Link
+                                      className="pds-wds-navbar-link"
+                                      key={subItem.id}
+                                      href={subItem.href}
+                                    >
+                                      <MenuItem className="pds-wds-navbar-menu-item">
+                                        <Typography
+                                          className="pds-wds-navbar-link-label"
+                                          textAlign="center"
+                                        >
+                                          {subItem.label}
+                                        </Typography>
+                                      </MenuItem>
+                                    </Link>
+                                  );
+                                })}
+                              </MenuList>
+                            </ClickAwayListener>
+                          </Paper>
+                        </Grow>
+                      )}
+                    </Popper>
                   </>
                 ) : (
                   <Link href={item.href}>

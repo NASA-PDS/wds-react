@@ -2,19 +2,24 @@
    background-color: var(--pds-secondary-black-t1);
 }
 
-.pds-wds-navbar-menu .MuiPaper-root {
-      background-color: var(--pds-secondary-black-t1);
-      border-radius: 0 0 3px 3px;
-      padding-top: 15px;
-      color: var(--pds-primary-white);
-}
-
-.pds-wds-navbar-menu .MuiPaper-root .MuiList-padding{
+.pds-wds-navbar-popper{
+   z-index: 1;
    padding: 11px 5px 11px 5px;
 }
 
+.pds-wds-titlebar-navbar .MuiPopper-root{
+   z-index: 1;
+}
+
+.pds-wds-navbar-paper {
+   background-color: var(--pds-secondary-black-t1);
+   border-radius: 0 0 3px 3px;
+   padding-top: 15px;
+   color: var(--pds-primary-white);
+}
+
 .pds-wds-navbar-menu-item:hover {
-   background-color: var(--pds-primary-black);
+   background-color: var(--pds-secondary-black-t1);
 }
 
 .pds-wds-navbar-menu-item:hover .MuiListItemIcon-root .MuiListItemText-primary{
@@ -26,7 +31,7 @@
 }
 
 .pds-wds-navbar-menu-item:focus{
-   background-color: var(--pds-primary-black);
+   background-color: var(--pds-secondary-black-t1);
 }
 
 .pds-wds-navbar-menu-item:focus  .MuiListItemIcon-root .MuiListItemText-primary{
@@ -35,43 +40,6 @@
 
 .pds-wds-navbar-menu-item:focus  .MuiLink-underlineFocus{
    text-decoration: none;
-}
-
-.pds-wds-navbar-search {
-   position: relative;
-   border-radius: 4px;
-   border-color: var(--pds-secondary-black-t2);
-   border-width: 1px;
-   border-style: solid;
-   background-color: var(--pds-primary-black);
-   margin-left: 0;
-   //width: 100%
-}
-
-.pds-wds-navbar-search:hover {
-   color: var(--pds-primary-white);
-   border-color: var(--pds-secondary-white-s4);
-}
-
-
-.pds-wds-navbar-search-icon-wrapper {
-   color: var(--pds-secondary-white-s3);
-   padding: 2px 12px 2px 12px;
-   height: 100%;
-   position: absolute;
-   pointer-events: none;
-   display: flex;
-   align-items: center;
-   justify-content: center;
-}
-
-.pds-wds-navbar-input-base {
-   color: inherit;
-}
-
-.pds-wds-navbar-input-base .MuiInputBase-input{
-   width: 100%;
-   color: var(--pds-primary-white);
 }
 
 .pds-wds-navbar-toolbar {

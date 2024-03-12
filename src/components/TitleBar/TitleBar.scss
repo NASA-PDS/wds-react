@@ -2,15 +2,16 @@
    background-color: var(--pds-primary-black);
 }
 
-.pds-wds-titlebar-menu .MuiPaper-root {
-      background-color: var(--pds-primary-black);
-      border-radius: 0 0 3px 3px;
-      padding-top: 15px;
-      color:var(--pds-primary-white);
+.pds-wds-titlebar-popper{
+   z-index: 1;
+   padding: 11px 5px 11px 5px;
 }
 
-.pds-wds-titlebar-menu .MuiPaper-root .MuiList-padding{
-   padding: 11px 5px 11px 5px;
+.pds-wds-titlebar-paper {
+   background-color: var(--pds-primary-black);
+   border-radius: 0 0 3px 3px;
+   padding-top: 15px;
+   color: var(--pds-primary-white);
 }
 
 .pds-wds-titlebar-menu-item:hover {
