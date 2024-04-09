@@ -8,6 +8,9 @@
 @import "_animations";
 
 // Components
+@import "../components/Chip/Chip.scss";
 @import "../components/HelloWorld/HelloWorld.scss";
 @import "../components/Navbar/Navbar.scss";
+@import "../components/Pagination/Pagination.scss";
+@import "../components/Tag/Tag.scss";
 @import "../components/TitleBar/TitleBar.scss";

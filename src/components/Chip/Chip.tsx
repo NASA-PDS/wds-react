@@ -1,18 +1,6 @@
-import MuiChip from '@mui/material/Chip';
-import StarsIcon from '@mui/icons-material/Stars';
+import MuiChip from "@mui/material/Chip";
+import StarsIcon from "@mui/icons-material/Stars";
 import { ChipProps } from "@mui/material";
-
-const styles = {
-  chip: {
-    borderRadius: '4px',
-    color: '#58585B',
-    border: '1px solid #288bff',
-    ':hover':{
-      border: '1px solid #288bff',
-      color: '#000000'
-    }
-  }
-}
 
 /**
  * A basic greeting message displayed to a user.
@@ -21,15 +9,13 @@ const styles = {
  * Default prop values should be specified in the deconstructed parameter object.
  *
  */
-export const Chip = ({
-  ...otherProps
-}: ChipProps) => {
+export const Chip = ({ ...otherProps }: ChipProps) => {
   return (
-    <MuiChip 
-      sx={styles.chip}
+    <MuiChip
+      className="pds-wds-chip"
       variant="outlined"
-      deleteIcon={<StarsIcon/>}
+      deleteIcon={<StarsIcon />}
       {...otherProps}
     />
   );
-}
+};

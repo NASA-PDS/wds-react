@@ -1,0 +1,10 @@
+.pds-wds-chip.MuiChip-root{
+   border-radius: 4px;
+   color: var(--pds-secondary-black-t3);
+   border: 1px solid var(--pds-secondary-blue-t1);
+}
+
+.pds-wds-chip.MuiChip-root:hover{
+   border: 1px solid var(--pds-secondary-blue-t1);
+   color: var(--pds-primary-black);
+}

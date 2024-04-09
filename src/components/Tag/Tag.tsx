@@ -1,17 +1,5 @@
-import MuiChip from '@mui/material/Chip';
+import MuiChip from "@mui/material/Chip";
 import { ChipProps } from "@mui/material";
-
-const styles = {
-  tag: {
-    borderRadius: '4px',
-    color: '#58585B',
-    border: '1px solid #58585B',
-    ':hover':{
-      border: '1px solid #000000',
-      color: '#000000'
-    }
-  }
-}
 
 /**
  * A simple tag.
@@ -20,13 +8,6 @@ const styles = {
  * Default prop values should be specified in the deconstructed parameter object.
  *
  */
-export const Tag = ({
-  ...otherProps
-}: ChipProps) => {
-  return (
-    <MuiChip 
-      sx={styles.tag}
-      {...otherProps}
-    />
-  );
-}
+export const Tag = ({ ...otherProps }: ChipProps) => {
+  return <MuiChip className="pds-wds-tag" {...otherProps} />;
+};

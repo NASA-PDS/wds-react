@@ -1,0 +1,20 @@
+.pds-wds-pagination .MuiPaginationItem-root{
+  border-radius: 4px;
+}
+
+.pds-wds-pagination .MuiPaginationItem-root:hover{
+   border: 2px solid var(--pds-primary-black);
+   color: var(--pds-primary-blue);
+   border-color: var(--pds-primary-blue);
+}
+
+.pds-wds-pagination .MuiButtonBase-root.MuiPaginationItem-root.Mui-selected{
+   color: var(--pds-primary-blue);
+   border-color: var(--pds-primary-blue);
+   background-color: var(--pds-primary-white);
+}
+
+.pds-wds-pagination .MuiButtonBase-root.MuiPaginationItem-root.Mui-focusVisible{
+   color: var(--pds-primary-blue);
+   border-color: var(--pds-primary-blue);
+}
