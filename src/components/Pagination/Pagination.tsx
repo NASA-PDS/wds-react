@@ -1,28 +1,6 @@
-import MaterialPagination from '@mui/material/Pagination';
-import {PaginationProps} from '@mui/material/Pagination';
-import Stack from '@mui/material/Stack';
-
-const styles = {
-  pagination: {
-    '& .MuiPaginationItem-root': {
-      borderRadius: '4px',
-      '&.Mui-selected': {
-          color: '#1C67E3',
-          borderColor: '#1C67E3',
-          backgroundColor: 'white'
-      },
-      '&.Mui-focusVisible': {
-          color: '#1C67E3',
-          borderColor: '#1C67E3',
-      },
-      ':hover':{
-          border: '2px solid #000000',
-          color: '#1C67E3',
-          borderColor: '#1C67E3',
-      }
-    }
-  }
-}
+import MaterialPagination from "@mui/material/Pagination";
+import { PaginationProps } from "@mui/material/Pagination";
+import Stack from "@mui/material/Stack";
 
 /**
  * A basic greeting message displayed to a user.
@@ -31,17 +9,15 @@ const styles = {
  * Default prop values should be specified in the deconstructed parameter object.
  *
  */
-export const Pagination = ({
-  ...otherProps
-}: PaginationProps) => {
+export const Pagination = ({ ...otherProps }: PaginationProps) => {
   return (
     <Stack spacing={2}>
-      <MaterialPagination 
-        sx={styles.pagination}
-        variant="outlined" 
+      <MaterialPagination
+        className="pds-wds-pagination"
+        variant="outlined"
         shape="rounded"
         {...otherProps}
       />
     </Stack>
   );
-}
+};

@@ -1,0 +1,162 @@
+.pds-wds-titlebar{
+   background-color: var(--pds-primary-black);
+}
+
+.pds-wds-titlebar-popper{
+   z-index: 1;
+   padding: 11px 5px 11px 5px;
+}
+
+.pds-wds-titlebar-paper {
+   background-color: var(--pds-primary-black);
+   border-radius: 0 0 3px 3px;
+   padding-top: 15px;
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-titlebar-menu-item:hover {
+   background-color: var(--pds-primary-black);
+}
+
+.pds-wds-titlebar-menu-item:hover .MuiListItemIcon-root .MuiListItemText-primary{
+   text-decoration: none;
+}
+
+.pds-wds-titlebar-menu-item:hover .MuiLink-underlineHover{
+   text-decoration: none;
+}
+
+.pds-wds-titlebar-menu-item:focus{
+   background-color: var(--pds-primary-black);
+}
+
+.pds-wds-titlebar-menu-item:focus  .MuiListItemIcon-root .MuiListItemText-primary{
+   text-decoration: none;
+}
+
+.pds-wds-titlebar-menu-item:focus  .MuiLink-underlineFocus{
+   text-decoration: none;
+}
+
+.pds-wds-titlebar-search {
+   position: relative;
+   border-radius: 4px;
+   border-color: var(--pds-secondary-black-t2);
+   border-width: 1px;
+   border-style: solid;
+   background-color: var(--pds-primary-black);
+   margin-left: 0;
+   //width: 100%
+}
+
+.pds-wds-titlebar-search:hover {
+   color: var(--pds-primary-white);
+   border-color: var(--pds-secondary-white-s4);
+}
+
+
+.pds-wds-titlebar-search-icon-wrapper {
+   color: var(--pds-secondary-white-s3);
+   padding: 2px 12px 2px 12px;
+   height: 100%;
+   position: absolute;
+   pointer-events: none;
+   display: flex;
+   align-items: center;
+   justify-content: center;
+}
+
+.pds-wds-titlebar-input-base {
+   color: inherit;
+}
+
+.pds-wds-titlebar-input-base .MuiInputBase-input{
+   width: 100%;
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-titlebar-nasa-logo-md {
+   height: 42px;
+   padding-top: 4px;
+   padding-bottom: 4px;
+   margin-right: 11.65px;
+}
+
+.pds-wds-titlebar-nasa-logo-xs {
+   height: 35px;
+   padding-top: 2px;
+   padding-bottom: 2px;
+   margin-right: 7.69px;
+}
+
+.pds-wds-titlebar-title-lg {
+   margin-right: 2px;
+   font-family: Inter;
+   font-weight: 700;
+   letter-spacing: -0.03125rem;
+   line-height: 26px;
+   color: inherit;
+   text-decoration: none;
+}
+
+.pds-wds-titlebar-title-md {
+   margin-right: 2px;
+   font-size: 1.125rem;
+   font-family: Inter;
+   font-weight: 700;
+   letter-spacing: -0.5px;
+   line-height: 23px;
+   color: inherit;
+   text-decoration: none;
+}
+
+.pds-wds-titlebar-title-xs {
+   margin-right: 2px;
+   font-size: 1rem;
+   flex-grow: 1;
+   font-family: Inter;
+   font-weight: 700;
+   letter-spacing: -0.5px;
+   line-height: 20px;
+   color: inherit;
+   text-decoration: none;
+}
+
+.pds-wds-titlebar-links{
+   justify-content: flex-end;
+   flex-grow: 1;
+}
+
+.pds-wds-titlebar-link-button {   
+   font-size: 0.875rem;
+   font-weight: 400;
+   line-height: 1.1875rem;
+   letter-spacing: -0.25px;
+   color: var(--pds-primary-white);
+   margin-right: 32px;
+   text-transform: none;
+}
+
+.pds-wds-titlebar-link.MuiTypography-root.MuiLink-root.MuiLink-underlineAlways.MuiTypography-inherit {   
+      text-decoration: none;
+}
+
+.pds-wds-titlebar-link.MuiTypography-root.MuiLink-root.MuiLink-underlineAlways.MuiTypography-inherit:hover {
+   text-decoration: underline;
+   text-decoration-color: var(--pds-primary-white);
+   text-decoration-style: dashed;
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-titlebar-link-label {   
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-titlebar-link-label:hover {   
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-titlebar-link-divider {   
+   background-color: var(--pds-secondary-black-t3);
+   margin-right: 16px;
+}
