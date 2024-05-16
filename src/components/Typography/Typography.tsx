@@ -1,63 +1,198 @@
 import MuiTypography from "@mui/material/Typography";
 import { TypographyProps } from "@mui/material";
 
-export type Props = {
-  variant: "body" | "display" | "header" | "label";
-  size:
-    | "240"
-    | "120"
-    | "100"
-    | "80"
-    | "72"
-    | "60"
-    | "48"
-    | "36"
-    | "41"
-    | "36"
-    | "29"
-    | "28"
-    | "22"
-    | "18"
-    | "16"
-    | "14"
-    | "12"
-    | "11";
-  type?: "light" | "regular" | "semibold" | "bold";
-} & Omit<TypographyProps, "variant" | "size">;
+type BodyProps = {
+  variant: "body1" | "body2" | "body3" | "body4" | "body5";
+  weight: "regular";
+};
+
+type DisplayProps = {
+  variant:
+    | "display1"
+    | "display2"
+    | "display3"
+    | "display4"
+    | "display5"
+    | "display6"
+    | "display7";
+  weight: "bold";
+};
+
+type HeaderBLProps = {
+  variant: "h1" | "h2";
+  weight: "bold" | "light";
+};
+
+type HeaderBRProps = {
+  variant: "h3";
+  weight: "bold" | "regular";
+};
+
+type HeaderSRProps = {
+  variant: "h4" | "h5" | "h6" | "h7";
+  weight: "semibold" | "regular";
+};
+
+type HeaderSProps = {
+  variant: "h8";
+  weight: "semibold";
+};
+
+type LabelProps = {
+  variant: "label1" | "label2" | "label3";
+  weight: "medium";
+};
+
+type NumberProps = {
+  variant:
+    | "number1"
+    | "number2"
+    | "number3"
+    | "number4"
+    | "number5"
+    | "number6"
+    | "number7";
+  weight: "light";
+};
+
+export type Props =
+  | (BodyProps & Omit<TypographyProps, "variant">)
+  | (DisplayProps & Omit<TypographyProps, "variant">)
+  | (HeaderBLProps & Omit<TypographyProps, "variant">)
+  | (HeaderBRProps & Omit<TypographyProps, "variant">)
+  | (HeaderSRProps & Omit<TypographyProps, "variant">)
+  | (HeaderSProps & Omit<TypographyProps, "variant">)
+  | (LabelProps & Omit<TypographyProps, "variant">)
+  | (NumberProps & Omit<TypographyProps, "variant">);
 
 export const Typography = (props: Props) => {
-  const { variant, size, type, ...other } = props;
+  const { variant, weight, ...other } = props;
 
   let typographyClass = "wds-typography";
-  if (variant === "body") typographyClass += "-body";
-  if (variant === "display") typographyClass += "-display";
-  if (variant === "header") typographyClass += "-header";
-  if (variant === "label") typographyClass += "-label";
+  let muiVariant;
 
-  if (type === "light") typographyClass += "-light";
-  if (type === "regular") typographyClass += "-regular";
-  if (type === "semibold") typographyClass += "-semibold";
-  if (type === "bold") typographyClass += "-bold";
-
-  if (size === "240") typographyClass += "-240";
-  if (size === "120") typographyClass += "-120";
-  if (size === "100") typographyClass += "-100";
-  if (size === "80") typographyClass += "-80";
-  if (size === "72") typographyClass += "-72";
-  if (size === "60") typographyClass += "-60";
-  if (size === "48") typographyClass += "-48";
-  if (size === "41") typographyClass += "-41";
-  if (size === "36") typographyClass += "-36";
-  if (size === "29") typographyClass += "-29";
-  if (size === "28") typographyClass += "-28";
-  if (size === "22") typographyClass += "-22";
-  if (size === "18") typographyClass += "-18";
-  if (size === "16") typographyClass += "-16";
-  if (size === "14") typographyClass += "-14";
-  if (size === "12") typographyClass += "-12";
-  if (size === "11") typographyClass += "-11";
+  switch (variant) {
+    case "body1":
+      typographyClass += "-body-regular-18";
+      muiVariant = "body1" as const;
+      break;
+    case "body2":
+      typographyClass += "-body-regular-16";
+      muiVariant = "body1" as const;
+      break;
+    case "body3":
+      typographyClass += "-body-regular-14";
+      muiVariant = "body1" as const;
+      break;
+    case "body4":
+      typographyClass += "-body-regular-12";
+      muiVariant = "body1" as const;
+      break;
+    case "body5":
+      typographyClass += "-body-regular-11";
+      muiVariant = "body1" as const;
+      break;
+    case "display1":
+      typographyClass += "-display-bold-120";
+      muiVariant = "body1" as const;
+      break;
+    case "display2":
+      typographyClass += "-display-bold-100";
+      muiVariant = "body1" as const;
+      break;
+    case "display3":
+      typographyClass += "-display-bold-80";
+      muiVariant = "body1" as const;
+      break;
+    case "display4":
+      typographyClass += "-display-bold-72";
+      muiVariant = "body1" as const;
+      break;
+    case "display5":
+      typographyClass += "-display-bold-60";
+      muiVariant = "body1" as const;
+      break;
+    case "display6":
+      typographyClass += "-display-bold-48";
+      muiVariant = "body1" as const;
+      break;
+    case "display7":
+      typographyClass += "-display-bold-41";
+      muiVariant = "body1" as const;
+      break;
+    case "h1":
+      typographyClass += "-header-" + weight + "-36";
+      muiVariant = "h1" as const;
+      break;
+    case "h2":
+      typographyClass += "-header-" + weight + "-29";
+      muiVariant = "h2" as const;
+      break;
+    case "h3":
+      typographyClass += "-header-" + weight + "-22";
+      muiVariant = "h3" as const;
+      break;
+    case "h4":
+      typographyClass += "-header-" + weight + "-18";
+      muiVariant = "h4" as const;
+      break;
+    case "h5":
+      typographyClass += "-header-" + weight + "-16";
+      muiVariant = "h5" as const;
+      break;
+    case "h6":
+      typographyClass += "-header-" + weight + "-14";
+      muiVariant = "h6" as const;
+      break;
+    case "h7":
+      typographyClass += "-header-" + weight + "-12";
+      muiVariant = "h6" as const;
+      break;
+    case "h8":
+      typographyClass += "-header-" + weight + "-11";
+      muiVariant = "h6" as const;
+      break;
+    case "label1":
+      typographyClass += "-label-" + weight + "-14";
+      muiVariant = "body1" as const;
+      break;
+    case "label2":
+      typographyClass += "-label-" + weight + "-12";
+      muiVariant = "body1" as const;
+      break;
+    case "label3":
+      typographyClass += "-label-" + weight + "-11";
+      muiVariant = "body1" as const;
+      break;
+    case "number1":
+      typographyClass += "-display-light-240";
+      muiVariant = "body1" as const;
+      break;
+    case "number2":
+      typographyClass += "-display-light-120";
+      muiVariant = "body1" as const;
+      break;
+    case "number3":
+      typographyClass += "-display-light-48";
+      muiVariant = "body1" as const;
+      break;
+    case "number4":
+      typographyClass += "-display-light-36";
+      muiVariant = "body1" as const;
+      break;
+    case "number5":
+      typographyClass += "-display-light-28";
+      muiVariant = "body1" as const;
+      break;
+    default:
+      muiVariant = "body1" as const;
+  }
 
   return (
-    <MuiTypography className={typographyClass} variant="body1" {...other} />
+    <MuiTypography
+      className={typographyClass}
+      variant={muiVariant}
+      {...other}
+    />
   );
 };

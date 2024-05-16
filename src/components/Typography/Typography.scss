@@ -1,38 +1,38 @@
 @use "@nasapds/wds/css/typography.css";
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-display-120{
-      @extend .wds-typography-display-120;
+   &.wds-typography-display-bold-120{
+      @extend .wds-typography-display-bold-120;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-display-100{
-      @extend .wds-typography-display-100;
+   &.wds-typography-display-bold-100{
+      @extend .wds-typography-display-bold-100;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-display-80{
-      @extend .wds-typography-display-80;
+   &.wds-typography-display-bold-80{
+      @extend .wds-typography-display-bold-80;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-display-72{
-      @extend .wds-typography-display-72;
+   &.wds-typography-display-bold-72{
+      @extend .wds-typography-display-bold-72;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-display-60{
-      @extend .wds-typography-display-60;
+   &.wds-typography-display-bold-60{
+      @extend .wds-typography-display-bold-60;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-display-48{
-      @extend .wds-typography-display-48;
+   &.wds-typography-display-bold-48{
+      @extend .wds-typography-display-bold-48;
    }
 }
 
@@ -42,123 +42,123 @@
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h1{
    &.wds-typography-header-bold-36{
       @extend .wds-typography-header-bold-36;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h1{
    &.wds-typography-header-light-36{
       @extend .wds-typography-header-light-36;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h2{
    &.wds-typography-header-bold-29{
       @extend .wds-typography-header-bold-29;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h2{
    &.wds-typography-header-light-29{
       @extend .wds-typography-header-light-29;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h3{
    &.wds-typography-header-bold-22{
       @extend .wds-typography-header-bold-22;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h3{
    &.wds-typography-header-regular-22{
       @extend .wds-typography-header-regular-22;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h4{
    &.wds-typography-header-semibold-18{
       @extend .wds-typography-header-semibold-18;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h4{
    &.wds-typography-header-regular-18{
       @extend .wds-typography-header-regular-18;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h5{
    &.wds-typography-header-semibold-16{
       @extend .wds-typography-header-semibold-16;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h5{
    &.wds-typography-header-regular-16{
       @extend .wds-typography-header-regular-16;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h6{
    &.wds-typography-header-semibold-14{
       @extend .wds-typography-header-semibold-14;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h6{
    &.wds-typography-header-regular-14{
       @extend .wds-typography-header-regular-14;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h6{
    &.wds-typography-header-semibold-12{
       @extend .wds-typography-header-semibold-12;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h6{
    &.wds-typography-header-regular-12{
       @extend .wds-typography-header-regular-12;
    }
 }
 
-.MuiTypography-root.MuiTypography-body1{
+.MuiTypography-root.MuiTypography-h6{
    &.wds-typography-header-semibold-11{
       @extend .wds-typography-header-semibold-11;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-body-18{
-      @extend .wds-typography-body-18;
+   &.wds-typography-body-regular-18{
+      @extend .wds-typography-body-regular-18;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-body-16{
-      @extend .wds-typography-body-16;
+   &.wds-typography-body-regular-16{
+      @extend .wds-typography-body-regular-16;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-body-14{
-      @extend .wds-typography-body-14;
+   &.wds-typography-body-regular-14{
+      @extend .wds-typography-body-regular-14;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-body-12{
-      @extend .wds-typography-body-12;
+   &.wds-typography-body-regular-12{
+      @extend .wds-typography-body-regular-12;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-body-11{
-      @extend .wds-typography-body-11;
+   &.wds-typography-body-regular-11{
+      @extend .wds-typography-body-regular-11;
    }
 }
 
@@ -193,19 +193,19 @@
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-label-14{
-      @extend .wds-typography-label-14;
+   &.wds-typography-label-medium-14{
+      @extend .wds-typography-label-medium-14;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-label-12{
-      @extend .wds-typography-label-12;
+   &.wds-typography-label-medium-12{
+      @extend .wds-typography-label-medium-12;
    }
 }
 
 .MuiTypography-root.MuiTypography-body1{
-   &.wds-typography-label-11{
-      @extend .wds-typography-label-11;
+   &.wds-typography-label-medium-11{
+      @extend .wds-typography-label-medium-11;
    }
 }
