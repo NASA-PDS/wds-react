@@ -1,0 +1,90 @@
+.pds-wds-navbar{
+   background-color: var(--pds-secondary-black-t1);
+}
+
+.pds-wds-navbar-popper{
+   z-index: 1;
+   padding: 11px 5px 11px 5px;
+}
+
+.pds-wds-titlebar-navbar .MuiPopper-root{
+   z-index: 1;
+}
+
+.pds-wds-navbar-paper {
+   background-color: var(--pds-secondary-black-t1);
+   border-radius: 0 0 3px 3px;
+   padding-top: 15px;
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-navbar-menu-item:hover {
+   background-color: var(--pds-secondary-black-t1);
+}
+
+.pds-wds-navbar-menu-item:hover .MuiListItemIcon-root .MuiListItemText-primary{
+   text-decoration: none;
+}
+
+.pds-wds-navbar-menu-item:hover .MuiLink-underlineHover{
+   text-decoration: none;
+}
+
+.pds-wds-navbar-menu-item:focus{
+   background-color: var(--pds-secondary-black-t1);
+}
+
+.pds-wds-navbar-menu-item:focus  .MuiListItemIcon-root .MuiListItemText-primary{
+   text-decoration: none;
+}
+
+.pds-wds-navbar-menu-item:focus  .MuiLink-underlineFocus{
+   text-decoration: none;
+}
+
+.pds-wds-navbar-toolbar {
+   justify-content: space-between;
+}
+
+.pds-wds-navbar-top-divider {
+   background-color: var(--pds-secondary-black-t3);
+}
+
+.pds-wds-navbar-link-button {   
+   font-weight: 400;
+   line-height: 1.1875rem;
+   letter-spacing: -0.25px;
+   color: var(--pds-primary-white);
+   margin-right: 32px;
+   text-transform: none;
+}
+
+.pds-wds-navbar-link-button-single {   
+   font-size: 0.875rem;
+   font-weight: 400;
+   line-height: 1.1875rem;
+   letter-spacing: -0.25px;
+   color: var(--pds-primary-white);
+   margin-right: 32px;
+   text-transform: none;
+}
+
+
+.pds-wds-navbar-link-label {   
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-navbar-link-label:hover {   
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-navbar-link.MuiTypography-root.MuiLink-root.MuiLink-underlineAlways.MuiTypography-inherit {   
+   text-decoration: none;
+}
+
+.pds-wds-navbar-link.MuiTypography-root.MuiLink-root.MuiLink-underlineAlways.MuiTypography-inherit:hover {
+   text-decoration: underline;
+   text-decoration-color: var(--pds-primary-white);
+   text-decoration-style: dashed;
+   color: var(--pds-primary-white);
+}
