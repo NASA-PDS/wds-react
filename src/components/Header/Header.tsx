@@ -7,7 +7,7 @@ export type HeaderProps = {
       id: string;
       label: string;
       href: string;
-      items: [
+      items?: [
         {
           id: string;
           label: string;
@@ -16,12 +16,13 @@ export type HeaderProps = {
       ];
     },
   ];
+  title: string;
 };
 
-export const Header = ({ navItems }: HeaderProps) => {
+export const Header = ({ navItems, title }: HeaderProps) => {
   return (
     <header>
-      <TitleBar />
+      <TitleBar title={title} />
       <Navbar navItems={navItems} />
     </header>
   );

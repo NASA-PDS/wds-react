@@ -14,6 +14,11 @@
    color: var(--pds-primary-white);
 }
 
+.pds-wds-titlebar-titlelink{
+   color: white;
+   text-decoration: none;
+}
+
 .pds-wds-titlebar-menu-item:hover {
    background-color: var(--pds-primary-black);
 }
@@ -129,7 +134,7 @@
 
 .pds-wds-titlebar-link-button {   
    font-size: 0.875rem;
-   font-weight: 400;
+   font-weight: bold;
    line-height: 1.1875rem;
    letter-spacing: -0.25px;
    color: var(--pds-primary-white);

@@ -66,10 +66,16 @@ export type Props =
   | (NumberProps & Omit<TypographyProps, "variant">);
 
 export const Typography = (props: Props) => {
-  const { variant, weight, ...other } = props;
+  const { variant, weight, className, ...other } = props;
 
-  let typographyClass = "wds-typography";
+  let typographyClass = "";
   let muiVariant;
+
+  if (className) {
+    typographyClass = className + " wds-typography";
+  } else {
+    typographyClass = "wds-typography";
+  }
 
   switch (variant) {
     case "body1":
