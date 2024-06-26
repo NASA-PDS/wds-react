@@ -18,9 +18,9 @@ import MenuList from "@mui/material/MenuList";
 import ChevronDown from "../Icons/ChevronDown";
 import ArrowCircleDownIcon from "../Icons/ArrowCircleDown";
 import ArrowCircleUpIcon from "../Icons/ArrowCircleUp";
+import ArrowForwardIcon from "../Icons/ArrowForward";
 
 const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
-  //const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
   const [isSmallMenuOpen, setIsSmallMenuOpen] = useState(false);
 
   const [elList, setElList] = useState(
@@ -34,18 +34,6 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
   const [activeSmallMenuIndices, setActiveSmallMenuIndices] = useState(
     new Set(),
   );
-
-  /*
-  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-  */
-
-  /*
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-  */
 
   const handleClick = (index: number, event: React.MouseEvent<HTMLElement>) => {
     setElList((prevArray) => {
@@ -186,6 +174,24 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
                                 id="composition-menu"
                                 aria-labelledby="composition-button"
                               >
+                                {item.items ? (
+                                  <Link
+                                    className="pds-wds-navbar-link-main"
+                                    href={item.href}
+                                  >
+                                    <Typography
+                                      className="pds-wds-navbar-link-label"
+                                      variant="h4"
+                                      weight="semibold"
+                                      textAlign="center"
+                                    >
+                                      {item.label}
+                                    </Typography>
+                                    <ArrowForwardIcon className="pds-wds-navbar-link-main-icon" />
+                                  </Link>
+                                ) : (
+                                  <></>
+                                )}
                                 {item.items?.map((subItem) => {
                                   return (
                                     <Link
@@ -263,9 +269,9 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
                               {item.label}
                             </Typography>
                             {activeSmallMenuIndices.has(index) ? (
-                              <ArrowCircleDownIcon className="icon" />
-                            ) : (
                               <ArrowCircleUpIcon className="icon" />
+                            ) : (
+                              <ArrowCircleDownIcon className="icon" />
                             )}
                           </Box>
 

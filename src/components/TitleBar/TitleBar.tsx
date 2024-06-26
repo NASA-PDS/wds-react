@@ -3,16 +3,12 @@ import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-//import Menu from "@mui/material/Menu";
-//import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
 import { Typography } from "../Typography/Typography";
 import Divider from "@mui/material/Divider";
 import InputBase from "@mui/material/InputBase";
 import NasaLogo from "../../assets/nasa.svg";
-//import IconButton from "@mui/material/IconButton";
-//import SearchIcon from "@mui/icons-material/Search";
 import Link from "@mui/material/Link";
 import { StyledEngineProvider } from "@mui/material/styles";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -82,14 +78,6 @@ export type TitleBarProps = {
 };
 
 const TitleBar = ({ title, titleLink }: TitleBarProps) => {
-  /*
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElSubNav, setAnchorElSubNav] = useState<null | Record<
-    string,
-    HTMLElement
-  >>(null);
-  */
-
   const [isSmallMenuOpen, setIsSmallMenuOpen] = useState(false);
   const [elList, setElList] = useState(
     Array<{
@@ -188,23 +176,6 @@ const TitleBar = ({ title, titleLink }: TitleBarProps) => {
     }
     setActiveSmallMenuIndices(newIndices);
   };
-
-  /*
-  const handleOpenSubNavMenu = (
-    index: number,
-    event: MouseEvent<HTMLElement>,
-  ) => {
-    setAnchorElSubNav({ [index]: event.currentTarget });
-  };
-
-  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
-  */
 
   return (
     <StyledEngineProvider injectFirst>
