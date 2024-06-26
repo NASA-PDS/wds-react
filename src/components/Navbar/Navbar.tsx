@@ -1,14 +1,12 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import IconButton from "@mui/material/IconButton";
 import { Typography } from "../Typography/Typography";
 import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import { Divider } from "@mui/material";
 import { HeaderProps } from "../Header/Header";
 import { StyledEngineProvider } from "@mui/material/styles";
@@ -18,9 +16,12 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuList from "@mui/material/MenuList";
 import ChevronDown from "../Icons/ChevronDown";
+import ArrowCircleDownIcon from "../Icons/ArrowCircleDown";
+import ArrowCircleUpIcon from "../Icons/ArrowCircleUp";
 
 const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  //const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
+  const [isSmallMenuOpen, setIsSmallMenuOpen] = useState(false);
 
   const [elList, setElList] = useState(
     Array<{
@@ -30,13 +31,21 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
     }>,
   );
 
+  const [activeSmallMenuIndices, setActiveSmallMenuIndices] = useState(
+    new Set(),
+  );
+
+  /*
   const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
     setAnchorElNav(event.currentTarget);
   };
+  */
 
+  /*
   const handleCloseNavMenu = () => {
     setAnchorElNav(null);
   };
+  */
 
   const handleClick = (index: number, event: React.MouseEvent<HTMLElement>) => {
     setElList((prevArray) => {
@@ -111,6 +120,20 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
     return null;
   };
 
+  const handleToggleSmallMenu = () => {
+    setIsSmallMenuOpen(!isSmallMenuOpen);
+  };
+
+  const handleOpenSmallMenuSubNav = (index: number) => {
+    const newIndices = new Set(activeSmallMenuIndices);
+    if (activeSmallMenuIndices.has(index)) {
+      newIndices.delete(index);
+    } else {
+      newIndices.add(index);
+    }
+    setActiveSmallMenuIndices(newIndices);
+  };
+
   return (
     <StyledEngineProvider injectFirst>
       <Divider
@@ -119,10 +142,10 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
         className="pds-wds-navbar-top-divider"
       />
       <AppBar component="nav" position="static" className="pds-wds-navbar">
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" className="pds-wds-navbar-container">
           <Toolbar disableGutters className="pds-wds-navbar-toolbar">
             <div />
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            <Box sx={{ display: { xs: "none", lg: "block" } }}>
               {navItems.map((item, index) => {
                 return item.items ? (
                   <>
@@ -203,49 +226,97 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
               })}
             </Box>
 
-            <Box sx={{ display: { xs: "block", sm: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <ChevronDown height={10} width={10} />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", sm: "none" },
-                }}
-              >
-                {navItems.map((item) => (
-                  <Link key={item.id} href={item.href}>
-                    <MenuItem onClick={handleCloseNavMenu}>
-                      <Typography
-                        variant="body2"
-                        weight="regular"
-                        textAlign="center"
-                      >
-                        {item.label}
-                      </Typography>
-                    </MenuItem>
-                  </Link>
-                ))}
-              </Menu>
+            <Box sx={{ display: { xs: "block", lg: "none" } }}>
+              <Button
+                className="pds-wds-navbar-link-button"
+                endIcon={
+                  isSmallMenuOpen ? (
+                    <ArrowCircleUpIcon className="icon" />
+                  ) : (
+                    <ArrowCircleDownIcon className="icon" />
+                  )
+                }
+                onClick={handleToggleSmallMenu}
+              ></Button>
+
+              {isSmallMenuOpen ? (
+                <div>
+                  <Box
+                    className="pds-wds-navbar-small-menu-md"
+                    sx={{
+                      display: { xs: "block", lg: "none" },
+                    }}
+                  >
+                    {navItems.map((item, index) => {
+                      return item.items ? (
+                        <div>
+                          <Box
+                            onClick={() => handleOpenSmallMenuSubNav(index)}
+                            className="pds-wds-navbar-small-menu-link"
+                          >
+                            <Typography
+                              className="pds-wds-navbar-link-label"
+                              variant="body1"
+                              weight="regular"
+                              textAlign="left"
+                            >
+                              {item.label}
+                            </Typography>
+                            {activeSmallMenuIndices.has(index) ? (
+                              <ArrowCircleDownIcon className="icon" />
+                            ) : (
+                              <ArrowCircleUpIcon className="icon" />
+                            )}
+                          </Box>
+
+                          {activeSmallMenuIndices.has(index) ? (
+                            <div>
+                              {item.items.map((subItem) => {
+                                return (
+                                  <div
+                                    className="pds-wds-navbar-small-menu-link"
+                                    key={subItem.id}
+                                  >
+                                    <Link
+                                      className="pds-wds-titlebar-link"
+                                      key={subItem.id}
+                                      href={subItem.href}
+                                    >
+                                      <Typography
+                                        className="pds-wds-navbar-link-label"
+                                        variant="body2"
+                                        weight="regular"
+                                        textAlign="center"
+                                      >
+                                        {subItem.label}
+                                      </Typography>
+                                    </Link>
+                                  </div>
+                                );
+                              })}
+                            </div>
+                          ) : (
+                            <></>
+                          )}
+                        </div>
+                      ) : (
+                        <div className="pds-wds-navbar-small-menu-link">
+                          <Typography
+                            className="pds-wds-navbar-link-label"
+                            variant="body1"
+                            weight="regular"
+                            textAlign="left"
+                          >
+                            {item.label}
+                          </Typography>
+                        </div>
+                      );
+                    })}
+                  </Box>
+                </div>
+              ) : (
+                <></>
+              )}
             </Box>
           </Toolbar>
         </Container>
