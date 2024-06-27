@@ -17,12 +17,13 @@ export type HeaderProps = {
     },
   ];
   title: string;
+  titleLink: string;
 };
 
-export const Header = ({ navItems, title }: HeaderProps) => {
+export const Header = ({ navItems, title, titleLink }: HeaderProps) => {
   return (
     <header>
-      <TitleBar title={title} />
+      <TitleBar title={title} titleLink={titleLink} />
       <Navbar navItems={navItems} />
     </header>
   );
