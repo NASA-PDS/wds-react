@@ -25,11 +25,6 @@ import CloseIcon from "../Icons/Close";
 
 const pages = [
   {
-    id: "explore-pds",
-    label: "Explore PDS",
-    href: "/",
-  },
-  {
     id: "pds-nodes",
     label: "PDS Nodes",
     items: [
