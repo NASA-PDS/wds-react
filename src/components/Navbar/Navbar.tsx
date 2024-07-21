@@ -16,23 +16,19 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuList from "@mui/material/MenuList";
 import ChevronDown from "../Icons/ChevronDown";
-import ArrowCircleDownIcon from "../Icons/ArrowCircleDown";
-import ArrowCircleUpIcon from "../Icons/ArrowCircleUp";
-import ArrowForwardIcon from "../Icons/ArrowForward";
+import ArrowRightIcon from "../Icons/ArrowRight";
 
-const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
-  const [isSmallMenuOpen, setIsSmallMenuOpen] = useState(false);
-
+const Navbar = ({
+  navItems,
+  subTitle,
+  subTitleLink,
+}: Omit<HeaderProps, "title">) => {
   const [elList, setElList] = useState(
     Array<{
       id: number;
       anchorEl: HTMLElement | null;
       isOpen: boolean;
     }>,
-  );
-
-  const [activeSmallMenuIndices, setActiveSmallMenuIndices] = useState(
-    new Set(),
   );
 
   const handleClick = (index: number, event: React.MouseEvent<HTMLElement>) => {
@@ -108,20 +104,6 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
     return null;
   };
 
-  const handleToggleSmallMenu = () => {
-    setIsSmallMenuOpen(!isSmallMenuOpen);
-  };
-
-  const handleOpenSmallMenuSubNav = (index: number) => {
-    const newIndices = new Set(activeSmallMenuIndices);
-    if (activeSmallMenuIndices.has(index)) {
-      newIndices.delete(index);
-    } else {
-      newIndices.add(index);
-    }
-    setActiveSmallMenuIndices(newIndices);
-  };
-
   return (
     <StyledEngineProvider injectFirst>
       <Divider
@@ -130,9 +112,40 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
         className="pds-wds-navbar-top-divider"
       />
       <AppBar component="nav" position="static" className="pds-wds-navbar">
-        <Container maxWidth="xl" className="pds-wds-navbar-container">
+        <Container maxWidth="xl">
           <Toolbar disableGutters className="pds-wds-navbar-toolbar">
-            <div />
+            {subTitle ? (
+              <>
+                <Link
+                  href={subTitleLink}
+                  target="_blank"
+                  className="pds-wds-navbar-titlelink"
+                  sx={{
+                    display: { xs: "none", lg: "flex" },
+                  }}
+                >
+                  <Typography variant="h3" weight="bold" noWrap>
+                    {subTitle}
+                  </Typography>
+                </Link>
+
+                <Link
+                  href={subTitleLink}
+                  target="_blank"
+                  className="pds-wds-navbar-titlelink"
+                  sx={{
+                    display: { xs: "flex", lg: "none" },
+                  }}
+                >
+                  <Typography variant="h4" weight="semibold" noWrap>
+                    {subTitle}
+                  </Typography>
+                </Link>
+              </>
+            ) : (
+              <div />
+            )}
+
             <Box sx={{ display: { xs: "none", lg: "block" } }}>
               {navItems.map((item, index) => {
                 return item.items ? (
@@ -181,13 +194,15 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
                                   >
                                     <Typography
                                       className="pds-wds-navbar-link-label"
-                                      variant="h4"
-                                      weight="semibold"
+                                      variant="h3"
+                                      weight="bold"
                                       textAlign="center"
                                     >
                                       {item.label}
                                     </Typography>
-                                    <ArrowForwardIcon className="pds-wds-navbar-link-main-icon" />
+                                    <Box className="pds-wds-navbar-arrow-forward-indicator">
+                                      <ArrowRightIcon className="pds-wds-navbar-link-main-icon" />
+                                    </Box>
                                   </Link>
                                 ) : (
                                   <></>
@@ -230,99 +245,6 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
                   </Link>
                 );
               })}
-            </Box>
-
-            <Box sx={{ display: { xs: "block", lg: "none" } }}>
-              <Button
-                className="pds-wds-navbar-link-button"
-                endIcon={
-                  isSmallMenuOpen ? (
-                    <ArrowCircleUpIcon className="icon" />
-                  ) : (
-                    <ArrowCircleDownIcon className="icon" />
-                  )
-                }
-                onClick={handleToggleSmallMenu}
-              ></Button>
-
-              {isSmallMenuOpen ? (
-                <div>
-                  <Box
-                    className="pds-wds-navbar-small-menu-md"
-                    sx={{
-                      display: { xs: "block", lg: "none" },
-                    }}
-                  >
-                    {navItems.map((item, index) => {
-                      return item.items ? (
-                        <div>
-                          <Box
-                            onClick={() => handleOpenSmallMenuSubNav(index)}
-                            className="pds-wds-navbar-small-menu-link"
-                          >
-                            <Typography
-                              className="pds-wds-navbar-link-label"
-                              variant="body1"
-                              weight="regular"
-                              textAlign="left"
-                            >
-                              {item.label}
-                            </Typography>
-                            {activeSmallMenuIndices.has(index) ? (
-                              <ArrowCircleUpIcon className="icon" />
-                            ) : (
-                              <ArrowCircleDownIcon className="icon" />
-                            )}
-                          </Box>
-
-                          {activeSmallMenuIndices.has(index) ? (
-                            <div>
-                              {item.items.map((subItem) => {
-                                return (
-                                  <div
-                                    className="pds-wds-navbar-small-menu-link"
-                                    key={subItem.id}
-                                  >
-                                    <Link
-                                      className="pds-wds-titlebar-link"
-                                      key={subItem.id}
-                                      href={subItem.href}
-                                    >
-                                      <Typography
-                                        className="pds-wds-navbar-link-label"
-                                        variant="body2"
-                                        weight="regular"
-                                        textAlign="center"
-                                      >
-                                        {subItem.label}
-                                      </Typography>
-                                    </Link>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      ) : (
-                        <div className="pds-wds-navbar-small-menu-link">
-                          <Typography
-                            className="pds-wds-navbar-link-label"
-                            variant="body1"
-                            weight="regular"
-                            textAlign="left"
-                          >
-                            {item.label}
-                          </Typography>
-                        </div>
-                      );
-                    })}
-                  </Box>
-                </div>
-              ) : (
-                <></>
-              )}
             </Box>
           </Toolbar>
         </Container>

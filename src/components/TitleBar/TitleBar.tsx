@@ -18,10 +18,11 @@ import Popper from "@mui/material/Popper";
 import MenuList from "@mui/material/MenuList";
 import ArrowCircleDownIcon from "../Icons/ArrowCircleDown";
 import ChevronDownIcon from "../Icons/ChevronDown";
-import ChevronRightIcon from "../Icons/ChevronRight";
 import MenuIcon from "../Icons/Menu";
 import SearchIcon from "../Icons/Search";
 import CloseIcon from "../Icons/Close";
+import { HeaderProps } from "../Header/Header";
+import ArrowCircleUpIcon from "../Icons/ArrowCircleUp";
 
 const pages = [
   {
@@ -72,7 +73,13 @@ export type TitleBarProps = {
   titleLink: string;
 };
 
-const TitleBar = ({ title, titleLink }: TitleBarProps) => {
+const TitleBar = ({
+  title,
+  titleLink,
+  navItems,
+  subTitle,
+  subTitleLink,
+}: HeaderProps) => {
   const [isSmallMenuOpen, setIsSmallMenuOpen] = useState(false);
   const [elList, setElList] = useState(
     Array<{
@@ -81,9 +88,11 @@ const TitleBar = ({ title, titleLink }: TitleBarProps) => {
       isOpen: boolean;
     }>,
   );
-  const [activeSmallMenuIndices, setActiveSmallMenuIndices] = useState(
+  const [activeNavSmallMenuIndices, setActiveNavSmallMenuIndices] = useState(
     new Set(),
   );
+  const [activeTitleSmallMenuIndices, setActiveTitleSmallMenuIndices] =
+    useState(new Set());
 
   const handleClick = (index: number, event: MouseEvent<HTMLElement>) => {
     setElList((prevArray) => {
@@ -162,14 +171,24 @@ const TitleBar = ({ title, titleLink }: TitleBarProps) => {
     setIsSmallMenuOpen(!isSmallMenuOpen);
   };
 
-  const handleOpenSmallMenuSubNav = (index: number) => {
-    const newIndices = new Set(activeSmallMenuIndices);
-    if (activeSmallMenuIndices.has(index)) {
+  const handleOpenNavSmallMenuSubNav = (index: number) => {
+    const newIndices = new Set(activeNavSmallMenuIndices);
+    if (activeNavSmallMenuIndices.has(index)) {
       newIndices.delete(index);
     } else {
       newIndices.add(index);
     }
-    setActiveSmallMenuIndices(newIndices);
+    setActiveNavSmallMenuIndices(newIndices);
+  };
+
+  const handleOpenTitleSmallMenuSubNav = (index: number) => {
+    const newIndices = new Set(activeTitleSmallMenuIndices);
+    if (activeTitleSmallMenuIndices.has(index)) {
+      newIndices.delete(index);
+    } else {
+      newIndices.add(index);
+    }
+    setActiveTitleSmallMenuIndices(newIndices);
   };
 
   return (
@@ -277,6 +296,12 @@ const TitleBar = ({ title, titleLink }: TitleBarProps) => {
                         </Grow>
                       )}
                     </Popper>
+                    <Divider
+                      className="pds-wds-titlebar-link-divider-mid"
+                      variant="middle"
+                      orientation="vertical"
+                      flexItem
+                    />
                   </>
                 ) : (
                   <>
@@ -458,36 +483,149 @@ const TitleBar = ({ title, titleLink }: TitleBarProps) => {
                   display: { xs: "block", lg: "none" },
                 }}
               >
-                <div className="pds-wds-titlebar-small-menu-container">
-                  <Box className="pds-wds-titlebar-links-small">
-                    <Button
-                      className="pds-wds-titlebar-link-button-sm"
-                      endIcon={<CloseIcon className="icon" />}
-                      onClick={handleToggleSmallMenu}
-                    ></Button>
+                <Box
+                  sx={{
+                    display: { xs: "none", md: "flex", lg: "none" },
+                  }}
+                >
+                  <Container maxWidth="xl">
+                    <Toolbar
+                      disableGutters
+                      className="pds-wds-titlebar-small-menu-toolbar"
+                    >
+                      <div className="pds-wds-titlebar-small-menu-container">
+                        <Link href={titleLink} target="_blank">
+                          <Box
+                            className="pds-wds-titlebar-nasa-logo-md"
+                            component="img"
+                            sx={{
+                              display: { xs: "none", md: "flex", lg: "none" },
+                            }}
+                            alt="NASA logo."
+                            src={NasaLogo}
+                          />
+                        </Link>
+                        <Link
+                          href={titleLink}
+                          target="_blank"
+                          className="pds-wds-titlebar-titlelink"
+                        >
+                          <Typography
+                            variant="h3"
+                            weight="bold"
+                            noWrap
+                            sx={{
+                              display: { xs: "none", md: "flex", lg: "none" },
+                            }}
+                          >
+                            {title}
+                          </Typography>
+                        </Link>
+                      </div>
 
-                    <div className="pds-wds-titlebar-small-title">
-                      <Link href={titleLink} target="_blank">
-                        <Box
-                          className="pds-wds-titlebar-nasa-logo-xs"
-                          component="img"
-                          alt="NASA logo."
-                          src={NasaLogo}
-                        />
-                      </Link>
-                      <Link
-                        href={titleLink}
-                        target="_blank"
-                        className="pds-wds-titlebar-titlelink"
+                      <Button
+                        className="pds-wds-titlebar-link-button-sm"
+                        endIcon={<CloseIcon className="icon" />}
+                        onClick={handleToggleSmallMenu}
+                      ></Button>
+                    </Toolbar>
+                  </Container>
+                </Box>
+
+                <Box
+                  sx={{
+                    display: { xs: "flex", md: "none" },
+                  }}
+                >
+                  <Container maxWidth="xl">
+                    <Toolbar
+                      disableGutters
+                      className="pds-wds-titlebar-small-menu-toolbar"
+                    >
+                      <div className="pds-wds-titlebar-small-menu-container">
+                        <Link href={titleLink} target="_blank">
+                          <Box
+                            className="pds-wds-titlebar-nasa-logo-xs"
+                            component="img"
+                            sx={{
+                              display: { xs: "flex", md: "none" },
+                            }}
+                            alt="NASA logo."
+                            src={NasaLogo}
+                          />
+                        </Link>
+                        <Link
+                          href={titleLink}
+                          target="_blank"
+                          className="pds-wds-titlebar-titlelink"
+                        >
+                          <Typography
+                            variant="h4"
+                            weight="semibold"
+                            noWrap
+                            sx={{
+                              display: { xs: "flex", md: "none" },
+                            }}
+                          >
+                            {title}
+                          </Typography>
+                        </Link>
+                      </div>
+
+                      <Button
+                        className="pds-wds-titlebar-link-button-sm"
+                        endIcon={<CloseIcon className="icon" />}
+                        onClick={handleToggleSmallMenu}
+                      ></Button>
+                    </Toolbar>
+                  </Container>
+                </Box>
+
+                {subTitle ? (
+                  <>
+                    <Divider
+                      variant="fullWidth"
+                      orientation="horizontal"
+                      className="pds-wds-navbar-top-divider"
+                    />
+                    <Container maxWidth="xl">
+                      <Toolbar
+                        disableGutters
+                        className="pds-wds-titlebar-toolbar"
                       >
-                        <Typography variant="h4" weight="semibold" noWrap>
-                          {title}
-                        </Typography>
-                      </Link>
-                    </div>
-                    <div></div>
-                  </Box>
+                        <Link
+                          href={subTitleLink}
+                          target="_blank"
+                          className="pds-wds-navbar-titlelink"
+                          sx={{
+                            display: { xs: "none", lg: "flex" },
+                          }}
+                        >
+                          <Typography variant="h3" weight="bold" noWrap>
+                            {subTitle}
+                          </Typography>
+                        </Link>
 
+                        <Link
+                          href={subTitleLink}
+                          target="_blank"
+                          className="pds-wds-navbar-titlelink"
+                          sx={{
+                            display: { xs: "flex", lg: "none" },
+                          }}
+                        >
+                          <Typography variant="h4" weight="semibold" noWrap>
+                            {subTitle}
+                          </Typography>
+                        </Link>
+                      </Toolbar>
+                    </Container>
+                  </>
+                ) : (
+                  <div />
+                )}
+
+                <Container maxWidth="xl">
                   <Box className="pds-wds-titlebar-links">
                     <div className="pds-wds-titlebar-search">
                       <div className="pds-wds-titlebar-search-icon-wrapper">
@@ -516,62 +654,25 @@ const TitleBar = ({ title, titleLink }: TitleBarProps) => {
                       />
                     </div>
                   </Box>
+                </Container>
 
-                  <Box className="pds-wds-titlebar-small-menu-sublinks">
-                    {pages.map((item, index) => {
-                      return item.items ? (
-                        <div>
-                          <Box
-                            onClick={() => handleOpenSmallMenuSubNav(index)}
-                            className="pds-wds-titlebar-small-menu-link"
-                          >
-                            <Typography
-                              className="pds-wds-titlebar-link-label"
-                              variant="body1"
-                              weight="regular"
-                              textAlign="left"
-                            >
-                              {item.label}
-                            </Typography>
-                            {activeSmallMenuIndices.has(index) ? (
-                              <ChevronDownIcon className="icon" />
-                            ) : (
-                              <ChevronRightIcon className="icon" />
-                            )}
-                          </Box>
-
-                          {activeSmallMenuIndices.has(index) ? (
-                            <div>
-                              {item.items.map((subItem) => {
-                                return (
-                                  <div
-                                    className="pds-wds-titlebar-small-menu-link"
-                                    key={subItem.id}
-                                  >
-                                    <Link
-                                      className="pds-wds-titlebar-link"
-                                      key={subItem.id}
-                                      href={subItem.href}
-                                    >
-                                      <Typography
-                                        className="pds-wds-titlebar-link-label"
-                                        variant="body2"
-                                        weight="regular"
-                                        textAlign="center"
-                                      >
-                                        {subItem.label}
-                                      </Typography>
-                                    </Link>
-                                  </div>
-                                );
-                              })}
-                            </div>
-                          ) : (
-                            <></>
-                          )}
-                        </div>
-                      ) : (
-                        <div className="pds-wds-titlebar-small-menu-link">
+                <Box
+                  className="pds-wds-titlebar-small-menu-md"
+                  sx={{
+                    display: { xs: "block", lg: "none" },
+                  }}
+                >
+                  {navItems.map((item, index) => {
+                    return item.items ? (
+                      <div>
+                        <Box
+                          onClick={() => handleOpenNavSmallMenuSubNav(index)}
+                          className={
+                            activeNavSmallMenuIndices.has(index)
+                              ? "pds-wds-titlebar-small-menu-link-open"
+                              : "pds-wds-titlebar-small-menu-link"
+                          }
+                        >
                           <Typography
                             className="pds-wds-titlebar-link-label"
                             variant="body1"
@@ -580,11 +681,133 @@ const TitleBar = ({ title, titleLink }: TitleBarProps) => {
                           >
                             {item.label}
                           </Typography>
-                        </div>
-                      );
-                    })}
-                  </Box>
-                </div>
+                          {activeNavSmallMenuIndices.has(index) ? (
+                            <ArrowCircleUpIcon className="icon" />
+                          ) : (
+                            <ArrowCircleDownIcon className="icon" />
+                          )}
+                        </Box>
+
+                        {activeNavSmallMenuIndices.has(index) ? (
+                          <div>
+                            <Divider className="pds-wds-titlebar-small-menu-link-divider" />
+                            {item.items.map((subItem) => {
+                              return (
+                                <div
+                                  className="pds-wds-titlebar-small-menu-sub-link"
+                                  key={subItem.id}
+                                >
+                                  <Link
+                                    className="pds-wds-titlebar-link"
+                                    key={subItem.id}
+                                    href={subItem.href}
+                                  >
+                                    <Typography
+                                      className="pds-wds-titlebar-link-label"
+                                      variant="body1"
+                                      weight="regular"
+                                      textAlign="left"
+                                    >
+                                      {subItem.label}
+                                    </Typography>
+                                  </Link>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="pds-wds-titlebar-small-menu-link">
+                        <Typography
+                          className="pds-wds-titlebar-link-label"
+                          variant="body1"
+                          weight="regular"
+                          textAlign="left"
+                        >
+                          {item.label}
+                        </Typography>
+                      </div>
+                    );
+                  })}
+                </Box>
+
+                <Box
+                  className="pds-wds-titlebar-small-menu-md"
+                  sx={{
+                    display: { xs: "block", lg: "none" },
+                  }}
+                >
+                  <Divider className="pds-wds-titlebar-small-menu-link-divider" />
+                  {pages.map((item, index) => {
+                    return item.items ? (
+                      <div>
+                        <Box
+                          onClick={() => handleOpenTitleSmallMenuSubNav(index)}
+                          className="pds-wds-titlebar-small-menu-link"
+                        >
+                          <Typography
+                            className="pds-wds-titlebar-link-label"
+                            variant="body1"
+                            weight="regular"
+                            textAlign="left"
+                          >
+                            {item.label}
+                          </Typography>
+                          {activeTitleSmallMenuIndices.has(index) ? (
+                            <ArrowCircleUpIcon className="icon" />
+                          ) : (
+                            <ArrowCircleDownIcon className="icon" />
+                          )}
+                        </Box>
+
+                        {activeTitleSmallMenuIndices.has(index) ? (
+                          <div>
+                            <Divider className="pds-wds-titlebar-small-menu-link-divider" />
+                            {item.items.map((subItem) => {
+                              return (
+                                <div
+                                  className="pds-wds-titlebar-small-menu-sub-link"
+                                  key={subItem.id}
+                                >
+                                  <Link
+                                    className="pds-wds-titlebar-link"
+                                    key={subItem.id}
+                                    href={subItem.href}
+                                  >
+                                    <Typography
+                                      className="pds-wds-titlebar-link-label"
+                                      variant="body1"
+                                      weight="regular"
+                                      textAlign="center"
+                                    >
+                                      {subItem.label}
+                                    </Typography>
+                                  </Link>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="pds-wds-titlebar-small-menu-link">
+                        <Typography
+                          className="pds-wds-titlebar-link-label"
+                          variant="body1"
+                          weight="regular"
+                          textAlign="left"
+                        >
+                          {item.label}
+                        </Typography>
+                      </div>
+                    );
+                  })}
+                </Box>
               </Box>
             ) : (
               <></>
