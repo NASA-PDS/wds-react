@@ -16,7 +16,6 @@ import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuList from "@mui/material/MenuList";
 import ChevronDown from "../Icons/ChevronDown";
-import ArrowRightIcon from "../Icons/ArrowRight";
 
 const Navbar = ({
   navItems,
@@ -187,26 +186,6 @@ const Navbar = ({
                                 id="composition-menu"
                                 aria-labelledby="composition-button"
                               >
-                                {item.items ? (
-                                  <Link
-                                    className="pds-wds-navbar-link-main"
-                                    href={item.href}
-                                  >
-                                    <Typography
-                                      className="pds-wds-navbar-link-label"
-                                      variant="h3"
-                                      weight="bold"
-                                      textAlign="center"
-                                    >
-                                      {item.label}
-                                    </Typography>
-                                    <Box className="pds-wds-navbar-arrow-forward-indicator">
-                                      <ArrowRightIcon className="pds-wds-navbar-link-main-icon" />
-                                    </Box>
-                                  </Link>
-                                ) : (
-                                  <></>
-                                )}
                                 {item.items?.map((subItem) => {
                                   return (
                                     <Link

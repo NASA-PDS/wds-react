@@ -625,7 +625,7 @@ const TitleBar = ({
                   <div />
                 )}
 
-                <Container maxWidth="xl">
+                <Container maxWidth="xl" className="pds-wds-titlebar-small-menu-search-container">
                   <Box className="pds-wds-titlebar-links">
                     <div className="pds-wds-titlebar-search">
                       <div className="pds-wds-titlebar-search-icon-wrapper">
@@ -639,10 +639,9 @@ const TitleBar = ({
                           "& .MuiInputBase-input": {
                             padding: (theme) => theme.spacing(1, 1, 1, 0),
                             // vertical padding + font size from searchIcon
-                            paddingLeft: (theme) =>
-                              `calc(1em + ${theme.spacing(4)})`,
-                            transition: (theme) =>
-                              theme.transitions.create("width"),
+                            paddingLeft: (theme) => `calc(1em + ${theme.spacing(4)})`,
+                            display: "flex",
+                            transition: (theme) => theme.transitions.create("width"),
                             '[theme.breakpoints.up("sm")]': {
                               width: "12ch",
                               "&:focus": {

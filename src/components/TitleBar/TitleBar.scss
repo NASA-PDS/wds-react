@@ -4,7 +4,6 @@
 
 .pds-wds-titlebar-popper{
    z-index: 1;
-   padding: 11px 5px 11px 5px;
 }
 
 .pds-wds-titlebar-paper {
@@ -51,7 +50,6 @@
    border-style: solid;
    background-color: var(--pds-primary-black);
    margin-left: 0;
-   margin-bottom: 10px;
 }
 
 .pds-wds-titlebar-search:hover {
@@ -73,6 +71,7 @@
 
 .pds-wds-titlebar-input-base {
    color: inherit;
+   display: flex;
 }
 
 .pds-wds-titlebar-input-base .MuiInputBase-input{
@@ -269,4 +268,9 @@
    padding-left: 30px;
    padding-right: 40px;
    background-color: var(--pds-secondary-black-t2);
+}
+
+.pds-wds-titlebar-small-menu-search-container{
+   margin-top: 10px;
+   margin-bottom: 10px;
 }
