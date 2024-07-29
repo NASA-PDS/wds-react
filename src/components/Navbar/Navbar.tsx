@@ -1,14 +1,12 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Link from "@mui/material/Link";
-import IconButton from "@mui/material/IconButton";
 import { Typography } from "../Typography/Typography";
 import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import { Divider } from "@mui/material";
 import { HeaderProps } from "../Header/Header";
 import { StyledEngineProvider } from "@mui/material/styles";
@@ -19,9 +17,11 @@ import Popper from "@mui/material/Popper";
 import MenuList from "@mui/material/MenuList";
 import ChevronDown from "../Icons/ChevronDown";
 
-const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-
+const Navbar = ({
+  navItems,
+  subTitle,
+  subTitleLink,
+}: Omit<HeaderProps, "title">) => {
   const [elList, setElList] = useState(
     Array<{
       id: number;
@@ -29,14 +29,6 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
       isOpen: boolean;
     }>,
   );
-
-  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
   const handleClick = (index: number, event: React.MouseEvent<HTMLElement>) => {
     setElList((prevArray) => {
@@ -121,8 +113,39 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
       <AppBar component="nav" position="static" className="pds-wds-navbar">
         <Container maxWidth="xl">
           <Toolbar disableGutters className="pds-wds-navbar-toolbar">
-            <div />
-            <Box sx={{ display: { xs: "none", sm: "block" } }}>
+            {subTitle ? (
+              <>
+                <Link
+                  href={subTitleLink}
+                  target="_blank"
+                  className="pds-wds-navbar-titlelink"
+                  sx={{
+                    display: { xs: "none", lg: "flex" },
+                  }}
+                >
+                  <Typography variant="h3" weight="bold" noWrap>
+                    {subTitle}
+                  </Typography>
+                </Link>
+
+                <Link
+                  href={subTitleLink}
+                  target="_blank"
+                  className="pds-wds-navbar-titlelink"
+                  sx={{
+                    display: { xs: "flex", lg: "none" },
+                  }}
+                >
+                  <Typography variant="h4" weight="semibold" noWrap>
+                    {subTitle}
+                  </Typography>
+                </Link>
+              </>
+            ) : (
+              <div />
+            )}
+
+            <Box sx={{ display: { xs: "none", lg: "block" } }}>
               {navItems.map((item, index) => {
                 return item.items ? (
                   <>
@@ -201,51 +224,6 @@ const Navbar = ({ navItems }: Omit<HeaderProps, "title">) => {
                   </Link>
                 );
               })}
-            </Box>
-
-            <Box sx={{ display: { xs: "block", sm: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <ChevronDown height={10} width={10} />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", sm: "none" },
-                }}
-              >
-                {navItems.map((item) => (
-                  <Link key={item.id} href={item.href}>
-                    <MenuItem onClick={handleCloseNavMenu}>
-                      <Typography
-                        variant="body2"
-                        weight="regular"
-                        textAlign="center"
-                      >
-                        {item.label}
-                      </Typography>
-                    </MenuItem>
-                  </Link>
-                ))}
-              </Menu>
             </Box>
           </Toolbar>
         </Container>

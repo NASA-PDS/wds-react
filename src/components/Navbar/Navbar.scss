@@ -4,7 +4,6 @@
 
 .pds-wds-navbar-popper{
    z-index: 1;
-   padding: 11px 5px 11px 5px;
 }
 
 .pds-wds-titlebar-navbar .MuiPopper-root{
@@ -50,22 +49,13 @@
    background-color: var(--pds-secondary-black-t3);
 }
 
-.pds-wds-navbar-link-button {   
-   font-weight: 400;
-   line-height: 1.1875rem;
-   letter-spacing: -0.25px;
-   color: var(--pds-primary-white);
-   margin-right: 32px;
-   text-transform: none;
-}
-
 .pds-wds-navbar-link-button-single {   
+   margin-left: 10px;
    font-size: 0.875rem;
    font-weight: 400;
    line-height: 1.1875rem;
    letter-spacing: -0.25px;
    color: var(--pds-primary-white);
-   margin-right: 32px;
    text-transform: none;
 }
 
@@ -87,4 +77,87 @@
    text-decoration-color: var(--pds-primary-white);
    text-decoration-style: dashed;
    color: var(--pds-primary-white);
+}
+
+.pds-wds-navbar-link-main.MuiTypography-root.MuiLink-root.MuiLink-underlineAlways.MuiTypography-inherit {   
+   text-decoration: none;
+   display: flex;
+   justify-content: left;
+   margin-left: 15px;
+   padding-bottom: 20px;
+   align-items: center;
+}
+
+.pds-wds-navbar-link-main.MuiTypography-root.MuiLink-root.MuiLink-underlineAlways.MuiTypography-inherit:hover {
+   text-decoration: none;
+   text-decoration-color: var(--pds-primary-white);
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-navbar-small-menu-md{
+   background-color: var(--pds-secondary-black-t1);
+   position: absolute;
+   z-index: 8;
+   left: 0;
+   width: 100%;
+   overflow: auto;
+   border-top: solid var(--pds-secondary-black-t3) 1px;
+   margin-top: 8px;
+   padding-bottom: 20px;
+}
+
+.pds-wds-navbar-container{
+   padding:0;
+}
+
+.pds-wds-navbar-link-button {
+   margin-left: 10px;
+   font-size: 0.875rem;
+   line-height: 1.1875rem;
+   letter-spacing: -0.25px;
+   color: var(--pds-primary-white);
+   text-transform: none;
+}
+
+.pds-wds-navbar-small-menu-link{
+   display: flex;
+   justify-content: space-between;
+   padding-top: 20px;
+   padding-left: 30px;
+   padding-right: 47px;
+}
+
+
+.pds-wds-navbar-link-label {   
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-navbar-link-label:hover {   
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-navbar-link-main-icon {
+   color: var(--pds-primary-white);
+}
+
+.pds-wds-navbar-titlelink{
+   color: white;
+   text-decoration: none;
+}
+
+.pds-wds-navbar-arrow-forward-indicator{
+   background-color: var(--pds-primary-red);
+   height: 30px;
+   width: 30px;
+   padding: 10px;
+   border-radius: 100px;
+   display: inline-flex;
+   align-items: center;
+   box-sizing: border-box;
+   margin-left: 10px;
+   margin-right: 10px;
+}
+
+.pds-wds-navbar-link-main.MuiTypography-root.MuiLink-root.MuiLink-underlineAlways.MuiTypography-inherit:hover .pds-wds-navbar-arrow-forward-indicator {
+   background-color: var(--pds-secondary-red-s1);
 }
