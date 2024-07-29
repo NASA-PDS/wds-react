@@ -674,8 +674,8 @@ const TitleBar = ({
                         >
                           <Typography
                             className="pds-wds-titlebar-link-label"
-                            variant="body1"
-                            weight="regular"
+                            variant="h4"
+                            weight="semibold"
                             textAlign="left"
                           >
                             {item.label}
@@ -722,8 +722,8 @@ const TitleBar = ({
                       <div className="pds-wds-titlebar-small-menu-link">
                         <Typography
                           className="pds-wds-titlebar-link-label"
-                          variant="body1"
-                          weight="regular"
+                          variant="h4"
+                          weight="semibold"
                           textAlign="left"
                         >
                           {item.label}
@@ -749,8 +749,8 @@ const TitleBar = ({
                         >
                           <Typography
                             className="pds-wds-titlebar-link-label"
-                            variant="body1"
-                            weight="regular"
+                            variant="h4"
+                            weight="semibold"
                             textAlign="left"
                           >
                             {item.label}
