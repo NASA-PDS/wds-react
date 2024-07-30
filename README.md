@@ -15,12 +15,12 @@ The process overview is we have our css/sass styles in the WDS repository. The l
   - https://github.com/NASA-PDS/wds-react
 2. Build wds.
   - Open a terminal in the root of the wds repository. 
-  - Run `npm run install`
+  - Run `npm clean-install`
   - Run `npm run build:css`
   - Run `npm run build:icons`
 3. Set up wds-react
   - Open a terminal in the root of the wds-react repository. 
-  - Run `npm run install`
+  - Run `npm clean-install`
   - Run `npm run build-icons`
   - Run `npm run build-lib-watch`
 4. Set up tester app.
