@@ -1,16 +1,18 @@
 # wds-react
 
-The wds-react project is a library of pds components based on the Horizon Design System.
+The `wds-react` project is a library of Planetary Data System (PDS) web components based on the Horizon Design System (HDS).
 
-The process overview is we have our css/sass styles in the WDS repository. The library then imports those styles and applies them to the components. That css is then exported so that the client app that uses the library will import both the components and the css.
+This web component library relies on the CSS/SASS styles defined in the [PDS Web Design System (WDS) repository](https://github.com/nasa-pds/wds). The `wds-react` library imports the styles defined in `wds` and applies them to the web components. Then, `wds-react` exports CSS and other assets so that a client app can consume the library by importing the needed CSS and web components.
 
 **Prerequisites:**
-- Have nodejs installed: https://nodejs.org/en
-- Have git installed: https://git-scm.com
-- Have a code editor installed. We prefer visual studios code: https://code.visualstudio.com
+
+- Have Node.js installed: https://nodejs.org/en
+- Have Git installed: https://git-scm.com
+- Have a code editor installed. We prefer Visual Studio Code: https://code.visualstudio.com
 
 ## Getting Started
-1. Use Git to clone the WDS repository and the component library. Switch branches to develop. 
+
+1. Use Git to clone the WDS repository and the component library. Switch branches to develop.
   - https://github.com/NASA-PDS/wds
   - https://github.com/NASA-PDS/wds-react
 2. Build wds.
