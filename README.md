@@ -45,9 +45,10 @@ This web component library relies on the CSS/SASS styles defined in the [PDS Web
   - In the return block add the line `<div><HelloWorld/></div>`
 8. Verify component is there and styled.
   - Open the http://localhost:5173/ page or equivalent and then verify that the hello world message is displayed.
-    
-## Links
+
+## References
 - PDS WDS Specifications: https://www.figma.com/file/QqXo2XsUrKVu7KVjOHVeHk/PDS-Design-Library
-- HDS Specifications: https://website.nasa.gov/hds/
-- Current Nasa Site has working components for HDS: https://www.nasa.gov
+- Horizon Design System (HDS) Specifications — https://website.nasa.gov/horizon-design-system/
+- The current NASA (https://www.nasa.gov) and Science@NASA (https://science.nasa.gov/) sites demonstrate component usage for HDS.
+- 
 
