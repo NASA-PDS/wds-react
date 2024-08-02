@@ -16,7 +16,7 @@ This web component library relies on the CSS/SASS styles defined in the [PDS Web
     - https://github.com/NASA-PDS/wds
     - https://github.com/NASA-PDS/wds-react
 
-2. If using `nvm`, be sure to activate the proper version of Node.js by running the following command from the root folder of where the `wds` and wds-react` repos are cloned.
+2. If using `nvm`, be sure to activate the proper version of Node.js by running the following command from the root folder of where the `wds` and `wds-react` repos are cloned.
 
     ```
     nvm use
