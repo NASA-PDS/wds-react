@@ -16,28 +16,43 @@ This web component library relies on the CSS/SASS styles defined in the [PDS Web
     - https://github.com/NASA-PDS/wds
     - https://github.com/NASA-PDS/wds-react
 
-2. Build wds.
+2. If using `nvm`, be sure to activate the proper version of Node.js by running the following command from the root folder of where the `wds` and wds-react` repos are cloned.
+
+    ```
+    nvm use
+    ```
+
+    Example:
+
+    ```
+    wds-react % nvm use
+    Found '/some/path/to/wds-react/.nvmrc' with version <lts/iron>
+    Now using node v20.16.0 (npm v10.8.1)
+    wds-react % 
+    ```
+
+3. Build wds.
 
     - Open a terminal in the root of the wds repository. 
     - Run `npm clean-install` (See notes about differences between `npm install` and `npm clean-install`)
     - Run `npm run build:css`
     - Run `npm run build:icons`
 
-3. Set up wds-react
+4. Set up wds-react.
 
     - Open a terminal in the root of the wds-react repository. 
     - Run `npm clean-install` (See notes about differences between `npm install` and `npm clean-install`)
     - Run `npm run build-icons`
     - Run `npm run build-lib-watch`
 
-4. Set up an application to test the packages. (optional)
+5. Set up an application to test the packages. (optional)
 
     - Run `npm create vite@latest`
     - Follow the prompts. Enter a project name, choose React, choose Typescript or JavaScript. (JavaScript is simpler and faster to test).
     - Follow the message. `cd <project_name>`, `npm install`, `npm run dev`
     - Open a browser and go the the link shown in the message. By default it is http://localhost:5173/, but it can change if that port is already being used.
 
-5. Link wds, wds-react, and the application that needs these packages.
+6. Link wds, wds-react, and the application that needs these packages.
 
     - In the wds terminal run `npm link`
     - In the wds-react terminal run `npm link @nasapds/wds`
@@ -46,7 +61,7 @@ This web component library relies on the CSS/SASS styles defined in the [PDS Web
 
     ___Note about using `npm link`___: This is only needed when working with the `wds` and `wds-react` packages _locally_.
 
-6. Import library and styles into the tester app
+7. Import library and styles into the tester app.
 
     - Open the main entry point Typescript/JavaScirpt file for your application in a code editor. For the application created above, open the `src/App.jsx` or `src/App.tsx` file.
     - Add the imports:
@@ -61,11 +76,11 @@ This web component library relies on the CSS/SASS styles defined in the [PDS Web
       import { HelloWorld } from "@nasapds/wds-react";
       ```
 
-7. Use components.
+8. Use components.
 
     - In the return block add the line `<div><HelloWorld /></div>`
 
-8. Verify component is there and styled.
+9. Verify component is there and styled.
 
     - Open the http://localhost:5173/ page or equivalent and then verify that the hello world message is displayed.
 
