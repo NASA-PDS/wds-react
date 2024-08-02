@@ -131,6 +131,12 @@
    flex-grow: 1;
 }
 
+.pds-wds-titlebar-links-search{
+   justify-content: flex-end;
+   flex-grow: 1;
+   margin-right: 13px;
+}
+
 .pds-wds-titlebar-link-button {   
    font-size: 0.875rem;
    font-weight: bold;
