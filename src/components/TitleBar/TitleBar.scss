@@ -134,7 +134,6 @@
 .pds-wds-titlebar-links-search{
    justify-content: flex-end;
    flex-grow: 1;
-   margin-right: 13px;
 }
 
 .pds-wds-titlebar-link-button {   
@@ -153,6 +152,23 @@
    letter-spacing: -0.25px;
    color: var(--pds-primary-white);
    text-transform: none;
+}
+
+.pds-wds-titlebar-link-button-md {
+   font-size: 0.875rem;
+   font-weight: bold;
+   line-height: 1.1875rem;
+   letter-spacing: -0.25px;
+   color: var(--pds-primary-white);
+   text-transform: none;
+   min-width: 0;
+   padding-left: 0;
+   padding-right: 0;
+}
+
+.pds-wds-titlebar-link-button-md .MuiButton-icon.MuiButton-endIcon.MuiButton-iconSizeMedium {
+   margin-left: 0;
+   margin-right: 0;
 }
 
 .pds-wds-titlebar-link.MuiTypography-root.MuiLink-root.MuiLink-underlineAlways.MuiTypography-inherit {   
@@ -219,8 +235,8 @@
    justify-content: space-between;
    padding-top: 10px;
    padding-bottom: 10px;
-   padding-left: 30px;
-   padding-right: 40px;
+   padding-left: 24px;
+   padding-right: 24px;
    align-items: center;
 }
 
@@ -229,8 +245,8 @@
    justify-content: space-between;
    padding-top: 10px;
    padding-bottom: 10px;
-   padding-left: 30px;
-   padding-right: 40px;
+   padding-left: 24px;
+   padding-right: 24px;
    align-items: center;
    background-color: var(--pds-secondary-black-t2);
 }
@@ -271,8 +287,8 @@
    justify-content: space-between;
    padding-top: 10px;
    padding-bottom: 10px;
-   padding-left: 30px;
-   padding-right: 40px;
+   padding-left: 24px;
+   padding-right: 24px;
    background-color: var(--pds-secondary-black-t2);
 }
 

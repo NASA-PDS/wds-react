@@ -416,7 +416,7 @@ const TitleBar = ({
               />
 
               <Button
-                className="pds-wds-titlebar-link-button"
+                className="pds-wds-titlebar-link-button-md"
                 endIcon={<MenuIcon className="icon" />}
                 onClick={handleToggleSmallMenu}
               ></Button>
@@ -457,7 +457,7 @@ const TitleBar = ({
               }}
             >
               <Button
-                className="pds-wds-titlebar-link-button-sm"
+                className="pds-wds-titlebar-link-button-md"
                 endIcon={<SearchIcon className="icon" />}
                 onClick={handleToggleSmallMenu}
               ></Button>
@@ -470,7 +470,7 @@ const TitleBar = ({
               />
 
               <Button
-                className="pds-wds-titlebar-link-button-sm"
+                className="pds-wds-titlebar-link-button-md"
                 endIcon={<MenuIcon className="icon" />}
                 onClick={handleToggleSmallMenu}
               ></Button>
@@ -524,7 +524,7 @@ const TitleBar = ({
                       </div>
 
                       <Button
-                        className="pds-wds-titlebar-link-button-sm"
+                        className="pds-wds-titlebar-link-button-md"
                         endIcon={<CloseIcon className="icon" />}
                         onClick={handleToggleSmallMenu}
                       ></Button>
@@ -573,7 +573,7 @@ const TitleBar = ({
                       </div>
 
                       <Button
-                        className="pds-wds-titlebar-link-button-sm"
+                        className="pds-wds-titlebar-link-button-md"
                         endIcon={<CloseIcon className="icon" />}
                         onClick={handleToggleSmallMenu}
                       ></Button>
