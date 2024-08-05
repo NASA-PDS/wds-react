@@ -416,7 +416,7 @@ const TitleBar = ({
               />
 
               <Button
-                className="pds-wds-titlebar-link-button"
+                className="pds-wds-titlebar-link-button-md"
                 endIcon={<MenuIcon className="icon" />}
                 onClick={handleToggleSmallMenu}
               ></Button>
@@ -457,7 +457,7 @@ const TitleBar = ({
               }}
             >
               <Button
-                className="pds-wds-titlebar-link-button-sm"
+                className="pds-wds-titlebar-link-button-md"
                 endIcon={<SearchIcon className="icon" />}
                 onClick={handleToggleSmallMenu}
               ></Button>
@@ -470,7 +470,7 @@ const TitleBar = ({
               />
 
               <Button
-                className="pds-wds-titlebar-link-button-sm"
+                className="pds-wds-titlebar-link-button-md"
                 endIcon={<MenuIcon className="icon" />}
                 onClick={handleToggleSmallMenu}
               ></Button>
@@ -524,7 +524,7 @@ const TitleBar = ({
                       </div>
 
                       <Button
-                        className="pds-wds-titlebar-link-button-sm"
+                        className="pds-wds-titlebar-link-button-md"
                         endIcon={<CloseIcon className="icon" />}
                         onClick={handleToggleSmallMenu}
                       ></Button>
@@ -573,7 +573,7 @@ const TitleBar = ({
                       </div>
 
                       <Button
-                        className="pds-wds-titlebar-link-button-sm"
+                        className="pds-wds-titlebar-link-button-md"
                         endIcon={<CloseIcon className="icon" />}
                         onClick={handleToggleSmallMenu}
                       ></Button>
@@ -626,7 +626,7 @@ const TitleBar = ({
                 )}
 
                 <Container maxWidth="xl" className="pds-wds-titlebar-small-menu-search-container">
-                  <Box className="pds-wds-titlebar-links">
+                  <Box className="pds-wds-titlebar-links-search">
                     <div className="pds-wds-titlebar-search">
                       <div className="pds-wds-titlebar-search-icon-wrapper">
                         <SearchIcon />
@@ -745,7 +745,11 @@ const TitleBar = ({
                       <div>
                         <Box
                           onClick={() => handleOpenTitleSmallMenuSubNav(index)}
-                          className="pds-wds-titlebar-small-menu-link"
+                          className={
+                            activeTitleSmallMenuIndices.has(index)
+                              ? "pds-wds-titlebar-small-menu-link-open"
+                              : "pds-wds-titlebar-small-menu-link"
+                          }
                         >
                           <Typography
                             className="pds-wds-titlebar-link-label"
