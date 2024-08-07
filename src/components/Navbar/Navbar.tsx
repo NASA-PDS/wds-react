@@ -21,7 +21,7 @@ const Navbar = ({
   navItems,
   subTitle,
   subTitleLink,
-}: Omit<HeaderProps, "title">) => {
+}: Omit<HeaderProps, "title" | "titleLink">) => {
   const [elList, setElList] = useState(
     Array<{
       id: number;
