@@ -120,7 +120,7 @@
     "build-storybook": "storybook build",
     "compile": "tsc -p .",
     "lint": "eslint ./src --ext ts,tsx --report-unused-disable-directives --max-warnings 0",
-    "build-icons": "svgr -d ./src/components/Icons/ node_modules/@nasapds/wds/icons/",
+    "build-icons": "svgr --jsx-runtime automatic -d ./src/components/Icons/ node_modules/@nasapds/wds/icons/",
     "storybook": "storybook dev -p 6006",
     "test": "jest",
     "watch": "jest --watchAll"
