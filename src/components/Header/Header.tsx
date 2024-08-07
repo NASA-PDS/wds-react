@@ -2,21 +2,21 @@ import TitleBar from "../TitleBar/TitleBar";
 import Navbar from "../Navbar/Navbar";
 import Box from "@mui/material/Box";
 
-export type HeaderProps = {
-  navItems: [
+type NavItems = {
+  id: string;
+  label: string;
+  href: string;
+  items?: Array<
     {
       id: string;
       label: string;
       href: string;
-      items?: [
-        {
-          id: string;
-          label: string;
-          href: string;
-        },
-      ];
-    },
-  ];
+    }
+  >
+};
+
+export type HeaderProps = {
+  navItems: NavItems[];
   title: string;
   titleLink: string;
   subTitle?: string;
