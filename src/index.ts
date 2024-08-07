@@ -1,5 +1,6 @@
 import "./styles/styles.scss";
 export * from "./components/Breadcrumbs";
+export * from "./components/Button";
 export * from "./components/Card";
 export * from "./components/Chip";
 export * from "./components/FeaturedLinkListItem";
