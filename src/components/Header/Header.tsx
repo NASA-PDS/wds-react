@@ -2,7 +2,7 @@ import TitleBar from "../TitleBar/TitleBar";
 import Navbar from "../Navbar/Navbar";
 import Box from "@mui/material/Box";
 
-type NavItems = {
+export type NavItems = {
   id: string;
   label: string;
   href: string;
