@@ -2,17 +2,9 @@ import CircularProgress, { CircularProgressProps } from '@mui/material/CircularP
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
 
-type DeterminateLoaderProps = {
-  variant: 'determinate'
-  /** Progress value to display */
-  value: number;
-};
-
-type IndeterminateLoaderProps = {
-  variant: 'indeterminate'
+type LoaderProps = {
+  value?: number;
 }
-
-type LoaderProps = DeterminateLoaderProps | IndeterminateLoaderProps;
 
 function CircularProgressWithLabel(
   props: CircularProgressProps & { value: number },
@@ -43,12 +35,13 @@ function CircularProgressWithLabel(
 }
 
 /**
- * A basic determinate or indeterminate loader
+ * A basic loader that can display either an indeterminate
+ * or determinate progress component if a value is passed.
  */
-export const Loader = (props: LoaderProps) => {
+export const Loader = ({value}: LoaderProps) => {
 
-  if( props.variant == "determinate") {
-    return <CircularProgressWithLabel value={props.value}/>
+  if( value !== undefined) {
+    return <CircularProgressWithLabel value={value}/>
   }
   
   return <CircularProgress />
