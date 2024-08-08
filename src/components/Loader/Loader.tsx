@@ -1,7 +1,6 @@
 import CircularProgress, { CircularProgressProps } from '@mui/material/CircularProgress';
 import Typography from '@mui/material/Typography';
 import Box from '@mui/material/Box';
-import { ReactElement } from "react";
 
 type DeterminateLoaderProps = {
   variant: 'determinate'
@@ -48,14 +47,10 @@ function CircularProgressWithLabel(
  */
 export const Loader = (props: LoaderProps) => {
 
-  let progressComponent:ReactElement;
   if( props.variant == "determinate") {
-    progressComponent = <CircularProgressWithLabel value={props.value}/>
-  } else {
-    progressComponent = <CircularProgress />
+    return <CircularProgressWithLabel value={props.value}/>
   }
+  
+  return <CircularProgress />
 
-  return (
-    progressComponent
-  );
 };
