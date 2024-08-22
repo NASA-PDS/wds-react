@@ -127,6 +127,14 @@ export type FeaturedLinkTargetDetailsProps = FeaturedLinkDetailsBaseProps & {
   variant:FeaturedLinkDetailsVariant.TARGET;
 }
 
+export type FeaturedLinkToolDetailsProps = FeaturedLinkDetailsBaseProps & {
+  categories:Array<string>;
+  support:string;
+  url:string;
+  variant:FeaturedLinkDetailsVariant.TOOL;
+  version:string;
+}
+
 export type FeaturedLinkDetailsProps = (
   FeaturedLinkDataBundleDetailsProps 
   | FeaturedLinkDataCollectionDetailsProps
@@ -134,6 +142,7 @@ export type FeaturedLinkDetailsProps = (
   | FeaturedLinkInstrumentDetailsProps 
   | FeaturedLinkInvestigationDetailsProps
   | FeaturedLinkTargetDetailsProps
+  | FeaturedLinkToolDetailsProps
 );
 
 export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
@@ -198,11 +207,17 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Type"} value={props.targetType} />
           </>
         }
+        {
+          props.variant === FeaturedLinkDetailsVariant.TOOL && <>
+            <DetailRow label={"URL"} value={props.url} />
+            <DetailRow label={"Support"} value={props.support} />
+            <DetailRow label={"Version"} value={props.version} />
+            <DetailRow label={"Category"} value={props.categories.join(",")} />
+          </>
+        }
         <DetailRow value={props.tags} variant={DetailRowVariant.TAGS}/>
       </Stack>
     </Box>
   )
 
 };
-
-
