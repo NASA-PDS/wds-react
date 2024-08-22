@@ -10,8 +10,25 @@ import { FeaturedLinkDetailsProps } from '../FeaturedLinkDetails';
 
 type PrimaryAction = () => void;
 
+type FeaturedLinkColumn = {
+  align: "left" | "center" | "right";
+  data:string;
+  width:number;
+}
+
+const ellipsisText = (str:string, maxLength:number):string => {
+
+  if( str.length > maxLength ) {
+    return str.substring(0,maxLength) + "..."
+  }
+
+  return str
+
+}
+
 export type FeaturedLinkProps = {
   children:React.ReactElement<FeaturedLinkDetailsProps>;
+  columns?:FeaturedLinkColumn[];
   description:string;
   primaryAction:PrimaryAction;
   title:string;
@@ -19,6 +36,7 @@ export type FeaturedLinkProps = {
 
 export const FeaturedLink = ({
   children,
+  columns,
   description,
   primaryAction,
   title,
@@ -42,10 +60,23 @@ export const FeaturedLink = ({
             </Box>
             <Stack sx={{padding: "10px"}}>
               <Typography variant='h6' weight='semibold' sx={{margin: "5px"}}>{title}</Typography>
-              <Typography variant='body4' weight='regular' sx={{margin: "5px", wordWrap: 'break-word'}}>{description}</Typography>
+              <Typography variant='body4' weight='regular' sx={{margin: "5px", }}>{ellipsisText(description, 256)}</Typography>
             </Stack>
           </Stack>
         </Grid>
+        <Grid lgOffset={1} />
+        { 
+          columns?.map( (column, index) => {
+            return (
+              <>
+                <Grid md={column.width} display={{xs: "none", md:"flex"}} justifyContent={column.align} alignItems={"center"} key={index}>
+                  <Typography variant="body4" weight="regular" sx={{color: "#58585B"}}>{column.data}</Typography>
+                </Grid>
+                { index != columns.length -1 && <Grid lgOffset={1} /> }
+              </>
+            );
+          })
+        }
         <Grid xs={1} display={"flex"} justifyContent={"right"}>
           <IconButton aria-label="arrow" sx={{
             "&:hover": {
