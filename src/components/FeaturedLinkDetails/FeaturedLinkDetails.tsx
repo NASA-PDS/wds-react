@@ -73,9 +73,20 @@ type FeaturedLinkDetailsBaseProps = {
   tags:Array<string>;
 };
 
+export type FeaturedLinkDataBundleDetailsProps = FeaturedLinkDetailsBaseProps & {
+  lid:string;
+  investigation:string;
+  instrumentType:Array<string>;
+  doi:string;
+  processingLevel:string;
+  startDate:string;
+  stopDate:string;
+  variant:FeaturedLinkDetailsVariant.DATA_BUNDLE;
+}
+
 export type FeaturedLinkInstrumentDetailsProps = FeaturedLinkDetailsBaseProps & {
   instrumentType:Array<string>;
-  investigationTitle:string;
+  investigation:string;
   lid:string;
   startDate:string;
   stopDate:string;
@@ -97,7 +108,8 @@ export type FeaturedLinkTargetDetailsProps = FeaturedLinkDetailsBaseProps & {
 }
 
 export type FeaturedLinkDetailsProps = (
-  FeaturedLinkInstrumentDetailsProps 
+  FeaturedLinkDataBundleDetailsProps 
+  | FeaturedLinkInstrumentDetailsProps 
   | FeaturedLinkInvestigationDetailsProps
   | FeaturedLinkTargetDetailsProps
 );
@@ -111,8 +123,19 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
     }}>
       <Stack spacing={"5px"}>
         { 
+          props.variant === FeaturedLinkDetailsVariant.DATA_BUNDLE && <>
+            <DetailRow label={"Investigation"} value={props.investigation} />
+            <DetailRow label={"Identifier"} value={props.lid} />
+            <DetailRow label={"Instrument Type"} value={props.instrumentType.join(",")} />
+            <DetailRow label={"DOI"} value={props.doi} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel} />
+            <DetailRow label={"Start Date"} value={props.startDate} />
+            <DetailRow label={"Stop Date"} value={props.stopDate} />
+          </>
+        }
+        { 
           props.variant === FeaturedLinkDetailsVariant.INSTRUMENT && <>
-            <DetailRow label={"Investigation"} value={props.investigationTitle} />
+            <DetailRow label={"Investigation"} value={props.investigation} />
             <DetailRow label={"Identifier"} value={props.lid} />
             <DetailRow label={"Instrument Type"} value={props.instrumentType.join(",")} />
             <DetailRow label={"Start Date"} value={props.startDate} />
