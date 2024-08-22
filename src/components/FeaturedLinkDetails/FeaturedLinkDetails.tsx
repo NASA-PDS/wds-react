@@ -1,22 +1,59 @@
 import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { Typography } from "../Typography";
+import { Tag } from "../Tag";
 
-type DetailRowProps = {
-  label:string;
-  value:string;
+enum DetailRowVariant {
+  STRING = "string",
+  TAGS = "tags",
 }
 
-const DetailRow = ({label, value}:DetailRowProps) => {
+type DetailRowBaseProps = {
+  label?:string;
+};
+
+type DetailRowStringProps = DetailRowBaseProps & {
+  label:string;
+  value:string;
+  variant?:DetailRowVariant.STRING;
+}
+
+type DetailRowTagProps = DetailRowBaseProps & {
+  value:Array<string>;
+  variant?:DetailRowVariant.TAGS;
+}
+
+type DetailRowProps = DetailRowStringProps | DetailRowTagProps;
+
+const DetailRow = (props:DetailRowProps) => {
 
   return (
-    <Stack direction={{ xs: "column", md: "row" }} alignItems={{sm:"flex-start", "md": "center"}} sx={{ marginBottom: "8px"}}>
-      <Typography variant="h6" weight="semibold" sx={{
-        minWidth: "140px",
-        maxWidth: "140px",
-        }}>{label}</Typography>
-      <Typography variant="body4" weight="regular">{value ? value : "-"}</Typography>
-    </Stack>
+    <>
+      {
+        props.variant === undefined &&
+          <Stack direction={{ xs: "column", md: "row" }} alignItems={{sm:"flex-start", "md": "center"}} sx={{
+            marginBottom: "8px"}}
+          >
+            <Typography variant="h6" weight="semibold" sx={{ minWidth: "140px", maxWidth: "140px",}}>{props.label}</Typography>
+            <Typography variant="body4" weight="regular">{props.value ? props.value : "-"}</Typography>
+          </Stack>
+      }
+      {
+        props.variant === DetailRowVariant.TAGS && <>
+            <Stack direction={{ xs: "column", md: "row" }} alignItems={{sm:"flex-start", "md": "center"}} sx={{
+            marginBottom: "8px"}}>
+              <Typography variant="h6" weight="semibold" sx={{ minWidth: "140px", maxWidth: "140px",}}>{ props.label ? props.label : "Tags"}</Typography>
+              <Stack direction={"row"} spacing={1} useFlexGap flexWrap="wrap">
+                {
+                  props.value.length > 0 && props.value.map( (tag, index) => {
+                    return <Tag label={tag} key={index}></Tag>
+                  })
+                }
+              </Stack>
+            </Stack>
+          </>
+      }
+    </>
   );
 
 };
@@ -33,7 +70,7 @@ export enum FeaturedLinkDetailsVariant {
 }
 
 type FeaturedLinkDetailsBaseProps = {
-  tags?:Array<string>;
+  tags:Array<string>;
 };
 
 export type FeaturedLinkInstrumentDetailsProps = FeaturedLinkDetailsBaseProps & {
@@ -71,6 +108,7 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Instrument Type"} value={props.instrumentType.join(",")} />
             <DetailRow label={"Start Date"} value={props.startDate} />
             <DetailRow label={"Stop Date"} value={props.stopDate} />
+            <DetailRow value={props.tags} variant={DetailRowVariant.TAGS}/>
           </>
         }
         {
@@ -79,6 +117,7 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Start Date"} value={props.startDate} />
             <DetailRow label={"Stop Date"} value={props.stopDate} />
             <DetailRow label={"Instrument Hosts"} value={props.instrumentHostTitles.join(", ")} />
+            <DetailRow value={props.tags} variant={DetailRowVariant.TAGS}/>
           </>
         }
       </Stack>
