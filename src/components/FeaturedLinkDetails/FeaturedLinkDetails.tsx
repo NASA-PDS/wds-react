@@ -21,7 +21,7 @@ const DetailRow = ({label, value}:DetailRowProps) => {
 
 };
 
-export enum FeaturedLinkVariant {
+export enum FeaturedLinkDetailsVariant {
   DATA_BUNDLE = "data-bundle",
   DATA_COLLECTION = "data-collection",
   DATA_SET = "data-set",
@@ -42,7 +42,7 @@ export type FeaturedLinkInstrumentDetailsProps = FeaturedLinkDetailsBaseProps & 
   lid:string;
   startDate:string;
   stopDate:string;
-  variant:FeaturedLinkVariant.INSTRUMENT;
+  variant:FeaturedLinkDetailsVariant.INSTRUMENT;
 }
 
 export type FeaturedLinkInvestigationDetailsProps = FeaturedLinkDetailsBaseProps & {
@@ -50,7 +50,7 @@ export type FeaturedLinkInvestigationDetailsProps = FeaturedLinkDetailsBaseProps
   instrumentHostTitles:Array<string>;
   startDate:string;
   stopDate:string;
-  variant:FeaturedLinkVariant.INVESTIGATION;
+  variant:FeaturedLinkDetailsVariant.INVESTIGATION;
 }
 
 export type FeaturedLinkDetailsProps = FeaturedLinkInstrumentDetailsProps 
@@ -65,7 +65,7 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
     }}>
       <Stack spacing={"5px"}>
         { 
-          props.variant === FeaturedLinkVariant.INSTRUMENT && <>
+          props.variant === FeaturedLinkDetailsVariant.INSTRUMENT && <>
             <DetailRow label={"Investigation"} value={props.investigationTitle} />
             <DetailRow label={"Identifier"} value={props.lid} />
             <DetailRow label={"Instrument Type"} value={props.instrumentType.join(",")} />
@@ -74,7 +74,7 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           </>
         }
         {
-          props.variant === FeaturedLinkVariant.INVESTIGATION && <>
+          props.variant === FeaturedLinkDetailsVariant.INVESTIGATION && <>
             <DetailRow label={"Identifier"} value={props.lid} />
             <DetailRow label={"Start Date"} value={props.startDate} />
             <DetailRow label={"Stop Date"} value={props.stopDate} />
