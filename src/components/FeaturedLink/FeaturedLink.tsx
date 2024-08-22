@@ -6,16 +6,19 @@ import Divider from '@mui/material/Divider';
 import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
+import { FeaturedLinkDetailsProps } from '../FeaturedLinkDetails';
 
 type PrimaryAction = () => void;
 
 export type FeaturedLinkProps = {
+  children:React.ReactElement<FeaturedLinkDetailsProps>;
   description:string;
   primaryAction:PrimaryAction;
   title:string;
 }
 
 export const FeaturedLink = ({
+  children,
   description,
   primaryAction,
   title,
@@ -25,7 +28,7 @@ export const FeaturedLink = ({
 
   const toggleDetails = () => {
     setShowDetails( !showDetails );
-  }
+  };
 
   return (
     <Stack sx={{marginTop: "15px", width: "100%"}}>
@@ -58,7 +61,7 @@ export const FeaturedLink = ({
         </Grid>
       </Grid>
       {
-        showDetails && <>DETAILS!</>
+        showDetails && children
       }
       <Divider />
     </Stack>
