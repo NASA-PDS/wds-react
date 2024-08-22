@@ -32,7 +32,7 @@ export const FeaturedLink = ({
 
   return (
     <Stack sx={{marginTop: "15px", width: "100%"}}>
-      <Grid container spacing={2} alignItems={"center"} sx={{width: "100%"}}>
+      <Grid container spacing={2} alignItems={"stretch"}>
         <Grid xs sx={{marginY: "10px"}}>
           <Stack direction="row" alignItems="center">
             <Box>
@@ -46,7 +46,7 @@ export const FeaturedLink = ({
             </Stack>
           </Stack>
         </Grid>
-        <Grid xs={1} textAlign={'right'}>
+        <Grid xs={1} display={"flex"} justifyContent={"right"}>
           <IconButton aria-label="arrow" sx={{
             "&:hover": {
               backgroundColor: "#B60109"
