@@ -22,8 +22,14 @@ const DetailRow = ({label, value}:DetailRowProps) => {
 };
 
 export enum FeaturedLinkVariant {
-  INSTRUMENT = 'instrument',
-  INVESTIGATION = 'investigation',
+  DATA_BUNDLE = "data-bundle",
+  DATA_COLLECTION = "data-collection",
+  DATA_SET = "data-set",
+  INSTRUMENT = "instrument",
+  INVESTIGATION = "investigation",
+  RESOURCE = "resoruce",
+  TARGET = "target",
+  TOOL = "tool",
 }
 
 type FeaturedLinkDetailsBaseProps = {
