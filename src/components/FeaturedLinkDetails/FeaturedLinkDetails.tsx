@@ -95,6 +95,15 @@ export type FeaturedLinkDataCollectionDetailsProps = FeaturedLinkDetailsBaseProp
   variant:FeaturedLinkDetailsVariant.DATA_COLLECTION;
 }
 
+export type FeaturedLinkDataSetDetailsProps = FeaturedLinkDetailsBaseProps & {
+  disciplineName:string;
+  doi:string;
+  investigation:string;
+  processingLevel:string;
+  target:string;
+  variant:FeaturedLinkDetailsVariant.DATA_SET;
+}
+
 export type FeaturedLinkInstrumentDetailsProps = FeaturedLinkDetailsBaseProps & {
   instrumentType:Array<string>;
   investigation:string;
@@ -121,6 +130,7 @@ export type FeaturedLinkTargetDetailsProps = FeaturedLinkDetailsBaseProps & {
 export type FeaturedLinkDetailsProps = (
   FeaturedLinkDataBundleDetailsProps 
   | FeaturedLinkDataCollectionDetailsProps
+  | FeaturedLinkDataSetDetailsProps
   | FeaturedLinkInstrumentDetailsProps 
   | FeaturedLinkInvestigationDetailsProps
   | FeaturedLinkTargetDetailsProps
@@ -154,6 +164,15 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Processing Level"} value={props.processingLevel} />
             <DetailRow label={"Start Date"} value={props.startDate} />
             <DetailRow label={"Stop Date"} value={props.stopDate} />
+          </>
+        }
+        {
+          props.variant === FeaturedLinkDetailsVariant.DATA_SET && <>
+            <DetailRow label={"Investigation"} value={props.investigation} />
+            <DetailRow label={"Discipline Name"} value={props.disciplineName} />
+            <DetailRow label={"DOI"} value={props.doi} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel} />
+            <DetailRow label={"Target"} value={props.target} />
           </>
         }
         {
