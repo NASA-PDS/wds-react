@@ -74,14 +74,25 @@ type FeaturedLinkDetailsBaseProps = {
 };
 
 export type FeaturedLinkDataBundleDetailsProps = FeaturedLinkDetailsBaseProps & {
-  lid:string;
+  doi:string;
   investigation:string;
   instrumentType:Array<string>;
-  doi:string;
+  lid:string;
   processingLevel:string;
   startDate:string;
   stopDate:string;
   variant:FeaturedLinkDetailsVariant.DATA_BUNDLE;
+}
+
+export type FeaturedLinkDataCollectionDetailsProps = FeaturedLinkDetailsBaseProps & {
+  disciplineName:string;
+  doi:string;
+  investigation:string;
+  processingLevel:string;
+  lid:string;
+  startDate:string;
+  stopDate:string;
+  variant:FeaturedLinkDetailsVariant.DATA_COLLECTION;
 }
 
 export type FeaturedLinkInstrumentDetailsProps = FeaturedLinkDetailsBaseProps & {
@@ -94,8 +105,8 @@ export type FeaturedLinkInstrumentDetailsProps = FeaturedLinkDetailsBaseProps & 
 }
 
 export type FeaturedLinkInvestigationDetailsProps = FeaturedLinkDetailsBaseProps & {
-  lid:string;
   instrumentHostTitles:Array<string>;
+  lid:string;
   startDate:string;
   stopDate:string;
   variant:FeaturedLinkDetailsVariant.INVESTIGATION;
@@ -109,6 +120,7 @@ export type FeaturedLinkTargetDetailsProps = FeaturedLinkDetailsBaseProps & {
 
 export type FeaturedLinkDetailsProps = (
   FeaturedLinkDataBundleDetailsProps 
+  | FeaturedLinkDataCollectionDetailsProps
   | FeaturedLinkInstrumentDetailsProps 
   | FeaturedLinkInvestigationDetailsProps
   | FeaturedLinkTargetDetailsProps
@@ -122,7 +134,7 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
       padding: { sm: "20px 20px 20px 20px", md: "20px 20px 20px 80px" },
     }}>
       <Stack spacing={"5px"}>
-        { 
+        {
           props.variant === FeaturedLinkDetailsVariant.DATA_BUNDLE && <>
             <DetailRow label={"Investigation"} value={props.investigation} />
             <DetailRow label={"Identifier"} value={props.lid} />
@@ -133,7 +145,18 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Stop Date"} value={props.stopDate} />
           </>
         }
-        { 
+        {
+          props.variant === FeaturedLinkDetailsVariant.DATA_COLLECTION && <>
+            <DetailRow label={"Investigation"} value={props.investigation} />
+            <DetailRow label={"Identifier"} value={props.lid} />
+            <DetailRow label={"Discipline Name"} value={props.disciplineName} />
+            <DetailRow label={"DOI"} value={props.doi} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel} />
+            <DetailRow label={"Start Date"} value={props.startDate} />
+            <DetailRow label={"Stop Date"} value={props.stopDate} />
+          </>
+        }
+        {
           props.variant === FeaturedLinkDetailsVariant.INSTRUMENT && <>
             <DetailRow label={"Investigation"} value={props.investigation} />
             <DetailRow label={"Identifier"} value={props.lid} />
