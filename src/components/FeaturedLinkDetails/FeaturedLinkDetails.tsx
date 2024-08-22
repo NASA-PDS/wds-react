@@ -90,8 +90,17 @@ export type FeaturedLinkInvestigationDetailsProps = FeaturedLinkDetailsBaseProps
   variant:FeaturedLinkDetailsVariant.INVESTIGATION;
 }
 
-export type FeaturedLinkDetailsProps = FeaturedLinkInstrumentDetailsProps 
-                                        | FeaturedLinkInvestigationDetailsProps;
+export type FeaturedLinkTargetDetailsProps = FeaturedLinkDetailsBaseProps & {
+  lid:string;
+  targetType:Array<string>;
+  variant:FeaturedLinkDetailsVariant.TARGET;
+}
+
+export type FeaturedLinkDetailsProps = (
+  FeaturedLinkInstrumentDetailsProps 
+  | FeaturedLinkInvestigationDetailsProps
+  | FeaturedLinkTargetDetailsProps
+);
 
 export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
 
@@ -108,7 +117,6 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Instrument Type"} value={props.instrumentType.join(",")} />
             <DetailRow label={"Start Date"} value={props.startDate} />
             <DetailRow label={"Stop Date"} value={props.stopDate} />
-            <DetailRow value={props.tags} variant={DetailRowVariant.TAGS}/>
           </>
         }
         {
@@ -117,9 +125,15 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Start Date"} value={props.startDate} />
             <DetailRow label={"Stop Date"} value={props.stopDate} />
             <DetailRow label={"Instrument Hosts"} value={props.instrumentHostTitles.join(", ")} />
-            <DetailRow value={props.tags} variant={DetailRowVariant.TAGS}/>
           </>
         }
+        {
+          props.variant === FeaturedLinkDetailsVariant.TARGET && <>
+            <DetailRow label={"Identifier"} value={props.lid} />
+            <DetailRow label={"Type"} value={props.targetType} />
+          </>
+        }
+        <DetailRow value={props.tags} variant={DetailRowVariant.TAGS}/>
       </Stack>
     </Box>
   )
