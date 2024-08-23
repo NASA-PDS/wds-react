@@ -11,8 +11,9 @@ import { FeaturedLinkDetailsProps } from '../FeaturedLinkDetails';
 type PrimaryAction = () => void;
 
 type FeaturedLinkColumn = {
-  align: "left" | "center" | "right";
+  horizontalAlign?: "left" | "center" | "right";
   data:string;
+  verticalAlign?: "flex-start" | "center" | "flex-end"
   width:number;
 }
 
@@ -69,15 +70,15 @@ export const FeaturedLink = ({
           columns?.map( (column, index) => {
             return (
               <>
-                <Grid md={column.width} display={{xs: "none", md:"flex"}} justifyContent={column.align} alignItems={"center"} key={index}>
-                  <Typography variant="body4" weight="regular" sx={{color: "#58585B"}}>{column.data}</Typography>
+                <Grid md={column.width} display={{xs: "none", md:"flex"}} justifyContent={column.horizontalAlign || "left"} alignItems={column.verticalAlign || "flex-start"} key={index}>
+                  <Typography variant="body4" weight="regular" sx={{color: "#58585B", textAlign: column.horizontalAlign ? column.horizontalAlign : "left"}}>{column.data}</Typography>
                 </Grid>
                 { index != columns.length -1 && <Grid lgOffset={1} /> }
               </>
             );
           })
         }
-        <Grid xs={1} display={"flex"} justifyContent={"right"}>
+        <Grid xs={1} display={"flex"} justifyContent={"right"} alignItems={"center"}>
           <IconButton aria-label="arrow" sx={{
             "&:hover": {
               backgroundColor: "#B60109"
