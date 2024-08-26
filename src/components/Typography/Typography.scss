@@ -1,3 +1,5 @@
+@use "@nasapds/wds/css/typography.css";
+
 .MuiTypography-root.MuiTypography-body1{
    &.wds-typography-display-bold-120{
       @extend .wds-typography-display-bold-120;

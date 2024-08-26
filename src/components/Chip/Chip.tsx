@@ -1,5 +1,5 @@
 import MuiChip from "@mui/material/Chip";
-import StarsIcon from "@mui/icons-material/Stars";
+import CloseIcon from "../Icons/Close";
 import { ChipProps } from "@mui/material";
 
 /**
@@ -14,7 +14,7 @@ export const Chip = ({ ...otherProps }: ChipProps) => {
     <MuiChip
       className="pds-wds-chip"
       variant="outlined"
-      deleteIcon={<StarsIcon />}
+      deleteIcon={<CloseIcon />}
       {...otherProps}
     />
   );
