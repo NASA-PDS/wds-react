@@ -7,8 +7,7 @@ import Grid from '@mui/material/Unstable_Grid2';
 import IconButton from '@mui/material/IconButton';
 import Stack from '@mui/material/Stack';
 import { FeaturedLinkDetailsProps } from '../FeaturedLinkDetails';
-
-type PrimaryAction = () => void;
+import { Link } from 'react-router-dom';
 
 type FeaturedLinkColumn = {
   horizontalAlign?: "left" | "center" | "right";
@@ -31,7 +30,7 @@ export type FeaturedLinkProps = {
   children:React.ReactElement<FeaturedLinkDetailsProps>;
   columns?:FeaturedLinkColumn[];
   description:string;
-  primaryAction:PrimaryAction;
+  primaryLink:string;
   title:string;
 }
 
@@ -39,7 +38,7 @@ export const FeaturedLink = ({
   children,
   columns,
   description,
-  primaryAction,
+  primaryLink,
   title,
 }:FeaturedLinkProps) => {
 
@@ -60,7 +59,9 @@ export const FeaturedLink = ({
               </IconButton>
             </Box>
             <Stack sx={{padding: "10px"}}>
-              <Typography variant='h6' weight='semibold' sx={{margin: "5px"}}>{title}</Typography>
+              <Link to={primaryLink}>
+                <Typography variant='h6' weight='semibold' sx={{margin: "5px"}}>{title}</Typography>
+              </Link>
               <Typography variant='body4' weight='regular' sx={{margin: "5px", }}>{ellipsisText(description, 256)}</Typography>
             </Stack>
           </Stack>
@@ -79,17 +80,19 @@ export const FeaturedLink = ({
           })
         }
         <Grid xs={1} display={"flex"} justifyContent={"right"} alignItems={"center"}>
-          <IconButton aria-label="arrow" sx={{
-            "&:hover": {
-              backgroundColor: "#B60109"
-            },
-            backgroundColor: "#F64137",
-            color: "#FFFFFF",
-            height: "36px",
-            width: "36px",
-          }} onClick={() => {primaryAction()}}>
-            <IconArrowRight />
-          </IconButton>
+          <Link to={primaryLink}>
+            <IconButton aria-label="arrow" sx={{
+              "&:hover": {
+                backgroundColor: "#B60109"
+              },
+              backgroundColor: "#F64137",
+              color: "#FFFFFF",
+              height: "36px",
+              width: "36px",
+            }}>
+              <IconArrowRight />
+            </IconButton>
+          </Link>
         </Grid>
       </Grid>
       {
