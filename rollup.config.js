@@ -39,6 +39,6 @@ export default [
       }),
       image()
     ],
-    external: ["react", "react-dom"].concat(EXTERNAL),
+    external: ["react", "react-dom", "react-router-dom"].concat(EXTERNAL),
   },
 ];
