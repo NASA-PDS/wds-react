@@ -2,6 +2,7 @@ import Box from "@mui/material/Box";
 import Stack from "@mui/material/Stack";
 import { Typography } from "../Typography";
 import { Tag } from "../Tag";
+import { Link } from "react-router-dom";
 
 enum DetailRowVariant {
   STRING = "string",
@@ -14,11 +15,13 @@ type DetailRowBaseProps = {
 
 type DetailRowStringProps = DetailRowBaseProps & {
   label:string;
+  link?:string;
   value:string;
   variant?:DetailRowVariant.STRING;
 }
 
 type DetailRowTagProps = DetailRowBaseProps & {
+  link?:undefined;
   value:Array<string>;
   variant?:DetailRowVariant.TAGS;
 }
@@ -26,6 +29,11 @@ type DetailRowTagProps = DetailRowBaseProps & {
 type DetailRowProps = DetailRowStringProps | DetailRowTagProps;
 
 const DetailRow = (props:DetailRowProps) => {
+
+  let valueElement = <Typography variant="body4" weight="regular">{props.value ? props.value : "-"}</Typography>;
+  if( props.link !== undefined ) {
+    valueElement = <Link to={props.link}>{valueElement}</Link>;
+  }
 
   return (
     <>
@@ -35,7 +43,7 @@ const DetailRow = (props:DetailRowProps) => {
             marginBottom: "8px"}}
           >
             <Typography variant="h6" weight="semibold" sx={{ color: "#000000", minWidth: "140px", maxWidth: "140px", marginBottom: {xs: "4px", md: "inherit"}}}>{props.label}</Typography>
-            <Typography variant="body4" weight="regular">{props.value ? props.value : "-"}</Typography>
+            {valueElement}
           </Stack>
       }
       {
@@ -71,70 +79,75 @@ export enum FeaturedLinkDetailsVariant {
   TOOL = "tool",
 }
 
+type FeaturedLinkDetailData = {
+  link?:string;
+  value:string;
+}
+
 type FeaturedLinkDetailsBaseProps = {
   tags:Array<string>;
-};
+};  
 
 export type FeaturedLinkDataBundleDetailsProps = FeaturedLinkDetailsBaseProps & {
-  doi:string;
-  investigation:string;
+  doi:FeaturedLinkDetailData;
+  investigation:FeaturedLinkDetailData;
   instrumentType:Array<string>;
-  lid:string;
-  processingLevel:string;
-  startDate:string;
-  stopDate:string;
+  lid:FeaturedLinkDetailData;
+  processingLevel:FeaturedLinkDetailData;
+  startDate:FeaturedLinkDetailData;
+  stopDate:FeaturedLinkDetailData;
   variant:FeaturedLinkDetailsVariant.DATA_BUNDLE;
 }
 
 export type FeaturedLinkDataCollectionDetailsProps = FeaturedLinkDetailsBaseProps & {
-  disciplineName:string;
-  doi:string;
-  investigation:string;
-  processingLevel:string;
-  lid:string;
-  startDate:string;
-  stopDate:string;
+  disciplineName:FeaturedLinkDetailData;
+  doi:FeaturedLinkDetailData;
+  investigation:FeaturedLinkDetailData;
+  processingLevel:FeaturedLinkDetailData;
+  lid:FeaturedLinkDetailData;
+  startDate:FeaturedLinkDetailData;
+  stopDate:FeaturedLinkDetailData;
   variant:FeaturedLinkDetailsVariant.DATA_COLLECTION;
 }
 
 export type FeaturedLinkDataSetDetailsProps = FeaturedLinkDetailsBaseProps & {
-  disciplineName:string;
-  doi:string;
-  investigation:string;
-  processingLevel:string;
-  target:string;
+  disciplineName:FeaturedLinkDetailData;
+  doi:FeaturedLinkDetailData;
+  investigation:FeaturedLinkDetailData;
+  processingLevel:FeaturedLinkDetailData;
+  target:FeaturedLinkDetailData;
   variant:FeaturedLinkDetailsVariant.DATA_SET;
 }
 
 export type FeaturedLinkInstrumentDetailsProps = FeaturedLinkDetailsBaseProps & {
   instrumentType:Array<string>;
-  investigation:string;
-  lid:string;
-  startDate:string;
-  stopDate:string;
+  investigation:FeaturedLinkDetailData;
+  lid:FeaturedLinkDetailData;
+  startDate:FeaturedLinkDetailData;
+  stopDate:FeaturedLinkDetailData;
   variant:FeaturedLinkDetailsVariant.INSTRUMENT;
 }
 
 export type FeaturedLinkInvestigationDetailsProps = FeaturedLinkDetailsBaseProps & {
   instrumentHostTitles:Array<string>;
-  lid:string;
-  startDate:string;
-  stopDate:string;
+  lid:FeaturedLinkDetailData;
+  startDate:FeaturedLinkDetailData;
+  stopDate:FeaturedLinkDetailData;
   variant:FeaturedLinkDetailsVariant.INVESTIGATION;
 }
 
 export type FeaturedLinkTargetDetailsProps = FeaturedLinkDetailsBaseProps & {
-  lid:string;
+  lid:FeaturedLinkDetailData;
   targetType:Array<string>;
   variant:FeaturedLinkDetailsVariant.TARGET;
 }
 
 export type FeaturedLinkToolDetailsProps = FeaturedLinkDetailsBaseProps & {
   categories:Array<string>;
-  support:string;
-  url:string;
+  support:FeaturedLinkDetailData;
+  url:FeaturedLinkDetailData;
   variant:FeaturedLinkDetailsVariant.TOOL;
-  version:string;
+  version:FeaturedLinkDetailData;
 }
 
 export type FeaturedLinkDetailsProps = (
@@ -152,72 +165,72 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
   return (
     <Box sx={{
       backgroundColor: "#F6F6F6",
-      padding: { sm: "20px 20px 20px 20px", md: "20px 20px 20px 80px" },
+      padding: { xs: "20px 20px 20px 20px", md: "20px 20px 20px 80px" },
     }}>
       <Stack spacing={"5px"}>
         {
           props.variant === FeaturedLinkDetailsVariant.DATA_BUNDLE && <>
-            <DetailRow label={"Investigation"} value={props.investigation} />
-            <DetailRow label={"Identifier"} value={props.lid} />
-            <DetailRow label={"Instrument Type"} value={props.instrumentType.join(",")} />
-            <DetailRow label={"DOI"} value={props.doi} />
-            <DetailRow label={"Processing Level"} value={props.processingLevel} />
-            <DetailRow label={"Start Date"} value={props.startDate} />
-            <DetailRow label={"Stop Date"} value={props.stopDate} />
+            <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
+            <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
+            <DetailRow label={"Instrument Type"} value={props.instrumentType.join(", ")} />
+            <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel.value} link={props.processingLevel.link} />
+            <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link} />
+            <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.DATA_COLLECTION && <>
-            <DetailRow label={"Investigation"} value={props.investigation} />
-            <DetailRow label={"Identifier"} value={props.lid} />
-            <DetailRow label={"Discipline Name"} value={props.disciplineName} />
-            <DetailRow label={"DOI"} value={props.doi} />
-            <DetailRow label={"Processing Level"} value={props.processingLevel} />
-            <DetailRow label={"Start Date"} value={props.startDate} />
-            <DetailRow label={"Stop Date"} value={props.stopDate} />
+            <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
+            <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
+            <DetailRow label={"Discipline Name"} value={props.disciplineName.value} link={props.disciplineName.link} />
+            <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel.value} link={props.processingLevel.link} />
+            <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link} />
+            <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.DATA_SET && <>
-            <DetailRow label={"Investigation"} value={props.investigation} />
-            <DetailRow label={"Discipline Name"} value={props.disciplineName} />
-            <DetailRow label={"DOI"} value={props.doi} />
-            <DetailRow label={"Processing Level"} value={props.processingLevel} />
-            <DetailRow label={"Target"} value={props.target} />
+            <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
+            <DetailRow label={"Discipline Name"} value={props.disciplineName.value} link={props.disciplineName.link} />
+            <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel.value} link={props.processingLevel.link} />
+            <DetailRow label={"Target"} value={props.target.value} link={props.target.link} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.INSTRUMENT && <>
-            <DetailRow label={"Investigation"} value={props.investigation} />
-            <DetailRow label={"Identifier"} value={props.lid} />
-            <DetailRow label={"Instrument Type"} value={props.instrumentType.join(",")} />
-            <DetailRow label={"Start Date"} value={props.startDate} />
-            <DetailRow label={"Stop Date"} value={props.stopDate} />
+            <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
+            <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
+            <DetailRow label={"Instrument Type"} value={props.instrumentType.join(", ")} />
+            <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link} />
+            <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.INVESTIGATION && <>
-            <DetailRow label={"Identifier"} value={props.lid} />
-            <DetailRow label={"Start Date"} value={props.startDate} />
-            <DetailRow label={"Stop Date"} value={props.stopDate} />
+            <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
+            <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link} />
+            <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link} />
             <DetailRow label={"Instrument Hosts"} value={props.instrumentHostTitles.join(", ")} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.TARGET && <>
-            <DetailRow label={"Identifier"} value={props.lid} />
-            <DetailRow label={"Type"} value={props.targetType} />
+            <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
+            <DetailRow label={"Type"} value={props.targetType.join(", ")} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.TOOL && <>
-            <DetailRow label={"URL"} value={props.url} />
-            <DetailRow label={"Support"} value={props.support} />
-            <DetailRow label={"Version"} value={props.version} />
+            <DetailRow label={"URL"} value={props.url.value} link={props.url.link} />
+            <DetailRow label={"Support"} value={props.support.value} link={props.support.link} />
+            <DetailRow label={"Version"} value={props.version.value} link={props.version.link} />
             <DetailRow label={"Category"} value={props.categories.join(",")} />
           </>
         }
-        <DetailRow value={props.tags} variant={DetailRowVariant.TAGS}/>
+        <DetailRow value={props.tags} variant={DetailRowVariant.TAGS} />
       </Stack>
     </Box>
   )
