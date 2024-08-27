@@ -31,6 +31,7 @@ export type FeaturedLinkProps = {
   columns?:FeaturedLinkColumn[];
   description:string;
   primaryLink:string;
+  startExpanded?:boolean;
   title:string;
 }
 
@@ -39,10 +40,11 @@ export const FeaturedLink = ({
   columns,
   description,
   primaryLink,
+  startExpanded = false,
   title,
 }:FeaturedLinkProps) => {
 
-  const [showDetails, setShowDetails] = useState<boolean>(false);
+  const [showDetails, setShowDetails] = useState<boolean>(startExpanded);
 
   const toggleDetails = () => {
     setShowDetails( !showDetails );
