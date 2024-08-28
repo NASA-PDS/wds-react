@@ -21,6 +21,7 @@ type DetailRowStringProps = DetailRowBaseProps & {
 }
 
 type DetailRowTagProps = DetailRowBaseProps & {
+  label?:string;
   link?:undefined;
   value:Array<string>;
   variant?:DetailRowVariant.TAGS;
@@ -51,7 +52,7 @@ const DetailRow = (props:DetailRowProps) => {
             <Stack direction={{ xs: "column", md: "row" }} alignItems={{sm:"flex-start", "md": "center"}} sx={{
             marginBottom: "8px"}}>
               <Box sx={{ minWidth: "140px", maxWidth: "140px", marginBottom: {xs: "4px", md: "inherit"}}}>
-                <Typography variant="h6" weight="semibold">{ props.label ? props.label : "Tags"}</Typography>
+                <Typography variant="h6" weight="semibold">{ props.label ? props.label : "Tags" }</Typography>
               </Box>
               <Stack direction={"row"} spacing={1} useFlexGap flexWrap="wrap">
                 {
@@ -85,7 +86,7 @@ type FeaturedLinkDetailData = {
 }
 
 type FeaturedLinkDetailsBaseProps = {
-  tags:Array<string>;
+  tags?:Array<string>;
 };  
 
 export type FeaturedLinkDataBundleDetailsProps = FeaturedLinkDetailsBaseProps & {
@@ -248,7 +249,11 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Category"} value={props.categories.join(",")} />
           </>
         }
-        <DetailRow value={props.tags} variant={DetailRowVariant.TAGS} />
+        {
+          props.tags && <>
+            <DetailRow value={props.tags} variant={DetailRowVariant.TAGS}/>
+          </>
+        }
       </Stack>
     </Box>
   )
