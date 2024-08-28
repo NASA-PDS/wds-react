@@ -136,6 +136,14 @@ export type FeaturedLinkInvestigationDetailsProps = FeaturedLinkDetailsBaseProps
   variant:FeaturedLinkDetailsVariant.INVESTIGATION;
 }
 
+export type FeaturedLinkResourceDetailProps = FeaturedLinkDetailsBaseProps & {
+  format:FeaturedLinkDetailData;
+  size:FeaturedLinkDetailData;
+  version:FeaturedLinkDetailData;
+  year:FeaturedLinkDetailData;
+  variant:FeaturedLinkDetailsVariant.RESOURCE;
+}
+
 export type FeaturedLinkTargetDetailsProps = FeaturedLinkDetailsBaseProps & {
   lid:FeaturedLinkDetailData;
   targetType:Array<string>;
@@ -156,6 +164,7 @@ export type FeaturedLinkDetailsProps = (
   | FeaturedLinkDataSetDetailsProps
   | FeaturedLinkInstrumentDetailsProps 
   | FeaturedLinkInvestigationDetailsProps
+  | FeaturedLinkResourceDetailProps
   | FeaturedLinkTargetDetailsProps
   | FeaturedLinkToolDetailsProps
 );
@@ -214,6 +223,15 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link} />
             <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link} />
             <DetailRow label={"Instrument Hosts"} value={props.instrumentHostTitles.join(", ")} />
+          </>
+        }
+        {
+          props.variant === FeaturedLinkDetailsVariant.RESOURCE && <>
+            <DetailRow label={"Version"} value={props.version.value} link={props.version.link} />
+            <DetailRow label={"Year"} value={props.year.value} link={props.year.link} />
+            <DetailRow label={"Format"} value={props.format.value} link={props.format.link} />
+            <DetailRow label={"Format"} value={props.format.value} link={props.format.link} />
+            <DetailRow label={"Size"} value={props.size.value} link={props.size.link} />
           </>
         }
         {
