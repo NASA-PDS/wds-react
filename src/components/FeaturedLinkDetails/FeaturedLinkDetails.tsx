@@ -70,6 +70,7 @@ const DetailRow = (props:DetailRowProps) => {
 };
 
 export enum FeaturedLinkDetailsVariant {
+  BUNDLE_LIST = "bundle-list",
   DATA_BUNDLE = "data-bundle",
   DATA_COLLECTION = "data-collection",
   DATA_SET = "data-set",
@@ -87,7 +88,19 @@ type FeaturedLinkDetailData = {
 
 type FeaturedLinkDetailsBaseProps = {
   tags?:Array<string>;
-};  
+};
+
+export type FeaturedLinkBundleListDetailProps = FeaturedLinkDetailsBaseProps & {
+  bundleGroups:Array<{
+    title: "Calibrated Data Products" | "Derived Data Products" | "Partially Processed Data Products" | "Raw Data Products" | "Telemetry Data Products",
+    items:Array<{
+      title:string,
+      description:string,
+      link:string
+    }>
+  }>;
+  variant:FeaturedLinkDetailsVariant.BUNDLE_LIST;
+}
 
 export type FeaturedLinkDataBundleDetailsProps = FeaturedLinkDetailsBaseProps & {
   doi:FeaturedLinkDetailData;
@@ -160,7 +173,8 @@ export type FeaturedLinkToolDetailsProps = FeaturedLinkDetailsBaseProps & {
 }
 
 export type FeaturedLinkDetailsProps = (
-  FeaturedLinkDataBundleDetailsProps 
+  FeaturedLinkBundleListDetailProps
+  | FeaturedLinkDataBundleDetailsProps 
   | FeaturedLinkDataCollectionDetailsProps
   | FeaturedLinkDataSetDetailsProps
   | FeaturedLinkInstrumentDetailsProps 
@@ -178,6 +192,35 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
       padding: { xs: "20px 20px 20px 20px", md: "20px 80px 20px 80px" },
     }}>
       <Stack spacing={"5px"}>
+        {
+          props.variant === FeaturedLinkDetailsVariant.BUNDLE_LIST && <>
+            {
+              <Stack gap={"20px"}>
+                {
+                props.bundleGroups.map( (group, bundleIndex) => {
+                  return (
+                    <Stack key={bundleIndex} gap={"12px"}>
+                      <Typography variant="h6" weight="semibold">{group.title}</Typography>
+                      {
+                        group.items.map( (item, itemIndex) => {
+                          return (
+                            <Stack direction={"column"} gap={"8px"} key={itemIndex}>
+                              <Link to={item.link}>
+                                <Typography variant="body5" weight="regular">{item.title}</Typography>
+                              </Link>
+                              <Typography variant="body5" weight="regular" sx={{paddingLeft: "32px"}}>{item.description}</Typography>
+                            </Stack>
+                          )
+                        })
+                      }
+                    </Stack>
+                  );
+                })
+                }
+              </Stack>
+            }
+          </>
+        }
         {
           props.variant === FeaturedLinkDetailsVariant.DATA_BUNDLE && <>
             <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
