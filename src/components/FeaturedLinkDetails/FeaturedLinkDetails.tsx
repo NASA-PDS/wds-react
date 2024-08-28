@@ -21,6 +21,7 @@ type DetailRowStringProps = DetailRowBaseProps & {
 }
 
 type DetailRowTagProps = DetailRowBaseProps & {
+  label?:string;
   link?:undefined;
   value:Array<string>;
   variant?:DetailRowVariant.TAGS;
@@ -51,7 +52,7 @@ const DetailRow = (props:DetailRowProps) => {
             <Stack direction={{ xs: "column", md: "row" }} alignItems={{sm:"flex-start", "md": "center"}} sx={{
             marginBottom: "8px"}}>
               <Box sx={{ minWidth: "140px", maxWidth: "140px", marginBottom: {xs: "4px", md: "inherit"}}}>
-                <Typography variant="h6" weight="semibold">{ props.label ? props.label : "Tags"}</Typography>
+                <Typography variant="h6" weight="semibold">{ props.label ? props.label : "Tags" }</Typography>
               </Box>
               <Stack direction={"row"} spacing={1} useFlexGap flexWrap="wrap">
                 {
@@ -85,7 +86,7 @@ type FeaturedLinkDetailData = {
 }
 
 type FeaturedLinkDetailsBaseProps = {
-  tags:Array<string>;
+  tags?:Array<string>;
 };  
 
 export type FeaturedLinkDataBundleDetailsProps = FeaturedLinkDetailsBaseProps & {
@@ -136,6 +137,14 @@ export type FeaturedLinkInvestigationDetailsProps = FeaturedLinkDetailsBaseProps
   variant:FeaturedLinkDetailsVariant.INVESTIGATION;
 }
 
+export type FeaturedLinkResourceDetailProps = FeaturedLinkDetailsBaseProps & {
+  format:FeaturedLinkDetailData;
+  size:FeaturedLinkDetailData;
+  version:FeaturedLinkDetailData;
+  year:FeaturedLinkDetailData;
+  variant:FeaturedLinkDetailsVariant.RESOURCE;
+}
+
 export type FeaturedLinkTargetDetailsProps = FeaturedLinkDetailsBaseProps & {
   lid:FeaturedLinkDetailData;
   targetType:Array<string>;
@@ -156,6 +165,7 @@ export type FeaturedLinkDetailsProps = (
   | FeaturedLinkDataSetDetailsProps
   | FeaturedLinkInstrumentDetailsProps 
   | FeaturedLinkInvestigationDetailsProps
+  | FeaturedLinkResourceDetailProps
   | FeaturedLinkTargetDetailsProps
   | FeaturedLinkToolDetailsProps
 );
@@ -217,6 +227,15 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           </>
         }
         {
+          props.variant === FeaturedLinkDetailsVariant.RESOURCE && <>
+            <DetailRow label={"Version"} value={props.version.value} link={props.version.link} />
+            <DetailRow label={"Year"} value={props.year.value} link={props.year.link} />
+            <DetailRow label={"Format"} value={props.format.value} link={props.format.link} />
+            <DetailRow label={"Format"} value={props.format.value} link={props.format.link} />
+            <DetailRow label={"Size"} value={props.size.value} link={props.size.link} />
+          </>
+        }
+        {
           props.variant === FeaturedLinkDetailsVariant.TARGET && <>
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
             <DetailRow label={"Type"} value={props.targetType.join(", ")} />
@@ -230,7 +249,11 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Category"} value={props.categories.join(",")} />
           </>
         }
-        <DetailRow value={props.tags} variant={DetailRowVariant.TAGS} />
+        {
+          props.tags && <>
+            <DetailRow value={props.tags} variant={DetailRowVariant.TAGS}/>
+          </>
+        }
       </Stack>
     </Box>
   )
