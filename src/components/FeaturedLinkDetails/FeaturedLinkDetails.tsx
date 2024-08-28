@@ -175,7 +175,7 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
   return (
     <Box sx={{
       backgroundColor: "#F6F6F6",
-      padding: { xs: "20px 20px 20px 20px", md: "20px 20px 20px 80px" },
+      padding: { xs: "20px 20px 20px 20px", md: "20px 80px 20px 80px" },
     }}>
       <Stack spacing={"5px"}>
         {
