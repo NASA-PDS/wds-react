@@ -1,5 +1,6 @@
 import MuiTypography from "@mui/material/Typography";
 import { TypographyProps } from "@mui/material";
+import { StyledEngineProvider } from "@mui/material";
 
 type BodyProps = {
   variant: "body1" | "body2" | "body3" | "body4" | "body5";
@@ -195,10 +196,12 @@ export const Typography = (props: Props) => {
   }
 
   return (
-    <MuiTypography
-      className={typographyClass}
-      variant={muiVariant}
-      {...other}
-    />
+    <StyledEngineProvider injectFirst>
+      <MuiTypography
+        className={typographyClass}
+        variant={muiVariant}
+        {...other}
+      />
+    </StyledEngineProvider>
   );
 };
