@@ -31,6 +31,7 @@ export type FeaturedLinkProps = {
   columns?:FeaturedLinkColumn[];
   description:string;
   primaryLink:string;
+  primaryLinkLabel?:string;
   startExpanded?:boolean;
   title:string;
 }
@@ -40,6 +41,7 @@ export const FeaturedLink = ({
   columns,
   description,
   primaryLink,
+  primaryLinkLabel,
   startExpanded = false,
   title,
 }:FeaturedLinkProps) => {
@@ -70,7 +72,7 @@ export const FeaturedLink = ({
         </Grid>
         <Grid lgOffset={1} />
         { 
-          columns?.map( (column, index) => {
+          columns !== undefined && columns.map( (column, index) => {
             return (
               <>
                 <Grid md={column.width} display={{xs: "none", md:"flex"}} justifyContent={column.horizontalAlign || "left"} alignItems={column.verticalAlign || "flex-start"} key={index}>
@@ -81,19 +83,25 @@ export const FeaturedLink = ({
             );
           })
         }
-        <Grid xs={1} display={"flex"} justifyContent={"right"} alignItems={"center"}>
+        {
+          columns === undefined && <Grid mdOffset={1} />
+        }
+        <Grid xs={2} display={"flex"} justifyContent={"right"} alignItems={"center"}>
           <Link to={primaryLink}>
-            <IconButton aria-label="arrow" sx={{
-              "&:hover": {
-                backgroundColor: "#B60109"
-              },
-              backgroundColor: "#F64137",
-              color: "#FFFFFF",
-              height: "36px",
-              width: "36px",
-            }}>
-              <IconArrowRight />
-            </IconButton>
+            <Stack direction="row" alignItems={"center"} gap={1}>
+              { primaryLinkLabel && <Typography variant="h4" weight="semibold" display={{xs: "none", md:"block"}}>{primaryLinkLabel}</Typography> }
+              <IconButton aria-label="arrow" sx={{
+                "&:hover": {
+                  backgroundColor: "#B60109"
+                },
+                backgroundColor: "#F64137",
+                color: "#FFFFFF",
+                height: "36px",
+                width: "36px",
+              }}>
+                <IconArrowRight />
+              </IconButton>
+            </Stack>
           </Link>
         </Grid>
       </Grid>
