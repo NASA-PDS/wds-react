@@ -5,7 +5,7 @@ describe('Loader', () => {
 
   test('Indeterminate Loader component renders correctly', () => {
     const component = renderer.create(
-      <Loader variant="indeterminate" />
+      <Loader />
     )
 
     const tree = component.toJSON()
@@ -16,7 +16,7 @@ describe('Loader', () => {
   test('Determinate Loader component renders correctly', () => {
 
     const component = renderer.create(
-      <Loader variant={'determinate'} value={17} />
+      <Loader value={17} />
     )
 
     const tree = component.toJSON()
