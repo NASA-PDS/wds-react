@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { IconArrowCircleDown, IconArrowCircleRight, IconArrowRight } from '../Icons';
 import { Typography } from '../Typography';
 import Box from '@mui/material/Box';
@@ -47,6 +47,10 @@ export const FeaturedLink = ({
 }:FeaturedLinkProps) => {
 
   const [showDetails, setShowDetails] = useState<boolean>(startExpanded);
+
+  useEffect( () => {
+    setShowDetails(startExpanded);
+  }, [startExpanded])
 
   const toggleDetails = () => {
     setShowDetails( !showDetails );
