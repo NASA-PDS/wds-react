@@ -1,0 +1,8 @@
+@use "@nasapds/wds/css/button.css";
+
+.MuiButtonBase-root.MuiButton-root{
+   &.wds-button-cta {
+      box-shadow: none;
+      @extend .wds-button-cta;
+   }
+}

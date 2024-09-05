@@ -2,9 +2,22 @@
    border-radius: 4px;
    color: var(--pds-secondary-black-t3);
    border: 1px solid var(--pds-secondary-blue-t1);
+   font-size: var(--pds-typography-header-12-semibold-font-size);
+   line-height: var(--pds-typography-header-12-semibold-line-height);
+   letter-spacing: var(--pds-typography-header-12-semibold-letter-spacing);
+   font-weight: var(--pds-typography-header-12-semibold-font-weight);
 }
 
 .pds-wds-chip.MuiChip-root:hover{
    border: 1px solid var(--pds-secondary-blue-t1);
    color: var(--pds-primary-black);
+}
+
+.pds-wds-chip .MuiChip-deleteIcon{
+   height: 10px;
+}
+
+.pds-wds-chip .MuiChip-label{
+   padding-left: 8px;
+   padding-right: 8px;
 }

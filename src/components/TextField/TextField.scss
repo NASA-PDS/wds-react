@@ -1,0 +1,27 @@
+.pds-wds-react-textfield .MuiInputBase-root{
+    padding: 0 16px 0 16px;
+}
+
+.pds-wds-react-textfield .MuiOutlinedInput-notchedOutline {
+    border-color: var(--pds-secondary-white-s2);
+    border-radius: 2px;
+}
+
+.pds-wds-react-textfield .MuiInputBase-input.MuiOutlinedInput-input{
+    color: var(--pds-secondary-black-t2);
+    padding: 16px 0 16px 10px;
+}
+
+.pds-wds-react-textfield .MuiInputBase-root:hover .MuiOutlinedInput-notchedOutline{
+    border-color: var(--pds-secondary-white-s4);
+}
+
+.pds-wds-react-textfield .MuiInputBase-root.Mui-focused{
+    border-color: var(--pds-primary-blue);
+}
+
+.pds-wds-react-textfield .MuiInputBase-root.Mui-focused:hover .MuiOutlinedInput-notchedOutline{
+    border-color: var(--pds-primary-blue);
+}
+
+
