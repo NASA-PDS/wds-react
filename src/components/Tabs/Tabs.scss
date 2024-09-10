@@ -1,0 +1,41 @@
+
+/* Tabs */
+.pds-wds-tabs {
+
+  .MuiTabs-root {
+
+    border-bottom: 1px solid #D1D1D1;
+
+    .MuiTab-root {
+
+      color: #000000;
+  
+      &.Mui-selected {
+        color: #000000;
+      }
+  
+      &:hover { // doesn't work
+        border-bottom: 2px solid #58585B;
+        box-sizing: border-box;
+        top: 1px;
+      }
+  
+      &:focus {
+        border: 1px #58585B dotted;
+        top: 1px;
+      }
+      
+    }
+
+    .MuiTabs-scrollButtons.Mui-disabled {
+      opacity: 0.3;
+    }
+
+    .MuiTabs-indicator {
+      background-color: #000000;
+      height: 4px;
+    }
+
+  }
+  
+}
