@@ -6,30 +6,13 @@
 
     border-bottom: 1px solid #D1D1D1;
 
-    /* These do not work and cause issues when tab bar is hovered when scrolling is enabled */
-    & button:hover {
-      border-bottom: 2px solid #58585B;
-      box-sizing: border-box;
-      top: 1px;
-    }
-
-    /* & .MuiTabs-scroller {
-      & > .MuiTabs-flexContainer {
-          & > button:hover {
-            border-bottom: 2px solid #58585B;
-            box-sizing: border-box;
-            top: 1px;
-          }
-      }
-    } */
-
     .MuiTab-root {
 
       color: #000000;
   
       &.Mui-selected {
         color: #000000;
-      }
+      } 
 
       &:focus {
         border: 1px #58585B dotted;
