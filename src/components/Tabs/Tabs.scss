@@ -2,9 +2,26 @@
 /* Tabs */
 .pds-wds-tabs {
 
-  .MuiTabs-root {
+  & > .MuiTabs-root {
 
     border-bottom: 1px solid #D1D1D1;
+
+    /* These do not work and cause issues when tab bar is hovered when scrolling is enabled */
+    & button:hover {
+      border-bottom: 2px solid #58585B;
+      box-sizing: border-box;
+      top: 1px;
+    }
+
+    /* & .MuiTabs-scroller {
+      & > .MuiTabs-flexContainer {
+          & > button:hover {
+            border-bottom: 2px solid #58585B;
+            box-sizing: border-box;
+            top: 1px;
+          }
+      }
+    } */
 
     .MuiTab-root {
 
@@ -13,13 +30,7 @@
       &.Mui-selected {
         color: #000000;
       }
-  
-      &:hover { // doesn't work
-        border-bottom: 2px solid #58585B;
-        box-sizing: border-box;
-        top: 1px;
-      }
-  
+
       &:focus {
         border: 1px #58585B dotted;
         top: 1px;
@@ -38,4 +49,13 @@
 
   }
   
+}
+
+.pds-wds-tab {
+
+  & > .MuiBox-root {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
 }

@@ -23,6 +23,7 @@ function CustomTabPanel(props: TabPanelProps) {
       hidden={value !== index}
       id={`simple-tabpanel-${index}`}
       aria-labelledby={`simple-tab-${index}`}
+      className={"pds-wds-tab"}
       {...other}
     >
       {value === index && <MuiBox sx={{ p: 3 }}>{children}</MuiBox>}
@@ -50,7 +51,8 @@ export const Tabs = ({
 
   return <>
     <MuiBox className="pds-wds-tabs">
-      <MuiTabs value={value} onChange={handleChange} aria-label={description} variant="scrollable" scrollButtons={"auto"} allowScrollButtonsMobile>
+      <MuiTabs value={value} onChange={handleChange} aria-label={description}>
+      {/* <MuiTabs value={value} onChange={handleChange} aria-label={description} variant="scrollable" scrollButtons={"auto"} allowScrollButtonsMobile> */}
         {
           tabs.map((tab, tabIndex) => {
             return <MuiTab label={tab.label} {...a11yProps(tabIndex)} disableRipple disableTouchRipple key={tabIndex}/>
