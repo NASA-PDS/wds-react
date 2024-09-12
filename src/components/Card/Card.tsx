@@ -56,9 +56,6 @@ export const Card = ({
           minWidth: width,
           maxWidth, 
           boxShadow:'none',
-          ':hover': {
-            cursor: 'pointer',
-          },
           ':focus': {
             border: '1px dotted',
           }
