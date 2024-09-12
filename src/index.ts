@@ -12,6 +12,7 @@ export * from "./components/Icons";
 export * from "./components/Loader";
 export * from "./components/Pagination";
 export * from "./components/PrimaryButton";
+export * from "./components/QuickLInksBar";
 export * from "./components/Tabs";
 export * from "./components/Tag";
 export * from "./components/TextField";
