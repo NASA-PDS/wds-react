@@ -26,17 +26,6 @@ export const LinkCard = ({
           height: "100%", 
           backgroundColor: "#FFFFFF",
         }}>
-          {/* <Box
-            sx={{
-              position: 'absolute',
-              bottom: 0,
-              left: 0,
-              width: "100%",
-              height: '50%',
-              background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))',
-              color: 'white',
-            }}
-          /> */}
           <MuiBox sx={{
             display: "flex",
             flexGrow: 1,
