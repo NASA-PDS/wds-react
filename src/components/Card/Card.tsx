@@ -3,7 +3,6 @@ import { CardMediaProps } from '@mui/material/CardMedia';
 import CardMedia from '@mui/material/CardMedia';
 import testImage from '../../nasaTest.jpeg';
 import Box from '@mui/material/Box';
-import { useState } from 'react';
 import { Typography } from 'components/Typography';
 import { PrimaryButton } from 'components/PrimaryButton';
 import { Link } from 'react-router-dom';
@@ -37,21 +36,10 @@ export const Card = ({
   url,
   width = 312,
 }: CardProps) => {
-  const [isCardHovered, setIsCardHovered] = useState(false);
-
-  const onCardMouseOver = () => {
-    setIsCardHovered(true);
-  }
-
-  const onCardMouseOut = () => {
-    setIsCardHovered(false);
-  }
 
   return (
     <Link to={url}>
       <MaterialCard
-        onMouseOver={onCardMouseOver} 
-        onMouseOut={onCardMouseOut} 
         sx={{ 
           minWidth: width,
           maxWidth, 
@@ -67,11 +55,6 @@ export const Card = ({
             height={height}
             width={width}
             image={image}
-            sx={{
-              transform: isCardHovered? 'scale(1.25)' : 'scale(1)',
-              transition: 'all .2s ease',
-              verticalAlign: 'middle'
-            }}
             alt={imageDescription}
           />
           <Box
