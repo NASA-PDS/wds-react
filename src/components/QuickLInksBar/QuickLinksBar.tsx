@@ -4,6 +4,7 @@ import { PrimaryButton } from "components/PrimaryButton";
 import { Typography } from "components/Typography";
 
 import "./QuickLinksBar.scss"
+import { Link } from "react-router-dom";
 
 export type QuickLinksBarProps = {
 
@@ -24,14 +25,14 @@ export const QuickLinksBar = ({
         <MuiStack direction={{ xs: 'column', md: 'row' }} justifyContent={{ xs: "left",  lg:"flex-end"}} alignItems={{xs: "flex-start", lg: "center"}} spacing={"16px"}>
           {
             primaryLinks.map( (link, index) => {
-              return <Button variant="cta" key={index}>{link.label}</Button>
+              return <Link to={link.url} key={index}><Button variant="cta">{link.label}</Button></Link>
             })
           }
         </MuiStack>
         <MuiStack direction={{ xs: 'column', md: 'row' }} justifyContent={{ xs: "left",  lg:"flex-end"}} alignItems={{xs: "flex-start", md: "center", lg: "center"}} spacing={"16px"}>
           {
             secondaryLinks.map( (link, index) => {
-              return <PrimaryButton label={link.label} key={index}/>
+              return <Link to={link.url} key={index}><PrimaryButton label={link.label} /></Link>
             })
           }
         </MuiStack>
