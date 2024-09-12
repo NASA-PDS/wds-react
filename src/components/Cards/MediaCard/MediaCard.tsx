@@ -1,14 +1,18 @@
-import { Box, Card, Stack } from "@mui/material";
-import { CardMediaProps } from '@mui/material/CardMedia';
-import CardMedia from '@mui/material/CardMedia';
-import testImage from '../../../nasaTest.jpeg';
+import { 
+  Box as MuiBox, 
+  Card as MuiCard, 
+  CardMedia as MuiCardMedia,
+  CardMediaProps as MuiCardMediaProps,
+  Stack as MuiStack 
+} from "@mui/material";
 import { Link } from "react-router-dom";
-import { PrimaryButton } from "components/PrimaryButton";
+//import { PrimaryButton } from "components/PrimaryButton";
 import { Typography } from "components/Typography";
 import { IconArrowRight } from "components/Icons";
+import testImage from '../../../nasaTest.jpeg';
 
 export type MediaCardProps = {
-  image:CardMediaProps['image'];
+  image:MuiCardMediaProps['image'];
   imageDescription:string;
   title:string;
   url:string;
@@ -23,19 +27,19 @@ export const MediaCard = ({
 
   return <>
     <Link to={url}>
-      <Card sx={{
+      <MuiCard sx={{
         height: "250px",
         boxShadow: "none",
         ':focus': {
             border: '1px dotted',
         }
       }}>
-        <Box sx={{ 
+        <MuiBox sx={{ 
           width: "100%", 
           height: "100%", 
           position: 'relative', 
         }}>
-          <CardMedia
+          <MuiCardMedia
             component="img"
             image={image}
             width={"100%"}
@@ -43,7 +47,7 @@ export const MediaCard = ({
             sx={{ backgroundSize: "cover"}}
             alt={imageDescription}
           />
-          <Box
+          <MuiBox
             sx={{
               position: 'absolute',
               bottom: 0,
@@ -54,7 +58,7 @@ export const MediaCard = ({
               color: 'white',
             }}
           />
-          <Box sx={{
+          <MuiBox sx={{
             position: "absolute",
             bottom: 0,
             top: 0,
@@ -65,9 +69,9 @@ export const MediaCard = ({
             height: "100%",
             alignItems: "flex-end",
           }}>
-            <Box sx={{padding: "20px", width: "100%"}}>
+            <MuiBox sx={{padding: "20px", width: "100%"}}>
               {/* <PrimaryButton label={title} /> */}
-              <Stack direction={"row"} spacing={"4px"} alignItems={"flex-end"} width={"100%"} justifyContent={"space-between"}>
+              <MuiStack direction={"row"} spacing={"4px"} alignItems={"flex-end"} width={"100%"} justifyContent={"space-between"}>
                 <Typography variant={"h5"} weight={"semibold"} component={"span"}>{title}</Typography>
                 <div style={{
                     display: "flex",
@@ -80,11 +84,11 @@ export const MediaCard = ({
                 }}>
                   <IconArrowRight style={{ width: "10px", height: "10px" }}/>
                 </div>
-              </Stack>
-            </Box>
-          </Box>
-        </Box>
-      </Card>
+              </MuiStack>
+            </MuiBox>
+          </MuiBox>
+        </MuiBox>
+      </MuiCard>
     </Link>
   </>
 }

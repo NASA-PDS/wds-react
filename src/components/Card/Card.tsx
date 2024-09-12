@@ -1,11 +1,13 @@
-import MaterialCard from '@mui/material/Card';
-import { CardMediaProps } from '@mui/material/CardMedia';
-import CardMedia from '@mui/material/CardMedia';
-import testImage from '../../nasaTest.jpeg';
-import Box from '@mui/material/Box';
+import { 
+  Box as MuiBox, 
+  Card as MuiCard, 
+  CardMedia as MuiCardMedia, 
+  CardMediaProps as MuiCardMediaProps 
+} from '@mui/material';
+import { Link } from 'react-router-dom';
 import { Typography } from 'components/Typography';
 import { PrimaryButton } from 'components/PrimaryButton';
-import { Link } from 'react-router-dom';
+import testImage from '../../nasaTest.jpeg';
 
 export type CardProps = {
   /** Content to display in the card */
@@ -13,7 +15,7 @@ export type CardProps = {
   /** Height of the card */
   height: number;
   /** Image to display in the card */
-  image: CardMediaProps['image'];
+  image: MuiCardMediaProps['image'];
   /** Description of the image displayed in the card */
   imageDescription: string;
   /** Width of the card **/
@@ -39,7 +41,7 @@ export const Card = ({
 
   return (
     <Link to={url}>
-      <MaterialCard
+      <MuiCard
         sx={{ 
           minWidth: width,
           maxWidth, 
@@ -49,15 +51,15 @@ export const Card = ({
           }
         }}
       >
-        <Box sx={{ position: 'relative' }}>
-          <CardMedia
+        <MuiBox sx={{ position: 'relative' }}>
+          <MuiCardMedia
             component="img"
             height={height}
             width={width}
             image={image}
             alt={imageDescription}
           />
-          <Box
+          <MuiBox
             sx={{
               position: 'absolute',
               bottom: 0,
@@ -69,7 +71,7 @@ export const Card = ({
               //padding: '20px 20px',
             }}
           />
-          <Box
+          <MuiBox
             sx={{
               position: 'absolute',
               bottom: 0,
@@ -80,15 +82,15 @@ export const Card = ({
           >
             <PrimaryButton label={title} size="16"></PrimaryButton>
             <Typography variant="body2" weight="regular">{description}</Typography>
-          </Box>
-          <Box
+          </MuiBox>
+          <MuiBox
             sx={{
               position: 'relative', top: '-10px', zIndex: '3'
             }}
           >
-          </Box>
-        </Box>
-      </MaterialCard>
+          </MuiBox>
+        </MuiBox>
+      </MuiCard>
     </Link>
   );
 }
