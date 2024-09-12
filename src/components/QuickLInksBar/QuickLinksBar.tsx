@@ -9,7 +9,7 @@ import { Link } from "react-router-dom";
 export type QuickLinksBarProps = {
 
   primaryLinks:Array<{label:string, url:string }>;
-  secondaryLinks:Array<{label:string, url:string }>;
+  secondaryLinks:Array<{label:string, url:string, urlType?:"internal" | "external" }>;
   title:string;
 }
 
@@ -32,7 +32,7 @@ export const QuickLinksBar = ({
         <MuiStack direction={{ xs: 'column', md: 'row' }} justifyContent={{ xs: "left",  lg:"flex-end"}} alignItems={{xs: "flex-start", md: "center", lg: "center"}} spacing={"16px"}>
           {
             secondaryLinks.map( (link, index) => {
-              return <Link to={link.url} key={index}><PrimaryButton label={link.label} /></Link>
+              return <Link to={link.url} key={index}><PrimaryButton label={link.label} iconType={link.urlType} /></Link>
             })
           }
         </MuiStack>
