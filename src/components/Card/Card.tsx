@@ -1,6 +1,7 @@
 import { 
   Box as MuiBox, 
   Card as MuiCard, 
+  CardProps as MuiCardProps,
   CardMedia as MuiCardMedia, 
   CardMediaProps as MuiCardMediaProps 
 } from '@mui/material';
@@ -26,18 +27,21 @@ export type CardProps = {
   url: string;
   /** Width of the card **/
   width: number;
-}
+} & MuiCardProps;
 
-export const Card = ({
-  description = '',
-  height = 480,
-  image = testImage,
-  imageDescription,
-  maxWidth = 345,
-  title,
-  url,
-  width = 312,
-}: CardProps) => {
+export const Card = (props: CardProps) => {
+
+  const {
+    description = '',
+    height = 480,
+    image = testImage,
+    imageDescription,
+    maxWidth = 345,
+    title,
+    url,
+    width = 312,
+    ...other
+  } = props;
 
   return (
     <Link to={url}>
@@ -50,6 +54,7 @@ export const Card = ({
             border: '1px dotted',
           }
         }}
+        {...other}
       >
         <MuiBox sx={{ position: 'relative' }}>
           <MuiCardMedia
