@@ -5,12 +5,14 @@ import { Link } from "react-router-dom";
 export type LinkCardProps = {
   title: string;
   url:string;
+  urlType?:"internal" | "external";
   width?:string;
 }
 
 export const LinkCard = ({
   title,
   url,
+  urlType = "internal"
 }:LinkCardProps) => {
   return <>
     <Link to={url}>
@@ -35,7 +37,7 @@ export const LinkCard = ({
             alignItems: "center",
           }}>
             <MuiBox sx={{padding: "20px"}}>
-              <PrimaryButton label={title} />
+              <PrimaryButton label={title} iconType={urlType}/>
             </MuiBox>
           </MuiBox>
         </MuiBox>
