@@ -15,6 +15,8 @@ export type CardProps = {
   height: number;
   /** Image to display in the card */
   image: CardMediaProps['image'];
+  /** Description of the image displayed in the card */
+  imageDescription: string;
   /** Width of the card **/
   maxWidth: number;
   /** Title to display in the card */
@@ -29,6 +31,7 @@ export const Card = ({
   description = '',
   height = 480,
   image = testImage,
+  imageDescription,
   maxWidth = 345,
   title,
   url,
@@ -72,6 +75,7 @@ export const Card = ({
               transition: 'all .2s ease',
               verticalAlign: 'middle'
             }}
+            alt={imageDescription}
           />
           <Box
             sx={{
