@@ -51,8 +51,7 @@ export const Tabs = ({
 
   return <>
     <MuiBox className="pds-wds-tabs">
-      <MuiTabs value={value} onChange={handleChange} aria-label={description}>
-      {/* <MuiTabs value={value} onChange={handleChange} aria-label={description} variant="scrollable" scrollButtons={"auto"} allowScrollButtonsMobile> */}
+      <MuiTabs value={value} onChange={handleChange} aria-label={description} variant="scrollable" allowScrollButtonsMobile>
         {
           tabs.map((tab, tabIndex) => {
             return <MuiTab label={tab.label} {...a11yProps(tabIndex)} disableRipple disableTouchRipple key={tabIndex}/>
