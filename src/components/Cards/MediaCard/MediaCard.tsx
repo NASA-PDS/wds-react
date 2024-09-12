@@ -6,11 +6,9 @@ import {
   Stack as MuiStack 
 } from "@mui/material";
 import { Link } from "react-router-dom";
-//import { PrimaryButton } from "components/PrimaryButton";
 import { Typography } from "components/Typography";
 import { IconArrowRight } from "components/Icons";
 import testImage from '../../../nasaTest.jpeg';
-import { PrimaryButton } from "components/PrimaryButton";
 
 export type MediaCardProps = {
   description?:string;
