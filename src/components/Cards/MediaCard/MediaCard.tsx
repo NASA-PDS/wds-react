@@ -10,8 +10,10 @@ import { Link } from "react-router-dom";
 import { Typography } from "components/Typography";
 import { IconArrowRight } from "components/Icons";
 import testImage from '../../../nasaTest.jpeg';
+import { PrimaryButton } from "components/PrimaryButton";
 
 export type MediaCardProps = {
+  description?:string;
   image:MuiCardMediaProps['image'];
   imageDescription:string;
   title:string;
@@ -19,6 +21,7 @@ export type MediaCardProps = {
 }
 
 export const MediaCard = ({
+  description,
   image = testImage,
   imageDescription,
   title,
@@ -58,20 +61,20 @@ export const MediaCard = ({
               color: 'white',
             }}
           />
-          <MuiBox sx={{
-            position: "absolute",
-            bottom: 0,
-            top: 0,
-            display: "flex",
-            flexGrow: 1,
-            color: "#FFFFFF",
-            width: "100%",
-            height: "100%",
-            alignItems: "flex-end",
-          }}>
-            <MuiBox sx={{padding: "20px", width: "100%"}}>
-              {/* <PrimaryButton label={title} /> */}
-              <MuiStack direction={"row"} spacing={"4px"} alignItems={"flex-end"} width={"100%"} justifyContent={"space-between"}>
+          <MuiBox
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              color: 'white',
+              padding: '20px 20px',
+              gap: "12px",
+              display: "flex",
+              flexDirection: "column",
+              flexWrap: "wrap"
+            }}
+          >
+            <MuiStack direction={"row"} spacing={"4px"} alignItems={"flex-end"} width={"100%"} justifyContent={"space-between"}>
                 <Typography variant={"h5"} weight={"semibold"} component={"span"}>{title}</Typography>
                 <div style={{
                     display: "flex",
@@ -85,7 +88,7 @@ export const MediaCard = ({
                   <IconArrowRight style={{ width: "10px", height: "10px" }}/>
                 </div>
               </MuiStack>
-            </MuiBox>
+            { description && <Typography variant="body2" weight="regular">{description}</Typography> }
           </MuiBox>
         </MuiBox>
       </MuiCard>
