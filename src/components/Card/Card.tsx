@@ -52,7 +52,8 @@ export const Card = (props: CardProps) => {
           boxShadow:'none',
           ':focus': {
             border: '1px dotted',
-          }
+          },
+          borderRadius: "0px"
         }}
         {...other}
       >

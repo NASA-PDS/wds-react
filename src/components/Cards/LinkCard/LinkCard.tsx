@@ -19,6 +19,7 @@ export const LinkCard = ({
     <Link to={url}>
       <MuiCard sx={{
         boxShadow:'none', 
+        borderRadius: "0px",
         ':focus': {
           border: '1px dotted',
         },
