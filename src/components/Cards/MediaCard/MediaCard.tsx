@@ -33,7 +33,9 @@ export const MediaCard = ({
         boxShadow: "none",
         ':focus': {
             border: '1px dotted',
-        }
+        },
+        borderRadius: "0px",
+        transition: "none"
       }}>
         <MuiBox sx={{ 
           width: "100%", 
