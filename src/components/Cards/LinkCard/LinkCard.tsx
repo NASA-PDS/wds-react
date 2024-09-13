@@ -12,7 +12,8 @@ export type LinkCardProps = {
 export const LinkCard = ({
   title,
   url,
-  urlType = "internal"
+  urlType = "internal",
+  width = "100%"
 }:LinkCardProps) => {
   return <>
     <Link to={url}>
@@ -22,6 +23,7 @@ export const LinkCard = ({
           border: '1px dotted',
         },
         height: "250px", 
+        width
       }}>
         <MuiBox sx={{ 
           width: "100%", 
