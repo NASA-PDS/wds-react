@@ -1,2 +1,2 @@
-export * from "./LinkCard";
+export * from "./ButtonCard";
 export * from "./MediaCard";
