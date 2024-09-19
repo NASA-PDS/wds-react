@@ -74,9 +74,9 @@ export const Footer = ({
               }
 
             </Grid>
-            <MuiBox sx={{height: {xs: "150px", md: "unset"}, pt: "64px", mt: "64px", borderTop: "1px solid #2E2E32", marginBottom: "16px", paddingTop: "24px"}}>
+            <MuiBox sx={{height: {xs: "175px", md: "unset"}, pt: "64px", mt: "64px", borderTop: "1px solid #2E2E32", marginBottom: "16px", paddingTop: "24px"}}>
               {/* <MuiStack direction={{xs: "column", md: "row"}} spacing={"49px"}> */}
-              <MuiStack direction={{xs:"column", md: "row"}} spacing={{md: "49px"}} sx={{ height: {xs: "150px", md: "unset"}, flexWrap: 'wrap', flexShrink: 1, flexGrow: 0 }}>
+              <MuiStack direction={{xs:"column", md: "row"}} spacing={{md: "49px"}} sx={{ height: {xs: "175px", md: "unset"}, flexWrap: 'wrap', flexShrink: 1, flexGrow: 0 }}>
                 {
                   secondaryLinks.map( (link, index) => {
                     return <>
@@ -88,15 +88,15 @@ export const Footer = ({
                 }
               </MuiStack>
             </MuiBox>
-            <MuiBox>
+            <MuiBox className="pds-wds-footer-metadata">
               <MuiStack direction={{xs:"column", md: "row"}} spacing={{md: "32px"}} sx={{flexWrap: 'wrap', flexShrink: 1, flexGrow: 0 }}>
                 <MuiStack direction={"row"} spacing={"4px"}>
-                  <Typography variant="h6" weight="regular" component="span" style={{color: "#959599", marginBottom: "8px"}}>Page Last Updated:</Typography>
-                  <Typography variant="h6" weight="semibold" component="span" style={{color: "#959599", marginBottom: "8px"}}>{pageLastUpdated}</Typography>
+                  <Typography variant="h6" weight="regular" component="span">Page Last Updated:</Typography>
+                  <Typography variant="h6" weight="semibold" component="span">{pageLastUpdated}</Typography>
                 </MuiStack>
                 <MuiStack direction={"row"} spacing={"4px"}>
-                  <Typography variant="h6" weight="regular" component="span" style={{color: "#959599", marginBottom: "8px"}}>NASA Official:</Typography>
-                  <Typography variant="h6" weight="semibold" component="span" style={{color: "#959599", marginBottom: "8px"}}>Jordan Padams</Typography>
+                  <Typography variant="h6" weight="regular" component="span">NASA Official:</Typography>
+                  <Typography variant="h6" weight="semibold" component="span">Jordan Padams</Typography>
                 </MuiStack>
               </MuiStack>
             </MuiBox>
