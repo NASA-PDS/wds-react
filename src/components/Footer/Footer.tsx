@@ -5,11 +5,11 @@ import {
   Stack as MuiStack,
   } from "@mui/material";
 import Grid from '@mui/material/Unstable_Grid2'; // Grid version 2
+import { Link } from "react-router-dom";
+import { Typography } from "components/Typography";
 import nasaLogo from "../../assets/nasa.svg";
 
 import "./Footer.scss";
-import { Typography } from "components/Typography";
-import { Link } from "react-router-dom";
 
 export type FooterLink = {
   id: string;

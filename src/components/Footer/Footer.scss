@@ -5,6 +5,18 @@
 
   a {
     color: #FFFFFF;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-style: dashed;
+      text-underline-offset: .3em;
+    }
+
+    &:focus {
+      outline: .25rem solid var(--pds-secondary-blue-t1);
+      outline-offset: 0;
+    }
+    
   }
   
   & .pds-wds-footer-container {
@@ -12,42 +24,14 @@
   }
 
   a.pds-wds-footer-primary-link {
-
     color: var(--pds-secondary-white-s2);
     margin-bottom: 19px;
-  
-    /* not working due to issues with Typography component */
-    &:hover span {
-      text-decoration: dashed;
-      text-decoration-line: dashed;
-      text-decoration-color: var(--pds-secondary-white-s2);
-    }
-  
-    &:focus {
-      outline: .25rem solid var(--pds-secondary-blue-t1);
-      outline-offset: 8;
-    }
-  
   }
 
   a.pds-wds-footer-secondary-link {
-
     color: var(--pds-secondary-white-s2);
     margin-bottom: 8px;
     padding: 8px 12px 8px 12px;
-  
-    /* not working due to issues with Typography component */
-    &:hover span {
-      text-decoration: dashed;
-      text-decoration-line: dashed;
-      text-decoration-color: var(--pds-secondary-white-s2);
-    }
-  
-    &:focus {
-      outline: .25rem solid var(--pds-secondary-blue-t1);
-      outline-offset: 0;
-    }
-  
   }
 
   .pds-wds-footer-metadata {
