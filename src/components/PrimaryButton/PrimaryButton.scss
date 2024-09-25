@@ -1,0 +1,80 @@
+.pds-wds-primary-button {
+
+  &.MuiIconButton-root {
+
+    background-color: #F64137;
+    color: #FFFFFF;
+
+    &:hover {
+      background-color: #B60109;
+    }
+  
+    &.pds-wds-primary-button-size-14 {
+      height: 16px;
+      width: 16px;
+      padding: 4px;
+
+      & > svg {
+        width: 8px;
+        height: 8px;
+      }
+    }
+  
+    &.pds-wds-primary-button-size-16 {
+      height: 20px;
+      width: 20px;
+      padding: 5px;
+
+      & > svg {
+        width: 10px;
+        height: 10px;
+      }
+    }
+  
+    &.pds-wds-primary-button-size-18 {
+      height: 24px;
+      width: 24px;
+      padding: 6px;
+
+      & > svg {
+        width: 12px;
+        height: 12px;
+      }
+    }
+  
+    &.pds-wds-primary-button-size-22 {
+      height: 28px;
+      width: 28px;
+      padding: 7px;
+
+      & > svg {
+        width: 14px;
+        height: 14px;
+      }
+    }
+  
+    &.pds-wds-primary-button-size-29 {
+      height: 32px;
+      width: 32px;
+      padding: 8px;
+
+      & > svg {
+        width: 16px;
+        height: 16px;
+      }
+    }
+  
+    &.pds-wds-primary-button-size-36 {
+      height: 36px;
+      width: 36px;
+      padding: 9px;
+
+      & > svg {
+        width: 18px;
+        height: 18px;
+      }
+    }
+    
+  }
+
+}
