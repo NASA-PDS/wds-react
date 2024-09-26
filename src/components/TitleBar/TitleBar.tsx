@@ -1,4 +1,4 @@
-import { MouseEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
@@ -77,10 +77,12 @@ const TitleBar = ({
   title,
   titleLink,
   navItems,
+  searchEndpoint,
   subTitle,
   subTitleLink,
 }: HeaderProps) => {
   const [isSmallMenuOpen, setIsSmallMenuOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
   const [elList, setElList] = useState(
     Array<{
       id: number;
@@ -189,6 +191,16 @@ const TitleBar = ({
       newIndices.add(index);
     }
     setActiveTitleSmallMenuIndices(newIndices);
+  };
+
+  const handleSearchValueChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value);
+  };
+
+  const handleSearchKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key == "Enter") {
+      window.location.href = searchEndpoint + searchText;
+    }
   };
 
   return (
@@ -345,6 +357,9 @@ const TitleBar = ({
                       },
                     },
                   }}
+                  value={searchText}
+                  onChange={handleSearchValueChange}
+                  onKeyDown={handleSearchKeyDown}
                 />
               </div>
             </Box>
@@ -405,6 +420,9 @@ const TitleBar = ({
                       },
                     },
                   }}
+                  value={searchText}
+                  onChange={handleSearchValueChange}
+                  onKeyDown={handleSearchKeyDown}
                 />
               </div>
 
@@ -625,7 +643,10 @@ const TitleBar = ({
                   <div />
                 )}
 
-                <Container maxWidth="xl" className="pds-wds-titlebar-small-menu-search-container">
+                <Container
+                  maxWidth="xl"
+                  className="pds-wds-titlebar-small-menu-search-container"
+                >
                   <Box className="pds-wds-titlebar-links-search">
                     <div className="pds-wds-titlebar-search">
                       <div className="pds-wds-titlebar-search-icon-wrapper">
@@ -639,9 +660,11 @@ const TitleBar = ({
                           "& .MuiInputBase-input": {
                             padding: (theme) => theme.spacing(1, 1, 1, 0),
                             // vertical padding + font size from searchIcon
-                            paddingLeft: (theme) => `calc(1em + ${theme.spacing(4)})`,
+                            paddingLeft: (theme) =>
+                              `calc(1em + ${theme.spacing(4)})`,
                             display: "flex",
-                            transition: (theme) => theme.transitions.create("width"),
+                            transition: (theme) =>
+                              theme.transitions.create("width"),
                             '[theme.breakpoints.up("sm")]': {
                               width: "12ch",
                               "&:focus": {
@@ -650,6 +673,9 @@ const TitleBar = ({
                             },
                           },
                         }}
+                        value={searchText}
+                        onChange={handleSearchValueChange}
+                        onKeyDown={handleSearchKeyDown}
                       />
                     </div>
                   </Box>
