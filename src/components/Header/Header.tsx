@@ -6,19 +6,18 @@ export type NavItems = {
   id: string;
   label: string;
   href: string;
-  items?: Array<
-    {
-      id: string;
-      label: string;
-      href: string;
-    }
-  >
+  items?: Array<{
+    id: string;
+    label: string;
+    href: string;
+  }>;
 };
 
 export type HeaderProps = {
   navItems: NavItems[];
   title: string;
   titleLink: string;
+  searchEndpoint: string;
   subTitle?: string;
   subTitleLink?: string;
 };
@@ -27,6 +26,7 @@ export const Header = ({
   navItems,
   title,
   titleLink,
+  searchEndpoint,
   subTitle,
   subTitleLink,
 }: HeaderProps) => {
@@ -36,6 +36,7 @@ export const Header = ({
         title={title}
         titleLink={titleLink}
         navItems={navItems}
+        searchEndpoint={searchEndpoint}
         subTitle={subTitle}
         subTitleLink={subTitleLink}
       />
