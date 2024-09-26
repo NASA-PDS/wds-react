@@ -199,7 +199,7 @@ const TitleBar = ({
 
   const handleSearchKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
     if (event.key == "Enter") {
-      window.location.href = searchEndpoint + searchText;
+      window.location.href = searchEndpoint + encodeURIComponent(searchText);
     }
   };
 
