@@ -74,11 +74,14 @@ export enum FeaturedLinkDetailsVariant {
   DATA_BUNDLE = "data-bundle",
   DATA_COLLECTION = "data-collection",
   DATA_SET = "data-set",
+  FACILITY = "facility",
   INSTRUMENT = "instrument",
+  INSTRUMENT_HOST = "instrument-host",
   INVESTIGATION = "investigation",
   RESOURCE = "resoruce",
   TARGET = "target",
-  TOOL = "tool",
+  TELESCOPE = "telescope",
+  TOOL = "tool"
 }
 
 type FeaturedLinkDetailData = {
@@ -133,6 +136,14 @@ export type FeaturedLinkDataSetDetailsProps = FeaturedLinkDetailsBaseProps & {
   variant:FeaturedLinkDetailsVariant.DATA_SET;
 }
 
+export type FeaturedLinkFacilityDetailsProps = FeaturedLinkDetailsBaseProps & {
+  country: FeaturedLinkDetailData;
+  lid: FeaturedLinkDetailData;
+  telescopes: Array<string>;
+  type: FeaturedLinkDetailData;
+  variant: FeaturedLinkDetailsVariant.FACILITY;
+}
+
 export type FeaturedLinkInstrumentDetailsProps = FeaturedLinkDetailsBaseProps & {
   instrumentType:Array<string>;
   investigation:FeaturedLinkDetailData;
@@ -141,6 +152,15 @@ export type FeaturedLinkInstrumentDetailsProps = FeaturedLinkDetailsBaseProps & 
   stopDate:FeaturedLinkDetailData;
   variant:FeaturedLinkDetailsVariant.INSTRUMENT;
 }
+
+export type FeaturedLinkInstrumentHostDetailsProps =
+  FeaturedLinkDetailsBaseProps & {
+    investigation: FeaturedLinkDetailData;
+    instruments: Array<string>;
+    lid: FeaturedLinkDetailData;
+    variant: FeaturedLinkDetailsVariant.INSTRUMENT_HOST;
+};
+
 
 export type FeaturedLinkInvestigationDetailsProps = FeaturedLinkDetailsBaseProps & {
   instrumentHostTitles:Array<string>;
@@ -164,6 +184,13 @@ export type FeaturedLinkTargetDetailsProps = FeaturedLinkDetailsBaseProps & {
   variant:FeaturedLinkDetailsVariant.TARGET;
 }
 
+export type FeaturedLinkTelescopeDetailsProps = FeaturedLinkDetailsBaseProps & {
+  facility: FeaturedLinkDetailData;
+  instruments: Array<string>;
+  lid: FeaturedLinkDetailData;
+  variant: FeaturedLinkDetailsVariant.TELESCOPE;
+};
+
 export type FeaturedLinkToolDetailsProps = FeaturedLinkDetailsBaseProps & {
   categories:Array<string>;
   support:FeaturedLinkDetailData;
@@ -177,10 +204,13 @@ export type FeaturedLinkDetailsProps = (
   | FeaturedLinkDataBundleDetailsProps 
   | FeaturedLinkDataCollectionDetailsProps
   | FeaturedLinkDataSetDetailsProps
+  | FeaturedLinkFacilityDetailsProps
   | FeaturedLinkInstrumentDetailsProps 
+  | FeaturedLinkInstrumentHostDetailsProps
   | FeaturedLinkInvestigationDetailsProps
   | FeaturedLinkResourceDetailProps
   | FeaturedLinkTargetDetailsProps
+  | FeaturedLinkTelescopeDetailsProps
   | FeaturedLinkToolDetailsProps
 );
 
@@ -253,12 +283,27 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           </>
         }
         {
+          props.variant === FeaturedLinkDetailsVariant.FACILITY && <>
+            <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
+            <DetailRow label={"Type"} value={props.type.value} link={props.type.link} />
+            <DetailRow label={"Country"} value={props.country.value} link={props.country.link} />
+            <DetailRow label={"Telescopes"} value={props.telescopes.join(",")} />
+          </>
+        }
+        {
           props.variant === FeaturedLinkDetailsVariant.INSTRUMENT && <>
             <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
             <DetailRow label={"Instrument Type"} value={props.instrumentType.join(", ")} />
             <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link} />
             <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link} />
+          </>
+        }
+        {
+          props.variant === FeaturedLinkDetailsVariant.INSTRUMENT_HOST && <>
+            <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
+            <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
+            <DetailRow label={"Instruments"} value={props.instruments.join(",")} />
           </>
         }
         {
@@ -282,6 +327,13 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           props.variant === FeaturedLinkDetailsVariant.TARGET && <>
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
             <DetailRow label={"Type"} value={props.targetType.join(", ")} />
+          </>
+        }
+        {
+          props.variant === FeaturedLinkDetailsVariant.TELESCOPE && <>
+            <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
+            <DetailRow label={"Instruments"} value={props.instruments.join(", ")} />
+            <DetailRow label={"Facility"} value={props.facility.value} link={props.facility.link} />
           </>
         }
         {
