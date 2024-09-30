@@ -746,14 +746,20 @@ const TitleBar = ({
                       </div>
                     ) : (
                       <div className="pds-wds-titlebar-small-menu-link">
-                        <Typography
-                          className="pds-wds-titlebar-link-label"
-                          variant="h4"
-                          weight="semibold"
-                          textAlign="left"
+                        <Link
+                          className="pds-wds-titlebar-link"
+                          key={item.id}
+                          href={item.href}
                         >
-                          {item.label}
-                        </Typography>
+                          <Typography
+                            className="pds-wds-titlebar-link-label"
+                            variant="h4"
+                            weight="semibold"
+                            textAlign="left"
+                          >
+                            {item.label}
+                          </Typography>
+                        </Link>
                       </div>
                     );
                   })}
