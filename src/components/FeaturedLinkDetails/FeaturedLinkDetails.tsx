@@ -106,21 +106,21 @@ export type FeaturedLinkBundleListDetailProps = FeaturedLinkDetailsBaseProps & {
 }
 
 export type FeaturedLinkDataBundleDetailsProps = FeaturedLinkDetailsBaseProps & {
+  disciplineName:Array<string>;
   doi:FeaturedLinkDetailData;
   investigation:FeaturedLinkDetailData;
-  instrumentType:Array<string>;
   lid:FeaturedLinkDetailData;
-  processingLevel:FeaturedLinkDetailData;
+  processingLevel:Array<string>;
   startDate:FeaturedLinkDetailData;
   stopDate:FeaturedLinkDetailData;
   variant:FeaturedLinkDetailsVariant.DATA_BUNDLE;
 }
 
 export type FeaturedLinkDataCollectionDetailsProps = FeaturedLinkDetailsBaseProps & {
-  disciplineName:FeaturedLinkDetailData;
+  disciplineName:Array<string>;
   doi:FeaturedLinkDetailData;
   investigation:FeaturedLinkDetailData;
-  processingLevel:FeaturedLinkDetailData;
+  processingLevel:Array<string>;
   lid:FeaturedLinkDetailData;
   startDate:FeaturedLinkDetailData;
   stopDate:FeaturedLinkDetailData;
@@ -128,28 +128,25 @@ export type FeaturedLinkDataCollectionDetailsProps = FeaturedLinkDetailsBaseProp
 }
 
 export type FeaturedLinkDataSetDetailsProps = FeaturedLinkDetailsBaseProps & {
-  disciplineName:FeaturedLinkDetailData;
+  disciplineName:Array<string>;
   doi:FeaturedLinkDetailData;
   investigation:FeaturedLinkDetailData;
-  processingLevel:FeaturedLinkDetailData;
+  processingLevel:Array<string>;
   target:FeaturedLinkDetailData;
   variant:FeaturedLinkDetailsVariant.DATA_SET;
 }
 
 export type FeaturedLinkFacilityDetailsProps = FeaturedLinkDetailsBaseProps & {
-  country: FeaturedLinkDetailData;
+  country: Array<string>;
   lid: FeaturedLinkDetailData;
   telescopes: Array<string>;
-  type: FeaturedLinkDetailData;
+  type: Array<string>;
   variant: FeaturedLinkDetailsVariant.FACILITY;
 }
 
 export type FeaturedLinkInstrumentDetailsProps = FeaturedLinkDetailsBaseProps & {
-  instrumentType:Array<string>;
   investigation:FeaturedLinkDetailData;
   lid:FeaturedLinkDetailData;
-  startDate:FeaturedLinkDetailData;
-  stopDate:FeaturedLinkDetailData;
   variant:FeaturedLinkDetailsVariant.INSTRUMENT;
 }
 
@@ -164,6 +161,7 @@ export type FeaturedLinkInstrumentHostDetailsProps =
 
 export type FeaturedLinkInvestigationDetailsProps = FeaturedLinkDetailsBaseProps & {
   instrumentHostTitles:Array<string>;
+  investigationType:Array<string>;
   lid:FeaturedLinkDetailData;
   startDate:FeaturedLinkDetailData;
   stopDate:FeaturedLinkDetailData;
@@ -185,7 +183,7 @@ export type FeaturedLinkTargetDetailsProps = FeaturedLinkDetailsBaseProps & {
 }
 
 export type FeaturedLinkTelescopeDetailsProps = FeaturedLinkDetailsBaseProps & {
-  facility: FeaturedLinkDetailData;
+  facility: Array<string>;
   instruments: Array<string>;
   lid: FeaturedLinkDetailData;
   variant: FeaturedLinkDetailsVariant.TELESCOPE;
@@ -255,38 +253,38 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           props.variant === FeaturedLinkDetailsVariant.DATA_BUNDLE && <>
             <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
-            <DetailRow label={"Instrument Type"} value={props.instrumentType.join(", ")} />
+            <DetailRow label={"Discipline Name"} value={props.disciplineName.join(",")}/>
             <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
-            <DetailRow label={"Processing Level"} value={props.processingLevel.value} link={props.processingLevel.link} />
-            <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link} />
-            <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel.join(",")} />
+            <DetailRow label={"Start Date"} value={props.startDate.value} />
+            <DetailRow label={"Stop Date"} value={props.stopDate.value} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.DATA_COLLECTION && <>
             <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
-            <DetailRow label={"Discipline Name"} value={props.disciplineName.value} link={props.disciplineName.link} />
+            <DetailRow label={"Discipline Name"} value={props.disciplineName.join(",")} />
             <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
-            <DetailRow label={"Processing Level"} value={props.processingLevel.value} link={props.processingLevel.link} />
-            <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link} />
-            <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel.join(",")} />
+            <DetailRow label={"Start Date"} value={props.startDate.value} />
+            <DetailRow label={"Stop Date"} value={props.stopDate.value} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.DATA_SET && <>
             <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
-            <DetailRow label={"Discipline Name"} value={props.disciplineName.value} link={props.disciplineName.link} />
+            <DetailRow label={"Discipline Name"} value={props.disciplineName.join(",")} />
             <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
-            <DetailRow label={"Processing Level"} value={props.processingLevel.value} link={props.processingLevel.link} />
-            <DetailRow label={"Target"} value={props.target.value} link={props.target.link} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel.join(",")} />
+            <DetailRow label={"Target"} value={props.target.value} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.FACILITY && <>
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
-            <DetailRow label={"Type"} value={props.type.value} link={props.type.link} />
-            <DetailRow label={"Country"} value={props.country.value} link={props.country.link} />
+            <DetailRow label={"Type"} value={props.type.join(",")} />
+            <DetailRow label={"Country"} value={props.country.join(",")} />
             <DetailRow label={"Telescopes"} value={props.telescopes.join(",")} />
           </>
         }
@@ -294,9 +292,6 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           props.variant === FeaturedLinkDetailsVariant.INSTRUMENT && <>
             <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
-            <DetailRow label={"Instrument Type"} value={props.instrumentType.join(", ")} />
-            <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link} />
-            <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link} />
           </>
         }
         {
@@ -309,18 +304,18 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
         {
           props.variant === FeaturedLinkDetailsVariant.INVESTIGATION && <>
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
-            <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link} />
-            <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link} />
+            <DetailRow label={"Start Date"} value={props.startDate.value}/>
+            <DetailRow label={"Stop Date"} value={props.stopDate.value} />
             <DetailRow label={"Instrument Hosts"} value={props.instrumentHostTitles.join(", ")} />
+            <DetailRow label={"Investigation Type"} value={props.investigationType.join(", ")} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.RESOURCE && <>
-            <DetailRow label={"Version"} value={props.version.value} link={props.version.link} />
-            <DetailRow label={"Year"} value={props.year.value} link={props.year.link} />
-            <DetailRow label={"Format"} value={props.format.value} link={props.format.link} />
-            <DetailRow label={"Format"} value={props.format.value} link={props.format.link} />
-            <DetailRow label={"Size"} value={props.size.value} link={props.size.link} />
+            <DetailRow label={"Version"} value={props.version.value} />
+            <DetailRow label={"Year"} value={props.year.value} />
+            <DetailRow label={"Format"} value={props.format.value} />
+            <DetailRow label={"Size"} value={props.size.value} />
           </>
         }
         {
@@ -333,14 +328,14 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           props.variant === FeaturedLinkDetailsVariant.TELESCOPE && <>
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
             <DetailRow label={"Instruments"} value={props.instruments.join(", ")} />
-            <DetailRow label={"Facility"} value={props.facility.value} link={props.facility.link} />
+            <DetailRow label={"Facility"} value={props.facility.join(",")} />
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.TOOL && <>
             <DetailRow label={"URL"} value={props.url.value} link={props.url.link} />
-            <DetailRow label={"Support"} value={props.support.value} link={props.support.link} />
-            <DetailRow label={"Version"} value={props.version.value} link={props.version.link} />
+            <DetailRow label={"Support"} value={props.support.value} />
+            <DetailRow label={"Version"} value={props.version.value} />
             <DetailRow label={"Category"} value={props.categories.join(",")} />
           </>
         }
