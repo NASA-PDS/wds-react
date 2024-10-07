@@ -256,8 +256,8 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Discipline Name"} value={props.disciplineName.join(",")}/>
             <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
             <DetailRow label={"Processing Level"} value={props.processingLevel.join(",")} />
-            <DetailRow label={"Start Date"} value={props.startDate.value} />
-            <DetailRow label={"Stop Date"} value={props.stopDate.value} />
+            <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link}/>
+            <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.startDate.link}/>
           </>
         }
         {
@@ -267,8 +267,8 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Discipline Name"} value={props.disciplineName.join(",")} />
             <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
             <DetailRow label={"Processing Level"} value={props.processingLevel.join(",")} />
-            <DetailRow label={"Start Date"} value={props.startDate.value} />
-            <DetailRow label={"Stop Date"} value={props.stopDate.value} />
+            <DetailRow label={"Start Date"} value={props.startDate.value}  link={props.startDate.link}/>
+            <DetailRow label={"Stop Date"} value={props.stopDate.value}  link={props.stopDate.link}/>
           </>
         }
         {
@@ -277,7 +277,7 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"Discipline Name"} value={props.disciplineName.join(",")} />
             <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
             <DetailRow label={"Processing Level"} value={props.processingLevel.join(",")} />
-            <DetailRow label={"Target"} value={props.target.value} />
+            <DetailRow label={"Target"} value={props.target.value} link={props.target.link}/>
           </>
         }
         {
@@ -304,8 +304,8 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
         {
           props.variant === FeaturedLinkDetailsVariant.INVESTIGATION && <>
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
-            <DetailRow label={"Start Date"} value={props.startDate.value}/>
-            <DetailRow label={"Stop Date"} value={props.stopDate.value} />
+            <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link}/>
+            <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.stopDate.link}/>
             <DetailRow label={"Instrument Hosts"} value={props.instrumentHostTitles.join(", ")} />
             <DetailRow label={"Investigation Type"} value={props.investigationType.join(", ")} />
           </>
@@ -334,8 +334,8 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
         {
           props.variant === FeaturedLinkDetailsVariant.TOOL && <>
             <DetailRow label={"URL"} value={props.url.value} link={props.url.link} />
-            <DetailRow label={"Support"} value={props.support.value} />
-            <DetailRow label={"Version"} value={props.version.value} />
+            <DetailRow label={"Support"} value={props.support.value} link={props.support.link}/>
+            <DetailRow label={"Version"} value={props.version.value} link={props.version.link}/>
             <DetailRow label={"Category"} value={props.categories.join(",")} />
           </>
         }
