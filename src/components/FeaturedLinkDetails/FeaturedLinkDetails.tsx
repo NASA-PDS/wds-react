@@ -31,9 +31,18 @@ type DetailRowProps = DetailRowStringProps | DetailRowTagProps;
 
 const DetailRow = (props:DetailRowProps) => {
 
-  let valueElement = <Typography variant="body4" weight="regular">{props.value ? props.value : "-"}</Typography>;
+  let value:string | string[] = "-";
+  if( props.value ) {
+    if( props.value === "3000-01-01T00:00:00.000Z" ) {
+      value = "ongoing"
+    } else {
+      value = props.value;
+    }
+  }
+
+  let valueElement = <Typography variant="body4" weight="regular">{value}</Typography>;
   if( props.link !== undefined ) {
-    valueElement = <Link to={props.link}>{valueElement}</Link>;
+    valueElement = <Link to={props.link} style={{color: "#1C67E3", textDecoration: "underline"}}>{valueElement}</Link>;
   }
 
   return (
