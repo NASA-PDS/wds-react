@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { IconArrowCircleDown, IconArrowCircleRight, IconArrowRight } from '../Icons';
+import { IconArrowCircleDown, IconArrowCircleRight, IconArrowDiagonal, IconArrowRight } from '../Icons';
 import { Typography } from '../Typography';
 import Box from '@mui/material/Box';
 import Divider from '@mui/material/Divider';
@@ -32,6 +32,7 @@ export type FeaturedLinkProps = {
   description:string;
   primaryLink:string;
   primaryLinkLabel?:string;
+  primaryLinkType?:"internal" | "external"
   startExpanded?:boolean;
   title:string;
 }
@@ -42,6 +43,7 @@ export const FeaturedLink = ({
   description,
   primaryLink,
   primaryLinkLabel,
+  primaryLinkType = "internal",
   startExpanded = false,
   title,
 }:FeaturedLinkProps) => {
@@ -67,7 +69,7 @@ export const FeaturedLink = ({
               </IconButton>
             </Box>
             <Stack sx={{padding: "10px"}}>
-              <Link to={primaryLink}>
+              <Link to={primaryLink} target={ primaryLinkType === "internal" ? "_self" : "_blank"}>
                 <Typography variant='h6' weight='semibold' sx={{margin: "5px"}}>{title}</Typography>
               </Link>
               <Typography variant='body4' weight='regular' sx={{margin: "5px", }}>{ellipsisText(description, 256)}</Typography>
@@ -91,7 +93,7 @@ export const FeaturedLink = ({
           columns === undefined && <Grid mdOffset={1} />
         }
         <Grid xs={2} display={"flex"} justifyContent={"right"} alignItems={"center"}>
-          <Link to={primaryLink}>
+          <Link to={primaryLink} target={ primaryLinkType === "internal" ? "_self" : "_blank"}>
             <Stack direction="row" alignItems={"center"} gap={1}>
               { primaryLinkLabel && <Typography variant="h4" weight="semibold" display={{xs: "none", md:"block"}}>{primaryLinkLabel}</Typography> }
               <IconButton aria-label="arrow" sx={{
@@ -103,7 +105,7 @@ export const FeaturedLink = ({
                 height: "36px",
                 width: "36px",
               }}>
-                <IconArrowRight />
+                { primaryLinkType === "internal" ? <IconArrowRight /> : <IconArrowDiagonal /> }
               </IconButton>
             </Stack>
           </Link>
