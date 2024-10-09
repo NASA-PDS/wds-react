@@ -221,7 +221,6 @@ const TitleBar = ({
             </Link>
             <Link
               href={titleLink}
-              target="_blank"
               className="pds-wds-titlebar-titlelink"
             >
               <Typography
@@ -377,7 +376,6 @@ const TitleBar = ({
             </Link>
             <Link
               href={titleLink}
-              target="_blank"
               className="pds-wds-titlebar-titlelink"
             >
               <Typography
@@ -453,7 +451,6 @@ const TitleBar = ({
             </Link>
             <Link
               href={titleLink}
-              target="_blank"
               className="pds-wds-titlebar-titlelink"
             >
               <Typography
@@ -525,7 +522,6 @@ const TitleBar = ({
                         </Link>
                         <Link
                           href={titleLink}
-                          target="_blank"
                           className="pds-wds-titlebar-titlelink"
                         >
                           <Typography
@@ -574,7 +570,6 @@ const TitleBar = ({
                         </Link>
                         <Link
                           href={titleLink}
-                          target="_blank"
                           className="pds-wds-titlebar-titlelink"
                         >
                           <Typography
