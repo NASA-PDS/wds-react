@@ -243,9 +243,9 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           props.variant === FeaturedLinkDetailsVariant.DATA_BUNDLE && <>
             <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
-            <DetailRow label={"Discipline Name"} value={props.disciplineName.join(",")}/>
+            <DetailRow label={"Discipline Name"} value={props.disciplineName.join(", ")}/>
             <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
-            <DetailRow label={"Processing Level"} value={props.processingLevel.join(",")} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel.join(", ")} />
             <DetailRow label={"Start Date"} value={props.startDate.value} link={props.startDate.link}/>
             <DetailRow label={"Stop Date"} value={props.stopDate.value} link={props.startDate.link}/>
           </>
@@ -254,9 +254,9 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           props.variant === FeaturedLinkDetailsVariant.DATA_COLLECTION && <>
             <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
-            <DetailRow label={"Discipline Name"} value={props.disciplineName.join(",")} />
+            <DetailRow label={"Discipline Name"} value={props.disciplineName.join(", ")} />
             <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
-            <DetailRow label={"Processing Level"} value={props.processingLevel.join(",")} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel.join(", ")} />
             <DetailRow label={"Start Date"} value={props.startDate.value}  link={props.startDate.link}/>
             <DetailRow label={"Stop Date"} value={props.stopDate.value}  link={props.stopDate.link}/>
           </>
@@ -305,18 +305,18 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
         {
           props.variant === FeaturedLinkDetailsVariant.DATA_SET && <>
             <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
-            <DetailRow label={"Discipline Name"} value={props.disciplineName.join(",")} />
+            <DetailRow label={"Discipline Name"} value={props.disciplineName.join(", ")} />
             <DetailRow label={"DOI"} value={props.doi.value} link={props.doi.link} />
-            <DetailRow label={"Processing Level"} value={props.processingLevel.join(",")} />
+            <DetailRow label={"Processing Level"} value={props.processingLevel.join(", ")} />
             <DetailRow label={"Target"} value={props.target.value} link={props.target.link}/>
           </>
         }
         {
           props.variant === FeaturedLinkDetailsVariant.FACILITY && <>
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
-            <DetailRow label={"Type"} value={props.type.join(",")} />
-            <DetailRow label={"Country"} value={props.country.join(",")} />
-            <DetailRow label={"Telescopes"} value={props.telescopes.join(",")} />
+            <DetailRow label={"Type"} value={props.type.join(", ")} />
+            <DetailRow label={"Country"} value={props.country.join(", ")} />
+            <DetailRow label={"Telescopes"} value={props.telescopes.join(", ")} />
           </>
         }
         {
@@ -329,7 +329,7 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           props.variant === FeaturedLinkDetailsVariant.INSTRUMENT_HOST && <>
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
             <DetailRow label={"Investigation"} value={props.investigation.value} link={props.investigation.link} />
-            <DetailRow label={"Instruments"} value={props.instruments.join(",")} />
+            <DetailRow label={"Instruments"} value={props.instruments.join(", ")} />
           </>
         }
         {
@@ -359,7 +359,7 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
           props.variant === FeaturedLinkDetailsVariant.TELESCOPE && <>
             <DetailRow label={"Identifier"} value={props.lid.value} link={props.lid.link} />
             <DetailRow label={"Instruments"} value={props.instruments.join(", ")} />
-            <DetailRow label={"Facility"} value={props.facility.join(",")} />
+            <DetailRow label={"Facility"} value={props.facility.join(", ")} />
           </>
         }
         {
@@ -367,7 +367,7 @@ export const FeaturedLinkDetails = (props:FeaturedLinkDetailsProps) => {
             <DetailRow label={"URL"} value={props.url.value} link={props.url.link} />
             <DetailRow label={"Support"} value={props.support.value} link={props.support.link}/>
             <DetailRow label={"Version"} value={props.version.value} link={props.version.link}/>
-            <DetailRow label={"Category"} value={props.categories.join(",")} />
+            <DetailRow label={"Category"} value={props.categories.join(", ")} />
           </>
         }
         {
