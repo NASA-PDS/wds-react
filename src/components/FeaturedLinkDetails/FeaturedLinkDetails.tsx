@@ -33,7 +33,7 @@ const DetailRow = (props:DetailRowProps) => {
 
   let value:string | string[] = "-";
   if( props.value ) {
-    if( props.value === "3000-01-01T00:00:00.000Z" ) {
+    if( props.value === "3000-01-01T00:00:00.000Z" || props.value === "3000-01-01T00:00:00Z") {
       value = "ongoing"
     } else {
       value = props.value;

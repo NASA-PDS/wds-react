@@ -95,8 +95,8 @@ export const Footer = ({
                   <Typography variant="h6" weight="semibold" component="span">{pageLastUpdated}</Typography>
                 </MuiStack>
                 <MuiStack direction={"row"} spacing={"4px"}>
-                  <Typography variant="h6" weight="regular" component="span">NASA Official:</Typography>
-                  <Typography variant="h6" weight="semibold" component="span">Jordan Padams</Typography>
+                  <Typography variant="h6" weight="regular" component="span">Responsible NASA Official:</Typography>
+                  <Typography variant="h6" weight="semibold" component="span">Bo Trieu</Typography>
                 </MuiStack>
               </MuiStack>
             </MuiBox>
