@@ -29,6 +29,6 @@ export const Button = (props: ButtonProps) => {
   }
 
   return (
-    <MaterialButton className={buttonClass} variant={muiVariant} {...other} />
+    <MaterialButton className={buttonClass} variant={muiVariant} {...other} sx={{ width: "fit-content", textTransform: "none" }}/>
   );
 };
