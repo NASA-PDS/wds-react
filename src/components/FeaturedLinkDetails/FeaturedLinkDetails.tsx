@@ -3,6 +3,7 @@ import Stack from "@mui/material/Stack";
 import { Typography } from "../Typography";
 import { Tag } from "../Tag";
 import { Link } from "react-router-dom";
+import { PROCESSING_LEVEL_TITLES } from "utils/collections";
 
 enum DetailRowVariant {
   STRING = "string",
@@ -102,17 +103,8 @@ type FeaturedLinkDetailsBaseProps = {
   tags?:Array<string>;
 };
 
-export enum DATA_COLLECTION_GROUP_TITLE {
-  CALIBRATED = "Calibrated Data Products",
-  DERIVED = "Derived Data Products",
-  PARTIALLY_PROCESSED = "Partially Processed Data Products",
-  RAW = "Raw Data Products",
-  TELEMETRY = "Telemetry Data Products",
-  UNKNOWN = "Unknown Processing Level"
-};
-
 export type DataCollectionGroup = {
-  title:DATA_COLLECTION_GROUP_TITLE,
+  title:PROCESSING_LEVEL_TITLES,
   items:Array<{
     title:string,
     description:string,
