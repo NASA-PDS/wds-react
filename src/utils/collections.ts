@@ -16,6 +16,6 @@ export enum PROCESSING_LEVEL_TITLES {
   UNKNOWN = "Unknown Processing Level"
 };
 
-export const convertProcessingLevelKey = (key:string) => {
+export const convertProcessingLevelToKey = (key:string) => {
   return key.toUpperCase().replace(" ", "_") as keyof typeof PROCESSING_LEVEL_TITLES;
 }
