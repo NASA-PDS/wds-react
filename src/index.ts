@@ -18,3 +18,5 @@ export * from "./components/Tabs";
 export * from "./components/Tag";
 export * from "./components/TextField";
 export * from "./components/Typography";
+
+export * from "./utils/collections";
