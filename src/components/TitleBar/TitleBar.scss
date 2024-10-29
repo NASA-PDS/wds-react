@@ -4,7 +4,6 @@
 
 .pds-wds-titlebar-popper{
    z-index: 1;
-   padding: 11px 5px 11px 5px;
 }
 
 .pds-wds-titlebar-paper {
@@ -12,6 +11,11 @@
    border-radius: 0 0 3px 3px;
    padding-top: 15px;
    color: var(--pds-primary-white);
+}
+
+.pds-wds-titlebar-titlelink{
+   color: white;
+   text-decoration: none;
 }
 
 .pds-wds-titlebar-menu-item:hover {
@@ -46,7 +50,6 @@
    border-style: solid;
    background-color: var(--pds-primary-black);
    margin-left: 0;
-   //width: 100%
 }
 
 .pds-wds-titlebar-search:hover {
@@ -68,6 +71,7 @@
 
 .pds-wds-titlebar-input-base {
    color: inherit;
+   display: flex;
 }
 
 .pds-wds-titlebar-input-base .MuiInputBase-input{
@@ -127,14 +131,44 @@
    flex-grow: 1;
 }
 
+.pds-wds-titlebar-links-search{
+   justify-content: flex-end;
+   flex-grow: 1;
+}
+
 .pds-wds-titlebar-link-button {   
    font-size: 0.875rem;
-   font-weight: 400;
+   font-weight: bold;
    line-height: 1.1875rem;
    letter-spacing: -0.25px;
    color: var(--pds-primary-white);
-   margin-right: 32px;
    text-transform: none;
+}
+
+.pds-wds-titlebar-link-button-sm {   
+   font-size: 0.875rem;
+   font-weight: bold;
+   line-height: 1.1875rem;
+   letter-spacing: -0.25px;
+   color: var(--pds-primary-white);
+   text-transform: none;
+}
+
+.pds-wds-titlebar-link-button-md {
+   font-size: 0.875rem;
+   font-weight: bold;
+   line-height: 1.1875rem;
+   letter-spacing: -0.25px;
+   color: var(--pds-primary-white);
+   text-transform: none;
+   min-width: 0;
+   padding-left: 0;
+   padding-right: 0;
+}
+
+.pds-wds-titlebar-link-button-md .MuiButton-icon.MuiButton-endIcon.MuiButton-iconSizeMedium {
+   margin-left: 0;
+   margin-right: 0;
 }
 
 .pds-wds-titlebar-link.MuiTypography-root.MuiLink-root.MuiLink-underlineAlways.MuiTypography-inherit {   
@@ -159,4 +193,106 @@
 .pds-wds-titlebar-link-divider {   
    background-color: var(--pds-secondary-black-t3);
    margin-right: 16px;
+}
+
+.pds-wds-titlebar-link-divider-mid {   
+   background-color: var(--pds-secondary-black-t3);
+   margin-right: 16px;
+   margin-left: 16px;
+}
+
+.pds-wds-titlebar-small-menu {
+   background-color: var(--pds-primary-black);
+   position: fixed;
+   z-index: 10;
+   top: 0;
+   left: 0;
+   height:100%;
+   width: 100%;
+   overflow: auto;
+}
+
+.pds-wds-titlebar-links-small{
+   justify-content: space-between;
+   flex-grow: 1;
+   display: flex;
+   align-items: center;
+   overflow: auto;
+}
+
+.pds-wds-titlebar-small-menu-container{
+   display: flex;
+   align-items: center;
+}
+
+.pds-wds-titlebar-small-menu-toolbar{
+   display: flex;
+   justify-content: space-between;
+}
+
+.pds-wds-titlebar-small-menu-link{
+   display: flex;
+   justify-content: space-between;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   padding-left: 24px;
+   padding-right: 24px;
+   align-items: center;
+}
+
+.pds-wds-titlebar-small-menu-link-open{
+   display: flex;
+   justify-content: space-between;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   padding-left: 24px;
+   padding-right: 24px;
+   align-items: center;
+   background-color: var(--pds-secondary-black-t2);
+}
+
+.pds-wds-titlebar-small-title{
+   display: flex;
+   align-items: center;
+}
+
+.pds-wds-titlebar-small-menu-sublinks{
+   padding-left: 10px;
+   padding-right: 10px;
+}
+
+.pds-wds-titlebar-small-menu-md{
+   background-color: var(--pds-secondary-black-t1);
+   overflow: auto;
+}
+
+.pds-wds-titlebar-toolbar {
+   justify-content: space-between;
+}
+
+.pds-wds-titlebar-top-divider{
+   background-color: var(--pds-secondary-black-t3);
+}
+
+.pds-wds-titlebar-toolbar-container{
+   background-color: var(--pds-secondary-black-t1);
+}
+
+.pds-wds-titlebar-small-menu-link-divider{
+   background-color: var(--pds-secondary-black-t3);
+}
+
+.pds-wds-titlebar-small-menu-sub-link{
+   display: flex;
+   justify-content: space-between;
+   padding-top: 10px;
+   padding-bottom: 10px;
+   padding-left: 24px;
+   padding-right: 24px;
+   background-color: var(--pds-secondary-black-t2);
+}
+
+.pds-wds-titlebar-small-menu-search-container{
+   margin-top: 10px;
+   margin-bottom: 10px;
 }

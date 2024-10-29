@@ -1,95 +1,103 @@
-import Typography from '@mui/material/Typography';
-import MaterialCard from '@mui/material/Card';
-import { CardMediaProps } from '@mui/material/CardMedia';
-import CardMedia from '@mui/material/CardMedia';
+import { 
+  Box as MuiBox, 
+  Card as MuiCard, 
+  CardProps as MuiCardProps,
+  CardMedia as MuiCardMedia, 
+  CardMediaProps as MuiCardMediaProps 
+} from '@mui/material';
+import { Link } from 'react-router-dom';
+import { Typography } from 'components/Typography';
+import { PrimaryButton } from 'components/PrimaryButton';
 import testImage from '../../nasaTest.jpeg';
-import Box from '@mui/material/Box';
-import { useState } from 'react';
 
 export type CardProps = {
-  /** Title to display in the card */
-  title: string,
   /** Content to display in the card */
-  content: string,
+  description?: string;
+  /** Height of the card */
+  height: number;
   /** Image to display in the card */
-  image: CardMediaProps['image']
-}
+  image: MuiCardMediaProps['image'];
+  /** Description of the image displayed in the card */
+  imageDescription: string;
+  /** Width of the card **/
+  maxWidth: number;
+  /** Title to display in the card */
+  title: string;
+  /** Link to go to when card or button is clicked */
+  url: string;
+  /** Width of the card **/
+  width: number;
+} & MuiCardProps;
 
-export const Card = ({
-  title = '',
-  content = '',
-  image = testImage
-}: CardProps) => {
-  const [isCardHovered, setIsCardHovered] = useState(false);
+export const Card = (props: CardProps) => {
 
-  const onCardMouseOver = () => {
-    setIsCardHovered(true);
-  }
-
-  const onCardMouseOut = () => {
-    setIsCardHovered(false);
-  }
+  const {
+    description = '',
+    height = 480,
+    image = testImage,
+    imageDescription,
+    maxWidth = 345,
+    title,
+    url,
+    width = 312,
+    ...other
+  } = props;
 
   return (
-    <MaterialCard
-      onMouseOver={onCardMouseOver} 
-      onMouseOut={onCardMouseOut} 
-      sx={{ 
-        maxWidth: 345, 
-        boxShadow:'none',
-        ':hover': {
-          cursor: 'pointer',
-        },
-        ':focus': {
-          border: '1px dotted',
-        }
-      }}
-    >
-      <Box sx={{ position: 'relative' }}>
-        <CardMedia
-          component="img"
-          height="480"
-          width="312"
-          image={image}
-          sx={{
-            transform: isCardHovered? 'scale(1.25)' : 'scale(1)',
-            transition: 'all .2s ease',
-            verticalAlign: 'middle'
-          }}
-        />
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            width: '100%',
-            height: '50%',
-            background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))',
-            color: 'white',
-            padding: '20px 20px',
-          }}
-        />
-        <Box
-          sx={{
-            position: 'absolute',
-            bottom: 0,
-            left: 0,
-            width: '100%',
-            color: 'white',
-            padding: '20px 20px',
-          }}
-        >
-          <Typography variant="h5" component="span">{title} {/*<Badge color="secondary" badgeContent=" "><EastIcon/></Badge>*/}</Typography>
-          <Typography variant="body2">{content}</Typography>
-        </Box>
-        <Box
-          sx={{
-            position: 'relative', top: '-10px', zIndex: '3'
-          }}
-        >
-        </Box>
-      </Box>
-    </MaterialCard>
+    <Link to={url}>
+      <MuiCard
+        sx={{ 
+          minWidth: width,
+          maxWidth, 
+          boxShadow:'none',
+          ':focus': {
+            border: '1px dotted',
+          },
+          borderRadius: "0px"
+        }}
+        {...other}
+      >
+        <MuiBox sx={{ position: 'relative' }}>
+          <MuiCardMedia
+            component="img"
+            height={height}
+            width={width}
+            image={image}
+            alt={imageDescription}
+          />
+          <MuiBox
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              width,
+              height: '50%',
+              background: 'linear-gradient(to bottom, rgba(0, 0, 0, 0), rgba(0, 0, 0, 1))',
+              color: 'white',
+              //padding: '20px 20px',
+            }}
+          />
+          <MuiBox
+            sx={{
+              position: 'absolute',
+              bottom: 0,
+              left: 0,
+              color: 'white',
+              padding: '20px 20px',
+            }}
+          >
+            <PrimaryButton label={title} size="16"></PrimaryButton>
+            <Typography variant="body2" weight="regular">{description}</Typography>
+          </MuiBox>
+          <MuiBox
+            sx={{
+              position: 'relative', top: '-10px', zIndex: '3'
+            }}
+          >
+          </MuiBox>
+        </MuiBox>
+      </MuiCard>
+    </Link>
   );
 }
 

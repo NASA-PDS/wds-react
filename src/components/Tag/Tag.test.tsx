@@ -1,5 +1,4 @@
 import renderer from 'react-test-renderer'
-import { describe, expect, test } from 'vitest'
 import { Tag } from "./Tag"
 
 describe('Tag', () => {

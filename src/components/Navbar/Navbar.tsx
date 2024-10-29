@@ -1,15 +1,12 @@
-import { MouseEvent, useState } from "react";
+import { useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Container from "@mui/material/Container";
 import Toolbar from "@mui/material/Toolbar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
-import ExpandCircleDownOutlinedIcon from "@mui/icons-material/ExpandCircleDownOutlined";
 import Link from "@mui/material/Link";
-import IconButton from "@mui/material/IconButton";
-import Typography from "@mui/material/Typography";
+import { Typography } from "../Typography/Typography";
 import MenuItem from "@mui/material/MenuItem";
-import Menu from "@mui/material/Menu";
 import { Divider } from "@mui/material";
 import { HeaderProps } from "../Header/Header";
 import { StyledEngineProvider } from "@mui/material/styles";
@@ -18,10 +15,13 @@ import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuList from "@mui/material/MenuList";
+import ChevronDown from "../Icons/ChevronDown";
 
-const Navbar = ({ navItems }: HeaderProps) => {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-
+const Navbar = ({
+  navItems,
+  subTitle,
+  subTitleLink,
+}: Omit<HeaderProps, "title" | "titleLink" | "searchEndpoint">) => {
   const [elList, setElList] = useState(
     Array<{
       id: number;
@@ -29,14 +29,6 @@ const Navbar = ({ navItems }: HeaderProps) => {
       isOpen: boolean;
     }>,
   );
-
-  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
-  };
-
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
-  };
 
   const handleClick = (index: number, event: React.MouseEvent<HTMLElement>) => {
     setElList((prevArray) => {
@@ -121,8 +113,39 @@ const Navbar = ({ navItems }: HeaderProps) => {
       <AppBar component="nav" position="static" className="pds-wds-navbar">
         <Container maxWidth="xl">
           <Toolbar disableGutters className="pds-wds-navbar-toolbar">
-            <div />
-            <Box sx={{ display: { xs: "none", md: "block" } }}>
+            {subTitle ? (
+              <>
+                <Link
+                  href={subTitleLink}
+                  target="_blank"
+                  className="pds-wds-navbar-titlelink"
+                  sx={{
+                    display: { xs: "none", lg: "flex" },
+                  }}
+                >
+                  <Typography variant="h3" weight="bold" noWrap>
+                    {subTitle}
+                  </Typography>
+                </Link>
+
+                <Link
+                  href={subTitleLink}
+                  target="_blank"
+                  className="pds-wds-navbar-titlelink"
+                  sx={{
+                    display: { xs: "flex", lg: "none" },
+                  }}
+                >
+                  <Typography variant="h4" weight="semibold" noWrap>
+                    {subTitle}
+                  </Typography>
+                </Link>
+              </>
+            ) : (
+              <div />
+            )}
+
+            <Box sx={{ display: { xs: "none", lg: "block" } }}>
               {navItems.map((item, index) => {
                 return item.items ? (
                   <>
@@ -131,7 +154,7 @@ const Navbar = ({ navItems }: HeaderProps) => {
                       id="composition-button"
                       aria-haspopup="true"
                       onClick={(e) => handleClick(index, e)}
-                      endIcon={<ExpandCircleDownOutlinedIcon />}
+                      endIcon={<ChevronDown height={10} width={10} />}
                     >
                       {item.label}
                     </Button>
@@ -163,7 +186,7 @@ const Navbar = ({ navItems }: HeaderProps) => {
                                 id="composition-menu"
                                 aria-labelledby="composition-button"
                               >
-                                {item.items.map((subItem) => {
+                                {item.items?.map((subItem) => {
                                   return (
                                     <Link
                                       className="pds-wds-navbar-link"
@@ -173,6 +196,8 @@ const Navbar = ({ navItems }: HeaderProps) => {
                                       <MenuItem className="pds-wds-navbar-menu-item">
                                         <Typography
                                           className="pds-wds-navbar-link-label"
+                                          variant="body2"
+                                          weight="regular"
                                           textAlign="center"
                                         >
                                           {subItem.label}
@@ -199,45 +224,6 @@ const Navbar = ({ navItems }: HeaderProps) => {
                   </Link>
                 );
               })}
-            </Box>
-
-            <Box sx={{ display: { sm: "block", md: "none" } }}>
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <ExpandCircleDownOutlinedIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {navItems.map((item) => (
-                  <Link key={item.id} href={item.href}>
-                    <MenuItem onClick={handleCloseNavMenu}>
-                      <Typography textAlign="center">{item.label}</Typography>
-                    </MenuItem>
-                  </Link>
-                ))}
-              </Menu>
             </Box>
           </Toolbar>
         </Container>

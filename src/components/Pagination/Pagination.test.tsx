@@ -1,5 +1,4 @@
 import renderer from 'react-test-renderer'
-import { describe, expect, test } from 'vitest'
 import { Pagination } from "./Pagination"
 
 describe('Pagination', () => {

@@ -1,5 +1,6 @@
 import MuiTypography from "@mui/material/Typography";
-import { TypographyProps } from "@mui/material";
+import { TypographyProps as MuiTypographyProps } from "@mui/material";
+import { StyledEngineProvider } from "@mui/material";
 
 type BodyProps = {
   variant: "body1" | "body2" | "body3" | "body4" | "body5";
@@ -56,20 +57,26 @@ type NumberProps = {
 };
 
 export type Props =
-  | (BodyProps & Omit<TypographyProps, "variant">)
-  | (DisplayProps & Omit<TypographyProps, "variant">)
-  | (HeaderBLProps & Omit<TypographyProps, "variant">)
-  | (HeaderBRProps & Omit<TypographyProps, "variant">)
-  | (HeaderSRProps & Omit<TypographyProps, "variant">)
-  | (HeaderSProps & Omit<TypographyProps, "variant">)
-  | (LabelProps & Omit<TypographyProps, "variant">)
-  | (NumberProps & Omit<TypographyProps, "variant">);
+  | (BodyProps & Omit<MuiTypographyProps, "variant">)
+  | (DisplayProps & Omit<MuiTypographyProps, "variant">)
+  | (HeaderBLProps & Omit<MuiTypographyProps, "variant">)
+  | (HeaderBRProps & Omit<MuiTypographyProps, "variant">)
+  | (HeaderSRProps & Omit<MuiTypographyProps, "variant">)
+  | (HeaderSProps & Omit<MuiTypographyProps, "variant">)
+  | (LabelProps & Omit<MuiTypographyProps, "variant">)
+  | (NumberProps & Omit<MuiTypographyProps, "variant">);
 
 export const Typography = (props: Props) => {
-  const { variant, weight, ...other } = props;
+  const { variant, weight, className, ...other } = props;
 
-  let typographyClass = "wds-typography";
+  let typographyClass = "";
   let muiVariant;
+
+  if (className) {
+    typographyClass = className + " wds-typography";
+  } else {
+    typographyClass = "wds-typography";
+  }
 
   switch (variant) {
     case "body1":
@@ -189,10 +196,12 @@ export const Typography = (props: Props) => {
   }
 
   return (
-    <MuiTypography
-      className={typographyClass}
-      variant={muiVariant}
-      {...other}
-    />
+    <StyledEngineProvider injectFirst>
+      <MuiTypography
+        className={typographyClass}
+        variant={muiVariant}
+        {...other}
+      />
+    </StyledEngineProvider>
   );
 };

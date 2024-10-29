@@ -1,35 +1,5 @@
-import MaterialTextField from '@mui/material/TextField';
-import { TextFieldProps } from '@mui/material/TextField';
-
-const styles = {
-  textField: {
-    '& label.Mui-focused': {
-    },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: '#D1D1D1'
-    },
-    '& .MuiOutlinedInput-root': {
-      '& fieldset': {
-        borderColor:'#D1D1D1',
-        borderRadius: '2px'
-      },
-      '&:hover fieldset': {
-        borderColor:'#959599'
-      },
-      '&.Mui-focused fieldset': {
-        borderColor:'#1C67E3'
-      },
-      input: {
-        padding: '14px 16px'
-      },
-      label: {
-      },
-      '& .MuiInputAdornment-root': {
-        color: '#959599'
-      }
-    }
-  }
-}
+import MaterialTextField from "@mui/material/TextField";
+import { TextFieldProps as MuiTextFieldProps } from "@mui/material/TextField";
 
 /**
  * A simple text field.
@@ -38,13 +8,43 @@ const styles = {
  * Default prop values should be specified in the deconstructed parameter object.
  *
  */
+
+type PdsTextFieldProps = {
+  variant?: "standard" | "search";
+};
+
+export type TextFieldProps = PdsTextFieldProps &
+  Omit<MuiTextFieldProps, "variant">;
+
 export const TextField = ({
+  className,
+  variant,
   ...otherProps
 }: TextFieldProps) => {
-  return (
+  let textFieldClass = "";
+  let pdsVariant = variant;
+
+  if (className) {
+    textFieldClass = className + " pds-wds-react-textfield";
+  } else {
+    textFieldClass = "pds-wds-react-textfield";
+  }
+
+  if (!pdsVariant) {
+    pdsVariant = "standard";
+  }
+
+  return pdsVariant === "search" ? (
     <MaterialTextField
-      sx={styles.textField}
+      className={textFieldClass}
+      variant="outlined"
+      {...otherProps}
+    />
+  ) : (
+    <MaterialTextField
+      className={textFieldClass}
+      variant="outlined"
       {...otherProps}
     />
   );
-}
+};

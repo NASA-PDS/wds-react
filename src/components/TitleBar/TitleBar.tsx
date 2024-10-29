@@ -1,19 +1,14 @@
-import { MouseEvent, useState } from "react";
+import { ChangeEvent, KeyboardEvent, MouseEvent, useState } from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Button from "@mui/material/Button";
 import Container from "@mui/material/Container";
-import Menu from "@mui/material/Menu";
-import MenuIcon from "@mui/icons-material/Menu";
 import MenuItem from "@mui/material/MenuItem";
 import Toolbar from "@mui/material/Toolbar";
-import Typography from "@mui/material/Typography";
-import ExpandCircleDownOutlinedIcon from "@mui/icons-material/ExpandCircleDownOutlined";
+import { Typography } from "../Typography/Typography";
 import Divider from "@mui/material/Divider";
 import InputBase from "@mui/material/InputBase";
 import NasaLogo from "../../assets/nasa.svg";
-import IconButton from "@mui/material/IconButton";
-import SearchIcon from "@mui/icons-material/Search";
 import Link from "@mui/material/Link";
 import { StyledEngineProvider } from "@mui/material/styles";
 import ClickAwayListener from "@mui/material/ClickAwayListener";
@@ -21,7 +16,13 @@ import Grow from "@mui/material/Grow";
 import Paper from "@mui/material/Paper";
 import Popper from "@mui/material/Popper";
 import MenuList from "@mui/material/MenuList";
-import { check } from "@nasapds/wds/icons";
+import ArrowCircleDownIcon from "../Icons/ArrowCircleDown";
+import ChevronDownIcon from "../Icons/ChevronDown";
+import MenuIcon from "../Icons/Menu";
+import SearchIcon from "../Icons/Search";
+import CloseIcon from "../Icons/Close";
+import { HeaderProps } from "../Header/Header";
+import ArrowCircleUpIcon from "../Icons/ArrowCircleUp";
 
 const pages = [
   {
@@ -60,25 +61,28 @@ const pages = [
       },
       {
         id: "bodies",
-        label: "Ring-Moon Systems (RMS)",
+        label: "Small Bodies Node (SBN)",
         href: "https://pds-smallbodies.astro.umd.edu",
       },
     ],
   },
-  {
-    id: "explore-pds",
-    label: "Explore PDS",
-    href: "/",
-  },
 ];
 
-const TitleBar = () => {
-  const [anchorElNav, setAnchorElNav] = useState<null | HTMLElement>(null);
-  const [anchorElSubNav, setAnchorElSubNav] = useState<null | Record<
-    string,
-    HTMLElement
-  >>(null);
+export type TitleBarProps = {
+  title: string;
+  titleLink: string;
+};
 
+const TitleBar = ({
+  title,
+  titleLink,
+  navItems,
+  searchEndpoint,
+  subTitle,
+  subTitleLink,
+}: HeaderProps) => {
+  const [isSmallMenuOpen, setIsSmallMenuOpen] = useState(false);
+  const [searchText, setSearchText] = useState("");
   const [elList, setElList] = useState(
     Array<{
       id: number;
@@ -86,6 +90,11 @@ const TitleBar = () => {
       isOpen: boolean;
     }>,
   );
+  const [activeNavSmallMenuIndices, setActiveNavSmallMenuIndices] = useState(
+    new Set(),
+  );
+  const [activeTitleSmallMenuIndices, setActiveTitleSmallMenuIndices] =
+    useState(new Set());
 
   const handleClick = (index: number, event: MouseEvent<HTMLElement>) => {
     setElList((prevArray) => {
@@ -160,19 +169,38 @@ const TitleBar = () => {
     return null;
   };
 
-  const handleOpenSubNavMenu = (
-    index: number,
-    event: MouseEvent<HTMLElement>,
-  ) => {
-    setAnchorElSubNav({ [index]: event.currentTarget });
+  const handleToggleSmallMenu = () => {
+    setIsSmallMenuOpen(!isSmallMenuOpen);
   };
 
-  const handleOpenNavMenu = (event: MouseEvent<HTMLElement>) => {
-    setAnchorElNav(event.currentTarget);
+  const handleOpenNavSmallMenuSubNav = (index: number) => {
+    const newIndices = new Set(activeNavSmallMenuIndices);
+    if (activeNavSmallMenuIndices.has(index)) {
+      newIndices.delete(index);
+    } else {
+      newIndices.add(index);
+    }
+    setActiveNavSmallMenuIndices(newIndices);
   };
 
-  const handleCloseNavMenu = () => {
-    setAnchorElNav(null);
+  const handleOpenTitleSmallMenuSubNav = (index: number) => {
+    const newIndices = new Set(activeTitleSmallMenuIndices);
+    if (activeTitleSmallMenuIndices.has(index)) {
+      newIndices.delete(index);
+    } else {
+      newIndices.add(index);
+    }
+    setActiveTitleSmallMenuIndices(newIndices);
+  };
+
+  const handleSearchValueChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setSearchText(event.target.value);
+  };
+
+  const handleSearchKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key == "Enter") {
+      window.location.href = searchEndpoint + encodeURIComponent(searchText);
+    }
   };
 
   return (
@@ -180,64 +208,33 @@ const TitleBar = () => {
       <AppBar className="pds-wds-titlebar" position="static">
         <Container maxWidth="xl">
           <Toolbar disableGutters>
-            <Link href="https://www.nasa.gov/" target="_blank">
+            <Link href={titleLink} target="_blank">
               <Box
                 className="pds-wds-titlebar-nasa-logo-md"
                 component="img"
                 sx={{
-                  display: { xs: "none", md: "flex" },
+                  display: { xs: "none", lg: "flex" },
                 }}
                 alt="NASA logo."
                 src={NasaLogo}
               />
             </Link>
-            <Typography
-              className="pds-wds-titlebar-title-lg"
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                display: { xs: "none", lg: "flex" },
-              }}
+            <Link
+              href={titleLink}
+              className="pds-wds-titlebar-titlelink"
             >
-              Planetary Data System
-            </Typography>
-            <Typography
-              className="pds-wds-titlebar-title-md"
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                display: { xs: "none", md: "flex", lg: "none" },
-              }}
-            >
-              Planetary Data System
-            </Typography>
-            <Link href="https://www.nasa.gov/" target="_blank">
-              <Box
-                className="pds-wds-titlebar-nasa-logo-xs"
-                component="img"
+              <Typography
+                variant="h3"
+                weight="bold"
+                noWrap
                 sx={{
-                  display: { xs: "flex", md: "none" },
+                  display: { xs: "none", lg: "flex" },
                 }}
-                alt="NASA logo."
-                src={NasaLogo}
-              />
+              >
+                {title}
+              </Typography>
             </Link>
-            <Typography
-              className="pds-wds-titlebar-title-xs"
-              variant="h6"
-              noWrap
-              component="a"
-              href="/"
-              sx={{
-                display: { xs: "flex", md: "none" },
-              }}
-            >
-              Planetary Data System
-            </Typography>
+
             <Box
               className="pds-wds-titlebar-links"
               sx={{
@@ -252,7 +249,7 @@ const TitleBar = () => {
                       id="composition-button"
                       aria-haspopup="true"
                       onClick={(e) => handleClick(index, e)}
-                      endIcon={<ExpandCircleDownOutlinedIcon />}
+                      endIcon={<ChevronDownIcon height={10} width={10} />}
                     >
                       {item.label}
                     </Button>
@@ -294,6 +291,8 @@ const TitleBar = () => {
                                       <MenuItem className="pds-wds-titlebar-menu-item">
                                         <Typography
                                           className="pds-wds-titlebar-link-label"
+                                          variant="body2"
+                                          weight="regular"
                                           textAlign="center"
                                         >
                                           {subItem.label}
@@ -308,15 +307,20 @@ const TitleBar = () => {
                         </Grow>
                       )}
                     </Popper>
+                    <Divider
+                      className="pds-wds-titlebar-link-divider-mid"
+                      variant="middle"
+                      orientation="vertical"
+                      flexItem
+                    />
                   </>
                 ) : (
                   <>
                     <Button
                       className="pds-wds-titlebar-link-button"
-                      endIcon={<ExpandCircleDownOutlinedIcon />}
+                      endIcon={<ArrowCircleDownIcon className="icon" />}
                       key={item.id}
                       id={item.label + "MenuButton"}
-                      onClick={(e) => handleOpenSubNavMenu(index, e)}
                     >
                       {item.label}
                     </Button>
@@ -352,9 +356,39 @@ const TitleBar = () => {
                       },
                     },
                   }}
+                  value={searchText}
+                  onChange={handleSearchValueChange}
+                  onKeyDown={handleSearchKeyDown}
                 />
               </div>
             </Box>
+
+            <Link href={titleLink} target="_blank">
+              <Box
+                className="pds-wds-titlebar-nasa-logo-md"
+                component="img"
+                sx={{
+                  display: { xs: "none", md: "flex", lg: "none" },
+                }}
+                alt="NASA logo."
+                src={NasaLogo}
+              />
+            </Link>
+            <Link
+              href={titleLink}
+              className="pds-wds-titlebar-titlelink"
+            >
+              <Typography
+                variant="h3"
+                weight="bold"
+                noWrap
+                sx={{
+                  display: { xs: "none", md: "flex", lg: "none" },
+                }}
+              >
+                {title}
+              </Typography>
+            </Link>
 
             <Box
               className="pds-wds-titlebar-links"
@@ -384,49 +418,52 @@ const TitleBar = () => {
                       },
                     },
                   }}
+                  value={searchText}
+                  onChange={handleSearchValueChange}
+                  onKeyDown={handleSearchKeyDown}
                 />
               </div>
+
               <Divider
-                className="pds-wds-titlebar-link-divider"
+                className="pds-wds-titlebar-link-divider-mid"
                 variant="middle"
                 orientation="vertical"
                 flexItem
               />
-              <IconButton
-                size="large"
-                aria-label="account of current user"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page.label}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+
+              <Button
+                className="pds-wds-titlebar-link-button-md"
+                endIcon={<MenuIcon className="icon" />}
+                onClick={handleToggleSmallMenu}
+              ></Button>
             </Box>
+
+            <Link href={titleLink} target="_blank">
+              <Box
+                className="pds-wds-titlebar-nasa-logo-xs"
+                component="img"
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                }}
+                alt="NASA logo."
+                src={NasaLogo}
+              />
+            </Link>
+            <Link
+              href={titleLink}
+              className="pds-wds-titlebar-titlelink"
+            >
+              <Typography
+                variant="h4"
+                weight="semibold"
+                noWrap
+                sx={{
+                  display: { xs: "flex", md: "none" },
+                }}
+              >
+                {title}
+              </Typography>
+            </Link>
 
             <Box
               className="pds-wds-titlebar-links"
@@ -434,56 +471,377 @@ const TitleBar = () => {
                 display: { xs: "flex", md: "none" },
               }}
             >
-              <IconButton
-                size="large"
-                aria-label="site search"
-                aria-controls="menu-searchbar"
-                aria-haspopup="true"
-                color="inherit"
-              >
-                <SearchIcon />
-              </IconButton>
+              <Button
+                className="pds-wds-titlebar-link-button-md"
+                endIcon={<SearchIcon className="icon" />}
+                onClick={handleToggleSmallMenu}
+              ></Button>
+
               <Divider
-                className="pds-wds-titlebar-link-divider"
+                className="pds-wds-titlebar-link-divider-mid"
                 variant="middle"
                 orientation="vertical"
                 flexItem
               />
-              <IconButton
-                size="large"
-                aria-label="site navigation menu"
-                aria-controls="menu-appbar"
-                aria-haspopup="true"
-                onClick={handleOpenNavMenu}
-                color="inherit"
-              >
-                <MenuIcon />
-              </IconButton>
-              <Menu
-                id="menu-appbar"
-                anchorEl={anchorElNav}
-                anchorOrigin={{
-                  vertical: "bottom",
-                  horizontal: "left",
-                }}
-                keepMounted
-                transformOrigin={{
-                  vertical: "top",
-                  horizontal: "left",
-                }}
-                open={Boolean(anchorElNav)}
-                onClose={handleCloseNavMenu}
-                sx={{
-                  display: { xs: "block", md: "none" },
-                }}
-              >
-                {pages.map((page) => (
-                  <MenuItem key={page.id} onClick={handleCloseNavMenu}>
-                    <Typography textAlign="center">{page.label}</Typography>
-                  </MenuItem>
-                ))}
-              </Menu>
+
+              <Button
+                className="pds-wds-titlebar-link-button-md"
+                endIcon={<MenuIcon className="icon" />}
+                onClick={handleToggleSmallMenu}
+              ></Button>
             </Box>
+
+            {isSmallMenuOpen ? (
+              <Box
+                className="pds-wds-titlebar-small-menu"
+                sx={{
+                  display: { xs: "block", lg: "none" },
+                }}
+              >
+                <Box
+                  sx={{
+                    display: { xs: "none", md: "flex", lg: "none" },
+                  }}
+                >
+                  <Container maxWidth="xl">
+                    <Toolbar
+                      disableGutters
+                      className="pds-wds-titlebar-small-menu-toolbar"
+                    >
+                      <div className="pds-wds-titlebar-small-menu-container">
+                        <Link href={titleLink} target="_blank">
+                          <Box
+                            className="pds-wds-titlebar-nasa-logo-md"
+                            component="img"
+                            sx={{
+                              display: { xs: "none", md: "flex", lg: "none" },
+                            }}
+                            alt="NASA logo."
+                            src={NasaLogo}
+                          />
+                        </Link>
+                        <Link
+                          href={titleLink}
+                          className="pds-wds-titlebar-titlelink"
+                        >
+                          <Typography
+                            variant="h3"
+                            weight="bold"
+                            noWrap
+                            sx={{
+                              display: { xs: "none", md: "flex", lg: "none" },
+                            }}
+                          >
+                            {title}
+                          </Typography>
+                        </Link>
+                      </div>
+
+                      <Button
+                        className="pds-wds-titlebar-link-button-md"
+                        endIcon={<CloseIcon className="icon" />}
+                        onClick={handleToggleSmallMenu}
+                      ></Button>
+                    </Toolbar>
+                  </Container>
+                </Box>
+
+                <Box
+                  sx={{
+                    display: { xs: "flex", md: "none" },
+                  }}
+                >
+                  <Container maxWidth="xl">
+                    <Toolbar
+                      disableGutters
+                      className="pds-wds-titlebar-small-menu-toolbar"
+                    >
+                      <div className="pds-wds-titlebar-small-menu-container">
+                        <Link href={titleLink} target="_blank">
+                          <Box
+                            className="pds-wds-titlebar-nasa-logo-xs"
+                            component="img"
+                            sx={{
+                              display: { xs: "flex", md: "none" },
+                            }}
+                            alt="NASA logo."
+                            src={NasaLogo}
+                          />
+                        </Link>
+                        <Link
+                          href={titleLink}
+                          className="pds-wds-titlebar-titlelink"
+                        >
+                          <Typography
+                            variant="h4"
+                            weight="semibold"
+                            noWrap
+                            sx={{
+                              display: { xs: "flex", md: "none" },
+                            }}
+                          >
+                            {title}
+                          </Typography>
+                        </Link>
+                      </div>
+
+                      <Button
+                        className="pds-wds-titlebar-link-button-md"
+                        endIcon={<CloseIcon className="icon" />}
+                        onClick={handleToggleSmallMenu}
+                      ></Button>
+                    </Toolbar>
+                  </Container>
+                </Box>
+
+                {subTitle ? (
+                  <>
+                    <Divider
+                      variant="fullWidth"
+                      orientation="horizontal"
+                      className="pds-wds-navbar-top-divider"
+                    />
+                    <Container maxWidth="xl">
+                      <Toolbar
+                        disableGutters
+                        className="pds-wds-titlebar-toolbar"
+                      >
+                        <Link
+                          href={subTitleLink}
+                          target="_blank"
+                          className="pds-wds-navbar-titlelink"
+                          sx={{
+                            display: { xs: "none", lg: "flex" },
+                          }}
+                        >
+                          <Typography variant="h3" weight="bold" noWrap>
+                            {subTitle}
+                          </Typography>
+                        </Link>
+
+                        <Link
+                          href={subTitleLink}
+                          target="_blank"
+                          className="pds-wds-navbar-titlelink"
+                          sx={{
+                            display: { xs: "flex", lg: "none" },
+                          }}
+                        >
+                          <Typography variant="h4" weight="semibold" noWrap>
+                            {subTitle}
+                          </Typography>
+                        </Link>
+                      </Toolbar>
+                    </Container>
+                  </>
+                ) : (
+                  <div />
+                )}
+
+                <Container
+                  maxWidth="xl"
+                  className="pds-wds-titlebar-small-menu-search-container"
+                >
+                  <Box className="pds-wds-titlebar-links-search">
+                    <div className="pds-wds-titlebar-search">
+                      <div className="pds-wds-titlebar-search-icon-wrapper">
+                        <SearchIcon />
+                      </div>
+                      <InputBase
+                        className="pds-wds-titlebar-input-base"
+                        placeholder="Search…"
+                        inputProps={{ "aria-label": "search" }}
+                        sx={{
+                          "& .MuiInputBase-input": {
+                            padding: (theme) => theme.spacing(1, 1, 1, 0),
+                            // vertical padding + font size from searchIcon
+                            paddingLeft: (theme) =>
+                              `calc(1em + ${theme.spacing(4)})`,
+                            display: "flex",
+                            transition: (theme) =>
+                              theme.transitions.create("width"),
+                            '[theme.breakpoints.up("sm")]': {
+                              width: "12ch",
+                              "&:focus": {
+                                width: "20ch",
+                              },
+                            },
+                          },
+                        }}
+                        value={searchText}
+                        onChange={handleSearchValueChange}
+                        onKeyDown={handleSearchKeyDown}
+                      />
+                    </div>
+                  </Box>
+                </Container>
+
+                <Box
+                  className="pds-wds-titlebar-small-menu-md"
+                  sx={{
+                    display: { xs: "block", lg: "none" },
+                  }}
+                >
+                  {navItems.map((item, index) => {
+                    return item.items ? (
+                      <div>
+                        <Box
+                          onClick={() => handleOpenNavSmallMenuSubNav(index)}
+                          className={
+                            activeNavSmallMenuIndices.has(index)
+                              ? "pds-wds-titlebar-small-menu-link-open"
+                              : "pds-wds-titlebar-small-menu-link"
+                          }
+                        >
+                          <Typography
+                            className="pds-wds-titlebar-link-label"
+                            variant="h4"
+                            weight="semibold"
+                            textAlign="left"
+                          >
+                            {item.label}
+                          </Typography>
+                          {activeNavSmallMenuIndices.has(index) ? (
+                            <ArrowCircleUpIcon className="icon" />
+                          ) : (
+                            <ArrowCircleDownIcon className="icon" />
+                          )}
+                        </Box>
+
+                        {activeNavSmallMenuIndices.has(index) ? (
+                          <div>
+                            <Divider className="pds-wds-titlebar-small-menu-link-divider" />
+                            {item.items.map((subItem) => {
+                              return (
+                                <div
+                                  className="pds-wds-titlebar-small-menu-sub-link"
+                                  key={subItem.id}
+                                >
+                                  <Link
+                                    className="pds-wds-titlebar-link"
+                                    key={subItem.id}
+                                    href={subItem.href}
+                                  >
+                                    <Typography
+                                      className="pds-wds-titlebar-link-label"
+                                      variant="body1"
+                                      weight="regular"
+                                      textAlign="left"
+                                    >
+                                      {subItem.label}
+                                    </Typography>
+                                  </Link>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="pds-wds-titlebar-small-menu-link">
+                        <Link
+                          className="pds-wds-titlebar-link"
+                          key={item.id}
+                          href={item.href}
+                        >
+                          <Typography
+                            className="pds-wds-titlebar-link-label"
+                            variant="h4"
+                            weight="semibold"
+                            textAlign="left"
+                          >
+                            {item.label}
+                          </Typography>
+                        </Link>
+                      </div>
+                    );
+                  })}
+                </Box>
+
+                <Box
+                  className="pds-wds-titlebar-small-menu-md"
+                  sx={{
+                    display: { xs: "block", lg: "none" },
+                  }}
+                >
+                  <Divider className="pds-wds-titlebar-small-menu-link-divider" />
+                  {pages.map((item, index) => {
+                    return item.items ? (
+                      <div>
+                        <Box
+                          onClick={() => handleOpenTitleSmallMenuSubNav(index)}
+                          className={
+                            activeTitleSmallMenuIndices.has(index)
+                              ? "pds-wds-titlebar-small-menu-link-open"
+                              : "pds-wds-titlebar-small-menu-link"
+                          }
+                        >
+                          <Typography
+                            className="pds-wds-titlebar-link-label"
+                            variant="h4"
+                            weight="semibold"
+                            textAlign="left"
+                          >
+                            {item.label}
+                          </Typography>
+                          {activeTitleSmallMenuIndices.has(index) ? (
+                            <ArrowCircleUpIcon className="icon" />
+                          ) : (
+                            <ArrowCircleDownIcon className="icon" />
+                          )}
+                        </Box>
+
+                        {activeTitleSmallMenuIndices.has(index) ? (
+                          <div>
+                            <Divider className="pds-wds-titlebar-small-menu-link-divider" />
+                            {item.items.map((subItem) => {
+                              return (
+                                <div
+                                  className="pds-wds-titlebar-small-menu-sub-link"
+                                  key={subItem.id}
+                                >
+                                  <Link
+                                    className="pds-wds-titlebar-link"
+                                    key={subItem.id}
+                                    href={subItem.href}
+                                  >
+                                    <Typography
+                                      className="pds-wds-titlebar-link-label"
+                                      variant="body1"
+                                      weight="regular"
+                                      textAlign="center"
+                                    >
+                                      {subItem.label}
+                                    </Typography>
+                                  </Link>
+                                </div>
+                              );
+                            })}
+                          </div>
+                        ) : (
+                          <></>
+                        )}
+                      </div>
+                    ) : (
+                      <div className="pds-wds-titlebar-small-menu-link">
+                        <Typography
+                          className="pds-wds-titlebar-link-label"
+                          variant="body1"
+                          weight="regular"
+                          textAlign="left"
+                        >
+                          {item.label}
+                        </Typography>
+                      </div>
+                    );
+                  })}
+                </Box>
+              </Box>
+            ) : (
+              <></>
+            )}
           </Toolbar>
         </Container>
       </AppBar>
