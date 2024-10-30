@@ -1,17 +1,60 @@
-import { Box as MuiBox } from "@mui/material";
+import React from "react";
+import { 
+  Grid,
+  Box as MuiBox,
+  Container as MuiContainer,
+  Stack as MuiStack
+} from "@mui/material";
+import {
+  IconArrowDiagonal,
+  IconArrowRight,
+} from "../Icons";
+import { Typography } from "../Typography";
+import { Link } from "react-router-dom";
 
-type BannerProps = {
+type Link = {
+  href:string;
+  title:string;
+  type:"internal" | "external";
+}
+
+export type BannerProps = {
+  link?:Link;
   message:string;
+  title:string;
+  variant?:"info" | "alert"
 }
 
 export const Banner = (
   {
-    message
+    link,
+    message,
+    title,
+    variant = "info"
   }:BannerProps
 ) => {
 
-  return <MuiBox>
-    {message}
-  </MuiBox>
+  return <React.Fragment>
+    <MuiBox className={'pds-wds-react-banner ' + variant}>
+      <MuiContainer maxWidth={"xl"}>
+        <Grid container>
+          <Grid xs={12} lg={8}>
+            <MuiStack direction={{xs: "column", sm: "row"}} gap={{xs: "8px", sm:"32px"}} alignItems={{xs: "flex-start", md:"center"}} justifyContent={"flex-start"}>
+              <MuiStack direction={{xs: "column", sm: "row"}} gap={"8px"} alignItems={{xs: "flex-start", sm: "center"}} justifyContent={"flex-start"}>
+                <Typography variant="h5" weight="semibold" component="span" className="title">{title}</Typography>
+                <Typography variant="h6" weight="regular" component="span">{message}</Typography>
+              </MuiStack>
+              { link && 
+                  <Link to={link.href}>
+                    <Typography variant="h6" weight="semibold" component={"span"}>{link.title}</Typography>
+                    <span className={"icon " + variant}>{link.type ? <IconArrowRight /> : <IconArrowDiagonal />}</span>
+                  </Link>
+              }
+            </MuiStack>
+          </Grid>
+        </Grid>
+      </MuiContainer>
+    </MuiBox>
+  </React.Fragment>
 
 }
