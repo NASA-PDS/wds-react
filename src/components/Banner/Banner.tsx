@@ -1,6 +1,6 @@
 import React from "react";
 import { 
-  Grid,
+  Grid as MuiGrid,
   Box as MuiBox,
   Container as MuiContainer,
   Stack as MuiStack
@@ -37,8 +37,8 @@ export const Banner = (
   return <React.Fragment>
     <MuiBox className={'pds-wds-react-banner ' + variant}>
       <MuiContainer maxWidth={"xl"}>
-        <Grid container>
-          <Grid xs={12} lg={8}>
+        <MuiGrid container>
+          <MuiGrid xs={12} lg={8}>
             <MuiStack direction={{xs: "column", sm: "row"}} gap={{xs: "8px", sm:"32px"}} alignItems={{xs: "flex-start", sm:"center"}} justifyContent={"flex-start"}>
               <MuiStack direction={{xs: "column", sm: "row"}} gap={"8px"} alignItems={{xs: "flex-start", sm: "center"}} justifyContent={"flex-start"}>
                 <Typography variant="h5" weight="semibold" component="span" className="title">{title}</Typography>
@@ -51,8 +51,8 @@ export const Banner = (
                   </Link>
               }
             </MuiStack>
-          </Grid>
-        </Grid>
+          </MuiGrid>
+        </MuiGrid>
       </MuiContainer>
     </MuiBox>
   </React.Fragment>
