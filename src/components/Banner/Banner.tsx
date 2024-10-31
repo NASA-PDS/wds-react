@@ -39,7 +39,7 @@ export const Banner = (
       <MuiContainer maxWidth={"xl"}>
         <Grid container>
           <Grid xs={12} lg={8}>
-            <MuiStack direction={{xs: "column", sm: "row"}} gap={{xs: "8px", sm:"32px"}} alignItems={{xs: "flex-start", md:"center"}} justifyContent={"flex-start"}>
+            <MuiStack direction={{xs: "column", sm: "row"}} gap={{xs: "8px", sm:"32px"}} alignItems={{xs: "flex-start", sm:"center"}} justifyContent={"flex-start"}>
               <MuiStack direction={{xs: "column", sm: "row"}} gap={"8px"} alignItems={{xs: "flex-start", sm: "center"}} justifyContent={"flex-start"}>
                 <Typography variant="h5" weight="semibold" component="span" className="title">{title}</Typography>
                 <Typography variant="h6" weight="regular" component="span">{message}</Typography>
