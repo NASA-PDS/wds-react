@@ -10,17 +10,17 @@ import { ChipProps } from "@mui/material";
  *
  */
 export const Chip = ({ className, ...otherProps }: ChipProps) => {
-  let textFieldClass = "";
+  let chipClass = "";
 
   if (className) {
-    textFieldClass = className + " pds-wds-chip";
+    chipClass = className + " pds-wds-chip";
   } else {
-    textFieldClass = "pds-wds-chip";
+    chipClass = "pds-wds-chip";
   }
 
   return (
     <MuiChip
-      className={textFieldClass}
+      className={chipClass}
       variant="outlined"
       deleteIcon={<CloseIcon />}
       {...otherProps}
