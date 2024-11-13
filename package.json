@@ -135,5 +135,8 @@
     "definition": "dist/esm/index.d.ts"
   },
   "types": "./dist/esm/index.d.ts",
-  "version": "0.0.1"
+  "version": "0.0.1",
+  "dependencies": {
+    "@nasapds/wds": "^0.0.1"
+  }
 }
