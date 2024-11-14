@@ -8,6 +8,14 @@ import { ChipProps } from "@mui/material";
  * Default prop values should be specified in the deconstructed parameter object.
  *
  */
-export const Tag = ({ ...otherProps }: ChipProps) => {
-  return <MuiChip className="pds-wds-tag" {...otherProps} />;
+export const Tag = ({ className, ...otherProps }: ChipProps) => {
+  let tagClass = "";
+
+  if (className) {
+    tagClass = className + " pds-wds-tag";
+  } else {
+    tagClass = "pds-wds-tag";
+  }
+
+  return <MuiChip className={tagClass} {...otherProps} />;
 };
