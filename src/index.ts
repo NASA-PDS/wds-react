@@ -1,4 +1,5 @@
 import "./styles/styles.scss";
+export * from "./components/Banner";
 export * from "./components/Breadcrumbs";
 export * from "./components/Button";
 export * from "./components/Card";

@@ -9,10 +9,18 @@ import { ChipProps } from "@mui/material";
  * Default prop values should be specified in the deconstructed parameter object.
  *
  */
-export const Chip = ({ ...otherProps }: ChipProps) => {
+export const Chip = ({ className, ...otherProps }: ChipProps) => {
+  let chipClass = "";
+
+  if (className) {
+    chipClass = className + " pds-wds-chip";
+  } else {
+    chipClass = "pds-wds-chip";
+  }
+
   return (
     <MuiChip
-      className="pds-wds-chip"
+      className={chipClass}
       variant="outlined"
       deleteIcon={<CloseIcon />}
       {...otherProps}

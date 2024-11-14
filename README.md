@@ -84,6 +84,10 @@ This web component library relies on the CSS/SASS styles defined in the [PDS Web
 
     - Open the http://localhost:5173/ page or equivalent and then verify that the hello world message is displayed.
 
+## Deployments
+
+Deployments are managed automatically by using GitHub's release features. By creating a new release that contains a tag in the format, `vX.Y.Z`, the publishing workflow will be automatically triggered and a new version of the package will be deployed.
+
 ## Notes
 
 ### NPM Package Nanagement 

@@ -1,0 +1,62 @@
+.pds-wds-react-banner {
+
+  color: var(--pds-primary-white);
+  padding: 10px 0px;
+  text-align: left;
+
+  span.title {
+    white-space: nowrap;
+  }
+
+  a {
+
+    display: flex;
+    direction: column;
+    gap: 4px;
+    align-items: center;
+    color: var(--pds-primary-white);
+    border-radius: 8px;
+    white-space: nowrap;
+
+    &:hover {
+      text-decoration: underline;
+      text-decoration-style: dashed;
+      text-underline-offset: .3em;
+    }
+
+    span.icon {
+
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: var(--pds-primary-white);
+      border-radius: 8px;
+      height: 16px;
+      width: 16px;
+
+      &.info {
+        color: var(--pds-secondary-blue-s1);
+      }
+
+      &.alert {
+        color: var(--pds-secondary-red-s1);
+      }
+
+      & svg {
+        height: 10px;
+        width: 10px;
+      }
+
+    }
+
+  }
+
+  &.info {
+    background-color: var(--pds-secondary-blue-s1);
+  }
+
+  &.alert {
+    background-color: var(--pds-secondary-red-s1);
+  }
+
+}
