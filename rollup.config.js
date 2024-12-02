@@ -1,33 +1,31 @@
 import typescript from "@rollup/plugin-typescript";
-import peerDepsExternal from "rollup-plugin-peer-deps-external";
 import resolve from "@rollup/plugin-node-resolve";
 import commonjs from "@rollup/plugin-commonjs";
-import pkg from "./package.json" assert { type: "json" };
+import packageJson from "./package.json" assert { type: "json" };
 import scss from "rollup-plugin-scss";
 import del from "rollup-plugin-delete";
 import image from '@rollup/plugin-image';
 
-// Excluded dependencies - dev dependencies
-const EXTERNAL = Object.keys(pkg.devDependencies);
+const peerDependencies = Object.keys(packageJson.peerDependencies)
 
 export default [
   {
+    external: [...peerDependencies],
     input: "./src/index.ts",
     output: [
       {
-        file: pkg.main,
+        file: packageJson.main,
         format: "cjs",
         sourcemap: true,
       },
       {
-        file: pkg.module,
+        file: packageJson.module,
         format: "esm",
         sourcemap: true,
       },
     ],
     plugins: [
       del({ targets: 'dist/*' }),
-      peerDepsExternal(),
       resolve(),
       commonjs(),
       typescript({
@@ -39,6 +37,5 @@ export default [
       }),
       image()
     ],
-    external: ["react", "react-dom", "react-router-dom"].concat(EXTERNAL),
   },
 ];
