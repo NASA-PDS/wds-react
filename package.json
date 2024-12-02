@@ -59,7 +59,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.26.1",
     "react-test-renderer": "^18.2.0",
-    "rollup": "^3.26.3",
+    "rollup": "^4.27.3",
     "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-scss": "^4.0.0",
