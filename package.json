@@ -35,7 +35,6 @@
     "@types/react": "^18.2.14",
     "@types/react-dom": "^18.2.6",
     "@types/react-test-renderer": "^18.0.0",
-    "@types/rollup-plugin-peer-deps-external": "^2.2.1",
     "@typescript-eslint/eslint-plugin": "^5.61.0",
     "@typescript-eslint/parser": "^5.61.0",
     "babel-jest": "^29.6.2",
@@ -61,7 +60,6 @@
     "react-test-renderer": "^18.2.0",
     "rollup": "^3.26.3",
     "rollup-plugin-delete": "^2.0.0",
-    "rollup-plugin-peer-deps-external": "^2.2.4",
     "rollup-plugin-scss": "^4.0.0",
     "sass": "^1.64.0",
     "sass-loader": "^13.3.2",
@@ -137,6 +135,6 @@
   "types": "./dist/esm/index.d.ts",
   "version": "0.0.2",
   "dependencies": {
-    "@nasapds/wds": "^0.0.1"
+    "@nasapds/wds": "^0.0.2"
   }
 }

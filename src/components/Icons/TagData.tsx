@@ -1,6 +1,13 @@
-import type { SVGProps } from 'react';
+import type { SVGProps } from "react";
 const SvgTagData = (props: SVGProps<SVGSVGElement>) => (
-  <svg xmlns="http://www.w3.org/2000/svg" width={20} height={20} fill="none" viewBox="0 0 20 20" {...props}>
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width={20}
+    height={20}
+    fill="none"
+    viewBox="0 0 20 20"
+    {...props}
+  >
     <circle cx={10} cy={10} r={9.5} stroke="currentColor" />
     <circle cx={4.5} cy={10.5} r={1.5} fill="currentColor" />
     <circle cx={8} cy={5.5} r={1.5} fill="currentColor" />
